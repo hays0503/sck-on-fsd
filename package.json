@@ -9,16 +9,30 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@ant-design/nextjs-registry": "^1.0.1",
+    "antd": "^5.21.4",
+    "next": "14.2.15",
+    "next-intl": "^3.21.1",
     "react": "^18",
     "react-dom": "^18",
-    "next": "14.2.15"
+    "sass": "^1.79.5",
+    "usehooks-ts": "^3.1.0"
   },
   "devDependencies": {
-    "typescript": "^5",
+    "@feature-sliced/eslint-config": "^0.1.1",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
+    "@typescript-eslint/eslint-plugin": "^8.8.1",
+    "@typescript-eslint/parser": "^8.8.1",
     "eslint": "^8",
-    "eslint-config-next": "14.2.15"
+    "eslint-config-next": "14.2.15",
+    "eslint-import-resolver-typescript": "^3.6.3",
+    "eslint-plugin-boundaries": "^4.2.2",
+    "eslint-plugin-import": "^2.31.0",
+    "eslint-plugin-react-hooks": "^5.0.0",
+    "eslint-plugin-react-refresh": "^0.4.12",
+    "typescript": "^5",
+    "typescript-eslint": "^8.8.1"
   }
 }
