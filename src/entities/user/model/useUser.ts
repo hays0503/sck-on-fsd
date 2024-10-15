@@ -46,7 +46,7 @@ const useUserInfo = () => {
       console.error("Ошибка обновления токена", error);
       return undefined;
     }
-  }, [refreshToken.token, removeAccessToken, removeRefreshToken, setAccessToken]);
+  }, [refreshToken?.token, removeAccessToken, removeRefreshToken, setAccessToken]);
 
   const userInfo = useCallback(async () => {
     try {
@@ -80,7 +80,7 @@ const useUserInfo = () => {
       setError(true);
       console.error("Ошибка при получении информации о пользователе", error);
     }
-  }, [accessToken.token, fetchRefreshToken]);
+  }, [accessToken?.token, fetchRefreshToken]);
 
   useEffect(() => {
     userInfo();

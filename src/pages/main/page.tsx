@@ -1,6 +1,7 @@
 "use client";
 import { UserProfile } from "@/entities/user";
 import { LoginWithGoogle } from "@/features/login-with-google";
+import { LoginWithSms } from "@/features/login-with-sms";
 import { Flex, Typography } from "antd";
 
 const { Text } = Typography;
@@ -8,12 +9,13 @@ const { Text } = Typography;
 export default function HomePage() {
   const [UserEntities, UserData] = UserProfile();
   return (
-    <div>
-      <LoginWithGoogle />
+    <Flex vertical={true} gap={20}>
+      
+
       <Flex
         vertical={false}
         gap={10}
-        style={{ width: "150px", height: "44px", border: "1px solid #D2D2D2", borderRadius: "4px" }}
+        style={{ width: "190px", height: "44px", border: "1px solid #D2D2D2", borderRadius: "4px" }}
         align="center"
         justify="center"
       >
@@ -24,6 +26,10 @@ export default function HomePage() {
           {`${UserData?.info?.user?.first_name??"Авторизоваться"} ${UserData?.info?.user?.last_name??""}`}
         </Text>
       </Flex>
-    </div>
+
+      <LoginWithGoogle />
+
+      <LoginWithSms />
+    </Flex>
   );
 }
