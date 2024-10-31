@@ -1,10 +1,12 @@
+"use client";
 import { useEffect, useState } from "react";
 import { getSmsAuthToken } from "../api";
+import { GetSmsAuthTokenResponse } from "../api/getSmsAuthToken";
 
 const useLoginWithSms = () => {
-  const [userData, setData] = useState<any>(null);
+  const [userData, setData] = useState<GetSmsAuthTokenResponse|null>(null);
   const [dataForSendSms, setDataForSendSms] = useState<
-    | {
+     {
         codeInSms: string;
         phone_number_id: string;
       }

@@ -82,11 +82,77 @@
 							[
 								"shared",
 								{
+									"segment": "types"
+								}
+							]
+						],
+						"allow": "*.(d.ts)"
+					},
+					{
+						"target": [
+							[
+								"shared",
+								{
 									"segment": "constants"
 								}
 							]
 						],
 						"allow": "index.ts"
+					},
+					{
+						"target": [
+							[
+								"shared",
+								{
+									"segment": "tools"
+								}
+							]
+						],
+						"allow": "**"
+					},
+					{
+						"target": [
+							[
+								"shared",
+								{
+									"segment": "styles"
+								}
+							]
+						],
+						"allow": "**"
+					},
+					{
+						"target": [
+							[
+								"shared",
+								{
+									"segment": "hooks"
+								}
+							]
+						],
+						"allow": "**"
+					},
+					{
+						"target": [
+							[
+								"shared",
+								{
+									"segment": "api"
+								}
+							]
+						],
+						"allow": "**"
+					},
+					{
+						"target": [
+							[
+								"shared",
+								{
+									"segment": "providers"
+								}
+							]
+						],
+						"allow": "**"
 					},
 					{
 						"target": [

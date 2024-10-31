@@ -7,10 +7,18 @@ import { ResponseRefreshToken } from "../api/getRefreshToken";
 
 type Token = { token: string };
 
+type useIsAnonymousFunc = () => boolean;
+
 // Авторизован ли пользователь
-const useIsAnonymous = () => {
+const useIsAnonymous:useIsAnonymousFunc = () => {
+  const [token, setToken] = useState("");
   const accessToken = useReadLocalStorage<Token>("accessToken");
-  return accessToken?.token;
+
+  useEffect(() => {
+    setToken(accessToken?.token??"");
+  }, [accessToken?.token]);
+
+  return token.length === 0;
 };
 
 const useUserInfo = () => {
@@ -27,7 +35,9 @@ const useUserInfo = () => {
   const fetchRefreshToken = useCallback(async () => {
     try {
       if (refreshToken.token) {
-        const refreshResponse: ResponseRefreshToken = await getRefreshToken(refreshToken.token);
+        const refreshResponse: ResponseRefreshToken = await getRefreshToken(
+          refreshToken.token
+        );
         if (refreshResponse?.token) {
           setAccessToken({ token: refreshResponse.token });
           console.log("Токен обновлен");
@@ -46,7 +56,12 @@ const useUserInfo = () => {
       console.error("Ошибка обновления токена", error);
       return undefined;
     }
-  }, [refreshToken?.token, removeAccessToken, removeRefreshToken, setAccessToken]);
+  }, [
+    refreshToken?.token,
+    removeAccessToken,
+    removeRefreshToken,
+    setAccessToken,
+  ]);
 
   const userInfo = useCallback(async () => {
     try {

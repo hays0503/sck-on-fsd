@@ -13,7 +13,7 @@ const AuthPage = () => {
     if (accessTokenData && refreshTokenData) {
       setAccessToken({ token: accessTokenData });
       setRefreshToken({ token: refreshTokenData });
-      window.location.href = process.env.HOST_URL ?? "http://localhost:3000/ru";
+      window.location.href = process.env.HOST_URL ?? "http://localhost:3000";
     }
   });
   return <>Save Token</>;

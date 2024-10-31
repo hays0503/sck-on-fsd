@@ -1,16 +1,27 @@
-const createNextIntlPlugin = require("next-intl/plugin");
+import createNextIntlPlugin from "next-intl/plugin";
 
 const withNextIntl = createNextIntlPlugin();
 
 /** @type {import('next').NextConfig} */
 
 const nextConfig = {
+  experimental: {
+    turbo: {
+      rules: {
+        "*.scss": {
+          loaders: ["sass-loader"],
+          as: "*.css",
+        },
+      },
+    },
+  },
   pageExtensions: ["mdx", "md", "jsx", "js", "tsx", "ts"],
+  
   async redirects() {
     return [
       {
         source: "/",
-        destination: "/ru/Astana",
+        destination: "/ru/Astana/main",
         permanent: true,
       },
     ];
@@ -141,4 +152,4 @@ const nextConfig = {
   },
 };
 
-module.exports = withNextIntl(nextConfig);
+export default withNextIntl(nextConfig);

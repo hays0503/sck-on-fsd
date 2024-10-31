@@ -2,7 +2,9 @@
 import { AntdRegistry } from "@ant-design/nextjs-registry";
 import { NextIntlClientProvider } from "next-intl";
 import { getMessages } from "next-intl/server";
-import "@/app/styles/Reset.scss";
+import "@/shared/styles/Reset.scss";
+import { ConfigProvider } from "antd";
+
 export async function ProvidersServer({
   children,
 }: {
@@ -11,10 +13,14 @@ export async function ProvidersServer({
   const messages = await getMessages();
 
   return (
-    <AntdRegistry>
-      <NextIntlClientProvider messages={messages}>
-        {children}
-      </NextIntlClientProvider>
-    </AntdRegistry>
+
+      <AntdRegistry>
+        <ConfigProvider theme={{ cssVar: true }}>
+          <NextIntlClientProvider messages={messages}>
+            {children}
+          </NextIntlClientProvider>
+        </ConfigProvider>
+      </AntdRegistry>
+
   );
 }
