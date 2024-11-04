@@ -5,7 +5,6 @@ import findRootAndDescendants from "@/shared/tools/findRootAndDescandants";
 import {
   selectDataByLangCategory,
   selectDataByLangDescriptionBody,
-  selectDataByLangDescriptionTitle,
   selectDataByLangProducts,
   selectDataByLangSpecificationName,
   selectDataByLangSpecificationValue,
@@ -18,6 +17,8 @@ import ProductDetailSwiper from "./SubComponents/ProductCartSwiper";
 import Image from "next/image";
 import { Link } from "@/i18n/routing";
 import { useGetCityParams } from "@/shared/hooks/useGetCityParams";
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// eslint-disable-next-line boundaries/entry-point
 import getPrice from "@/entities/ProductCart/model/getPrice";
 import useSelectedCity from "@/shared/hooks/useSelectedCity";
 import beautifulCost from "@/shared/tools/beautifulCost";
@@ -26,6 +27,8 @@ import useFetcherSpecificationById from "@/shared/api/fetch/specif";
 import type { DescriptionsProps } from "antd";
 import { useState } from "react";
 import truncateText from "@/shared/tools/truncateText";
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// eslint-disable-next-line boundaries/entry-point
 import Credit from "@/entities/Credit/ui/Credit";
 
 const { Text, Title } = Typography;
@@ -177,7 +180,7 @@ const ProductDetail: React.FC<IProductDetailProps> = (props) => {
                   >
                     <Image
                       src={item.list_url_to_image[0]}
-                      alt={item.name}
+                      alt={item.name_product}
                       width={30}
                       height={30}
                     />
@@ -195,10 +198,12 @@ const ProductDetail: React.FC<IProductDetailProps> = (props) => {
         gap={10}
         style={{ width: "100%", padding: "10px", backgroundColor: "#fff" }}
       >
-        <Text strong>{beautifulCost(price)}</Text>
-        <Text disabled delete>
-          {beautifulCost(discountPrice)}
-        </Text>
+        <Text strong>{price ? beautifulCost(price) : t("utochnit-cenu")}</Text>
+        {discountPrice && (
+          <Text disabled delete>
+            {beautifulCost(discountPrice)}
+          </Text>
+        )}
         <Button
           shape="default"
           size="large"

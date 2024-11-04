@@ -1,3 +1,3 @@
-import ProductDetail from './ProductDetail.tsx'
+import ProductDetail from './ProductDetail'
 
 export { ProductDetail }
