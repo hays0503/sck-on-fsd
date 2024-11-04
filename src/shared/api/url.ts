@@ -1,3 +1,5 @@
+
+
 const ApiUrl = "http://pimenov.kz";
 
 const UrlApi = {
@@ -6,6 +8,7 @@ const UrlApi = {
   getCategory: `/api/v1/category/`,
   getPopulatesId: `/api/v1/populates/`,
   getProducts: `/api/v1/products/`,
+  getProductSpecificationsById: `/api/v1/specif/`,
 
   getBasketApi: `/basket_api/v1/bascket`,
   getOrderApi: `/basket_api/v1/order`,
@@ -26,6 +29,7 @@ const UrlApiWithDomain = {
   getCategory: `${ApiUrl}${UrlApi.getCategory}`,
   getPopulatesId: `${ApiUrl}${UrlApi.getPopulatesId}`,
   getProducts: `${ApiUrl}${UrlApi.getProducts}`,
+  getProductSpecificationsById: `${ApiUrl}${UrlApi.getProductSpecificationsById}`,
 
   getBasketApi: `${ApiUrl}${UrlApi.getBasketApi}`,
   getOrderApi: `${ApiUrl}${UrlApi.getOrderApi}`,
@@ -65,6 +69,12 @@ const UrlRevalidate = {
   getProducts: {
     next: {
       tags: [`/api/v1/product/`],
+      revalidate: revalidateDefault,
+    },
+  },
+  getProductSpecificationsById: {
+    next: {
+      tags: [`/api/v1/specifications/`],
       revalidate: revalidateDefault,
     },
   },

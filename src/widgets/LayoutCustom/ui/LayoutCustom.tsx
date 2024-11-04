@@ -40,6 +40,7 @@ const LayoutCustom: React.FC<ILayoutMainCustomProps> = (props) => {
     paddingTop: "10px",
     paddingBottom: "10px",
     height: `calc(100vh - ${hightContent}${h})`,
+    marginBottom:`${hightFooter}${h}`,
     overflowY: "auto",
     overflowX: "hidden",
 

@@ -60,7 +60,7 @@ const ProductPage: ProductPageComponent = async (props) => {
         <LayoutCustom
           h="px"
           hightHeader={70}
-          hightFooter={70}
+          hightFooter={80}
           headerContent={
             <HeaderText
               text={selectDataByLangCategory(breadcrumbsRoot, locale) ?? ""}
