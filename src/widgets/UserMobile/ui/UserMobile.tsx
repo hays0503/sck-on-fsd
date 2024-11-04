@@ -1,6 +1,6 @@
 "use client";
 
-import { useUser } from "@/entities/User";
+import { useUser } from "@/entities/User-fix";
 import { Flex, Typography } from "antd";
 
 const { Title, Text } = Typography;

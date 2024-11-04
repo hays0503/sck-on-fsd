@@ -1,7 +1,7 @@
 "use client";
 import { Flex } from "antd";
 import { Level1, Level2, Level3 } from "./SubComponents";
-import { useUser } from "@/entities/User";
+import { useUser } from "@/entities/User-fix";
 
 const ProfileMobile: React.FC = () => {
   const { useIsAnonymous, info, error } = useUser();

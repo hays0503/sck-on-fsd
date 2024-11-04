@@ -115,4 +115,4 @@ const useUser = () => {
   };
 };
 
-export {useUser};
+export default useUser;
