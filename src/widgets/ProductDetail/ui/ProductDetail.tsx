@@ -66,7 +66,7 @@ const ProductDetail: React.FC<IProductDetailProps> = (props) => {
         ),
       };
     });
-  
+
   const specificationCount = fetchProductSpecification?.length;
 
   const specificationHide: DescriptionsProps["items"] = specification?.slice(
@@ -295,7 +295,8 @@ const ProductDetail: React.FC<IProductDetailProps> = (props) => {
           gap={5}
           style={{
             width: "100%",
-            overflow: "scroll",
+            overflow: "auto",
+            scrollbarWidth: "none",
           }}
         >
           {selectedCity && (
@@ -330,25 +331,27 @@ const ProductDetail: React.FC<IProductDetailProps> = (props) => {
         )}
       </Flex>
 
-      <Flex
-        vertical={true}
-        gap={10}
-        style={{ width: "100%", padding: "10px", backgroundColor: "#fff" }}
-      >
-        <Title level={5}>{t("opisanie")}</Title>
-        <Text disabled>
-          {expandedDescription ? descriptionBody : descriptionBodyHide}
-        </Text>
-        <Button
-          onClick={() => {
-            setExpandedDescription(!expandedDescription);
-          }}
+      {descriptionBody && (
+        <Flex
+          vertical={true}
+          gap={10}
+          style={{ width: "100%", padding: "10px", backgroundColor: "#fff" }}
         >
-          <Text style={{ color: "#4954F0" }}>
-            {expandedDescription ? t("svernut") : t("smotret-vse-opisanie")}
+          <Title level={5}>{t("opisanie")}</Title>
+          <Text disabled>
+            {expandedDescription ? descriptionBody : descriptionBodyHide}
           </Text>
-        </Button>
-      </Flex>
+          <Button
+            onClick={() => {
+              setExpandedDescription(!expandedDescription);
+            }}
+          >
+            <Text style={{ color: "#4954F0" }}>
+              {expandedDescription ? t("svernut") : t("smotret-vse-opisanie")}
+            </Text>
+          </Button>
+        </Flex>
+      )}
     </Flex>
   );
 };
