@@ -30,6 +30,9 @@ import truncateText from "@/shared/tools/truncateText";
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // eslint-disable-next-line boundaries/entry-point
 import Credit from "@/entities/Credit/ui/Credit";
+import { ProductCart } from "@/entities/ProductCart";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { ReviewsList } from "@/entities/Reviews/ui/ReviewsList";
 
 const { Text, Title } = Typography;
 
@@ -105,6 +108,10 @@ const ProductDetail: React.FC<IProductDetailProps> = (props) => {
         selectDataByLangCategory(category, localeActive) ??
         selectDataByLangCategory(category, "ru"),
     };
+  });
+
+  const related_products = fetchProduct.related_product.filter((item) => {
+    return selectedCity in item.price!;
   });
 
   const { price, discountPrice } = getPrice(fetchProduct, selectedCity);
@@ -355,6 +362,41 @@ const ProductDetail: React.FC<IProductDetailProps> = (props) => {
               {expandedDescription ? t("svernut") : t("smotret-vse-opisanie")}
             </Text>
           </Button>
+        </Flex>
+      )}
+
+      <Flex
+        vertical={true}
+        gap={10}
+        style={{ width: "100%", padding: "10px", backgroundColor: "#fff" }}
+      >
+        <ReviewsList productId={fetchProduct.id} />
+      </Flex>
+
+      {related_products.length > 0 && (
+        <Flex
+          vertical={true}
+          style={{ width: "100dwv", padding: "10px", backgroundColor: "#fff" }}
+        >
+          <Title level={5}>{t("rekomenduemye-tovary")}</Title>
+          <Swiper
+            slidesPerView={2}
+            spaceBetween={30}
+            loop={true}
+            width={320}
+            height={500}
+          >
+            {related_products.map((product) => (
+              <SwiperSlide key={product.id}>
+                <ProductCart
+                  key={product.id}
+                  Product={product}
+                  addToCartSlot={<></>}
+                  addToFavoriteSlot={<></>}
+                />
+              </SwiperSlide>
+            ))}
+          </Swiper>
         </Flex>
       )}
     </Flex>

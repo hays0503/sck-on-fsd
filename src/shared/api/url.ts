@@ -9,6 +9,7 @@ const UrlApi = {
   getPopulatesId: `/api/v1/populates/`,
   getProducts: `/api/v1/products/`,
   getProductSpecificationsById: `/api/v1/specif/`,
+  getProductReviewsById: `/api/v1/reviews/filter_by_prod/`,
 
   getBasketApi: `/basket_api/v1/bascket`,
   getOrderApi: `/basket_api/v1/order`,
@@ -30,6 +31,7 @@ const UrlApiWithDomain = {
   getPopulatesId: `${ApiUrl}${UrlApi.getPopulatesId}`,
   getProducts: `${ApiUrl}${UrlApi.getProducts}`,
   getProductSpecificationsById: `${ApiUrl}${UrlApi.getProductSpecificationsById}`,
+  getProductReviewsById: `${ApiUrl}${UrlApi.getProductReviewsById}`,
 
   getBasketApi: `${ApiUrl}${UrlApi.getBasketApi}`,
   getOrderApi: `${ApiUrl}${UrlApi.getOrderApi}`,
@@ -75,6 +77,12 @@ const UrlRevalidate = {
   getProductSpecificationsById: {
     next: {
       tags: [`/api/v1/specifications/`],
+      revalidate: revalidateDefault,
+    },
+  },
+  getProductReviewsById: {
+    next: {
+      tags: [`/api/v1/reviews/`],
       revalidate: revalidateDefault,
     },
   },
