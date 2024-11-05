@@ -32,7 +32,7 @@ import truncateText from "@/shared/tools/truncateText";
 import Credit from "@/entities/Credit/ui/Credit";
 import { ProductCart } from "@/entities/ProductCart";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { ReviewsList } from "@/entities/Reviews/ui/ReviewsList";
+import { ReviewsList } from "@/entities/Reviews";
 
 const { Text, Title } = Typography;
 

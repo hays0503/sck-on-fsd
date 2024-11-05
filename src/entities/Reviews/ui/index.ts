@@ -1,3 +1,3 @@
-import ReviewsList from './ReviewsList'
+import {ReviewsList} from './ReviewsList'
 
 export { ReviewsList }

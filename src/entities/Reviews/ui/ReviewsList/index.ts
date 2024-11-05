@@ -1,3 +1,3 @@
 import ReviewsList from './ReviewsList'
 
-export default {ReviewsList}
+export {ReviewsList}
