@@ -78,7 +78,7 @@ export default async function HomePage({
   if (FindCity.length > 0) {
     const RusCity: string = FindCity[0].name_city;
     const UrlPopulatesByCity = `/api/by_city/populates?city=${RusCity}`;
-    const UrlWithDomainPopulatesByCity = `http://localhost:3000${UrlPopulatesByCity}`;
+    const UrlWithDomainPopulatesByCity = `${process.env.HOST_URL}${UrlPopulatesByCity}`;
     console.log("UrlFetchPopulatesByCity =>", UrlWithDomainPopulatesByCity);
     const fetchPopulatesByCity = await (
       await fetch(UrlWithDomainPopulatesByCity, {

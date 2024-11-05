@@ -14,5 +14,5 @@ export async function GET(request: NextRequest) {
         Tokens.refresh.token
     );
   }
-  return Response.redirect(process.env.HOST_URL??"http://localhost:3000");
+  return Response.redirect(process.env.HOST_URL??"http://pimenov.kz:3000");
 }
