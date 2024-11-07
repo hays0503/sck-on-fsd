@@ -1,3 +1,3 @@
-import KaspiCredit from './Credit'
+import Credit from './Credit'
 
-export { KaspiCredit }
+export { Credit }

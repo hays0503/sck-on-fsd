@@ -1,7 +1,6 @@
 "use client";
 import { CategoryListMobile } from "@/entities/Category";
 import { SearchProduct } from "@/features/search-product";
-import LogoSCK from "@/shared/ui/LogoSCK";
 import { Flex } from "antd";
 
 export default function HeaderMobile() {
@@ -16,7 +15,6 @@ export default function HeaderMobile() {
         gap={10}
         style={{ width: "100%" }}
       >
-        <LogoSCK />
         <SearchProduct />
       </Flex>
       <Flex

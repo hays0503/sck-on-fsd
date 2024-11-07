@@ -7,6 +7,8 @@ import {
 } from "@/shared/tools/selectDataByLang";
 import { Category } from "@/shared/types/category";
 import { ProductsDetail } from "@/shared/types/productsDetail";
+import { Reviews } from "@/shared/types/reviews";
+import { Specification } from "@/shared/types/specification";
 import HeaderText from "@/shared/ui/HeaderText";
 import { FooterMobile } from "@/widgets/FooterMobile";
 import { LayoutCustom } from "@/widgets/LayoutCustom";
@@ -23,9 +25,17 @@ interface IProductPageProps {
 type ProductPageComponent = (props: IProductPageProps) => Promise<JSX.Element>;
 
 const ProductPage: ProductPageComponent = async (props) => {
-  const { locale, city, slug } = props.params;
+  const { locale, slug } = props.params;
 
-  console.log(locale, city, slug);
+  const fetchCity = await (
+    await fetch(UrlApiWithDomain.getCity, {
+      ...UrlRevalidate.getCity,
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+    })
+  ).json();
 
   const UrlProduct = `${UrlApi.getProducts}${slug}`;
   const UrlWithDomainProduct = `${UrlApiWithDomain.getProducts}${slug}`;
@@ -46,9 +56,36 @@ const ProductPage: ProductPageComponent = async (props) => {
     })
   ).json();
 
+  const urlBuilderSpecification = `${UrlApi.getProductSpecificationsById}filter_by_prod/${fetchProduct.id}`;
+  const urlBuilderSpecificationWithDomain = `${UrlApiWithDomain.getProductSpecificationsById}filter_by_prod/${fetchProduct.id}`;
+  const fetchSpecification:Specification[] = await (
+    await fetch(urlBuilderSpecificationWithDomain,{
+      ...UrlRevalidate.getProductSpecificationsById,
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+    })
+  ).json();
+
+  const urlBuilderReviews = `${UrlApi.getProductReviewsById}${fetchProduct.id}`
+  const urlBuilderReviewsWithDomain = `${UrlApiWithDomain.getProductReviewsById}${fetchProduct.id}`
+  const fetchReviews:Reviews[] = await (
+    await fetch(urlBuilderReviewsWithDomain,{
+      ...UrlRevalidate.getProductReviewsById,
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+    })
+  ).json();
+
   const fallback = {
+    [UrlApi.getCity]: fetchCity,
     [UrlApi.getCategory]: fetchCategory,
     [UrlProduct]: fetchProduct,
+    [urlBuilderSpecification]: fetchSpecification,
+    [urlBuilderReviews]: fetchReviews
   };
 
   const { root: breadcrumbsRoot } = findRootAndDescendants(fetchCategory, fetchProduct.category.id);

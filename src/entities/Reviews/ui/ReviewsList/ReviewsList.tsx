@@ -17,7 +17,7 @@ const ReviewsList: React.FC<{productId: number|string}> = ({productId}) => {
   const Reviews: React.FC<{ Reviews: Reviews }> = ({ Reviews }) => {
     return (
       <Flex vertical={true} gap={10}>
-        <Flex gap={10}>
+        <Flex gap={10} align="baseline">
           <Avatar icon={<UserOutlined />} />
           <Title level={5}>Комментатор</Title>
         </Flex>
@@ -38,7 +38,7 @@ const ReviewsList: React.FC<{productId: number|string}> = ({productId}) => {
 
   if (reviews.length === 0) {
     return (
-      <Flex vertical={true}>
+      <Flex vertical={true} style={{width:"100%",padding:"10px"}}>
         <Title level={5}>{t("otzyvy")}</Title>
         <Text>
           {t("u-etogo-tovara-eshe-net-otzyvov-vy-mozhete-ostavit-ego-pervym")}
@@ -49,7 +49,7 @@ const ReviewsList: React.FC<{productId: number|string}> = ({productId}) => {
   }
 
   return (
-    <Flex vertical={true}>
+    <Flex vertical={true} style={{width:"100%",padding:"10px"}}>
       <Flex gap={10} align="baseline">
         <Title level={5}>{t("otzyvy")}</Title>
         <Text>{reviews.length}</Text>

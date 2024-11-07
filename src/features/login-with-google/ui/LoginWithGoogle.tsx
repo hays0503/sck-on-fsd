@@ -4,8 +4,8 @@ import Image from "next/image";
 import useLoginWithGoogle from "../model/useLoginWithGoogle";
 
 export default function LoginWithGoogle() {
-  const url = useLoginWithGoogle();
-
+  const _url = useLoginWithGoogle()??"";
+   const url = _url.replace("http://pimenov.kz:3000","http://localhost:3000");
   return (
     <div>
       {url ? (

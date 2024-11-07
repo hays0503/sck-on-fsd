@@ -1,3 +1,3 @@
-import Reviews from './Reviews.tsx'
+import {ReviewsList} from './ReviewsList'
 
-export { Reviews }
+export { ReviewsList }
