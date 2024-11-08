@@ -1,15 +1,17 @@
 "use server";
+
 import { UrlApi, UrlApiWithDomain, UrlRevalidate } from "@/shared/api/url";
 import { ProvidersClient } from "@/shared/providers/providersClient";
 import { ProvidersServer } from "@/shared/providers/providersServer";
+import { selectDataByLangCategory } from "@/shared/tools/selectDataByLang";
 import { iCity } from "@/shared/types/city";
-import { Populates } from "@/shared/types/populates";
+import HeaderText from "@/shared/ui/HeaderText";
 import { FooterAboutMobile } from "@/widgets/FooterAboutMobile";
 import { FooterMobile } from "@/widgets/FooterMobile";
-import { HeaderMobile } from "@/widgets/HeaderMobile";
-import { LayoutMain } from "@/widgets/LayoutMain";
-import { ProductPopularListPagination } from "@/widgets/ProductPopularListPagination";
+import { LayoutCustom } from "@/widgets/LayoutCustom";
+import { ProductCatalogListPagination } from "@/widgets/ProductCatalogListPagination";
 import { Flex } from "antd";
+
 import { type SearchParams } from "nuqs/server";
 import { searchParamsCache } from "./search-params.pagination";
 
@@ -21,7 +23,13 @@ type PageProps = {
   };
   searchParams: Promise<SearchParams>;
 };
-export default async function HomePage({ params, searchParams }: PageProps) {
+
+async function CatalogPage({ params, searchParams }: PageProps) {
+  // Slug - slug категории
+  // locale - язык
+  // city - город
+  const { slug, locale } = params;
+
   const { page, sortOrder } = await searchParamsCache.parse(searchParams);
 
   const fetchCity = await (
@@ -44,25 +52,9 @@ export default async function HomePage({ params, searchParams }: PageProps) {
     })
   ).json();
 
-  const fetchPopulates = await (
-    await fetch(UrlApiWithDomain.getPopulatesId, {
-      ...UrlRevalidate.getPopulatesId,
-      headers: {
-        "Content-Type": "application/json",
-        Accept: "application/json",
-      },
-    })
-  ).json();
-
-  const PopularProductsByIds = `by_ids/${fetchPopulates
-    .flatMap((i: Populates) => i.products)
-    .join(",")}`;
-  const UrlApiPopularProductsByIds = UrlApi.getProducts + PopularProductsByIds;
-  const UrlApiWithDomainPopularProductsByIds =
-    UrlApiWithDomain.getProducts + PopularProductsByIds;
-  const fetchPopularProductsByIds = await (
-    await fetch(UrlApiWithDomainPopularProductsByIds, {
-      ...UrlRevalidate.getProducts,
+  const fetchCurrentCategory = await (
+    await fetch(UrlApiWithDomain.getCategory + slug, {
+      ...UrlRevalidate.getCategory,
       headers: {
         "Content-Type": "application/json",
         Accept: "application/json",
@@ -78,18 +70,15 @@ export default async function HomePage({ params, searchParams }: PageProps) {
   let fallback = {
     [UrlApi.getCity]: fetchCity,
     [UrlApi.getCategory]: fetchCategory,
-    [UrlApi.getPopulatesId]: fetchPopulates,
-    [UrlApiPopularProductsByIds]: fetchPopularProductsByIds,
   };
 
-  // Если найден город, добавляем данные о населенных пунктах города
   if (FindCity.length > 0) {
     const RusCity: string = FindCity[0].name_city;
-    const UrlPopulatesByCity = `/api/by_city/populates?city=${RusCity}`;
-    const UrlWithDomainPopulatesByCity = `${process.env.HOST_URL}${UrlPopulatesByCity}`;
-    const fetchPopulatesByCity = await (
-      await fetch(UrlWithDomainPopulatesByCity, {
-        ...UrlRevalidate.getPopulatesId,
+    const urlBuilderProductsByCategory = `/api/by_city/catalog?slug=${slug}&city=${RusCity}`;
+    const urlBuilderProductsByCategoryWithDomain = `${process.env.HOST_URL}${urlBuilderProductsByCategory}`;
+    const fetchProductsByCategory = await (
+      await fetch(urlBuilderProductsByCategoryWithDomain, {
+        ...UrlRevalidate.getProducts,
         headers: {
           "Content-Type": "application/json",
           Accept: "application/json",
@@ -99,24 +88,35 @@ export default async function HomePage({ params, searchParams }: PageProps) {
 
     fallback = {
       ...fallback,
-      [UrlPopulatesByCity]: fetchPopulatesByCity,
+      [urlBuilderProductsByCategory]: fetchProductsByCategory,
     };
   }
+
 
   return (
     <ProvidersServer>
       <ProvidersClient params={params} fallback={fallback}>
-        <LayoutMain
-          headerContent={<HeaderMobile />}
+        <LayoutCustom
+          h="px"
+          hightHeader={70}
+          hightFooter={80}
+          headerContent={
+            <HeaderText
+              text={
+                selectDataByLangCategory(fetchCurrentCategory, locale) ?? ""
+              }
+            />
+          }
           content={
             <Flex vertical={true} gap={20}>
-              <ProductPopularListPagination params={params} searchParams={{page, sortOrder}}/>
+              <ProductCatalogListPagination params={params} searchParams={{page, sortOrder}}/>
               <FooterAboutMobile />
             </Flex>
           }
-          footerContent={<FooterMobile />}
+          footerContent={<FooterMobile defaultKey="2" />}
         />
       </ProvidersClient>
     </ProvidersServer>
   );
 }
+export default CatalogPage;

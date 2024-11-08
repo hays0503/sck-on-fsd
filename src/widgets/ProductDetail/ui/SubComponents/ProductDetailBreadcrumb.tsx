@@ -30,10 +30,10 @@ const ProductDetailBreadcrumb: React.FC<IProductBreadcrumbProps> = (props) => {
   );
 
   const breadcrumbsItems: ItemType[] = breadcrumbs.map((category: Category) => {
+    const title = selectDataByLangCategory(category, localeActive) ??
+    selectDataByLangCategory(category, "ru")
     return {
-      title:
-        selectDataByLangCategory(category, localeActive) ??
-        selectDataByLangCategory(category, "ru"),
+      title: <Link href={`/${city}/catalog/${category.slug}`}>{title}</Link>,
     };
   });
 

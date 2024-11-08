@@ -2,6 +2,7 @@
 
 import { SWRConfig } from "swr";
 import { CityProvider } from "../hooks/useGetCityParams";
+import { NuqsAdapter } from "nuqs/adapters/next";
 
 
 export function ProvidersClient({
@@ -19,7 +20,9 @@ export function ProvidersClient({
 }) {
   return (
     <SWRConfig value={{ fallback }}>
+      <NuqsAdapter>
       <CityProvider City={params?.city}>{children}</CityProvider>
+      </NuqsAdapter>
     </SWRConfig>
   );
 }

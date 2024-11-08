@@ -47,7 +47,7 @@ const UrlApiWithDomain = {
   getUserRefreshTokenApi: `${ApiUrl}${UrlApi.getUserRefreshTokenApi}`,
 };
 
-const revalidateDefault = 3600;
+const revalidateDefault = 60;
 
 const UrlRevalidate = {
   getCity: {

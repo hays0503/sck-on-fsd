@@ -10,10 +10,9 @@ import { Flex } from "antd";
     const {addToCartSlot} = props
     return (
       <Flex
-        gap={10}
         style={{ width: "100%" }}
         align="center"
-        justify="space-around"
+        justify="center"
       >
         <>{addToCartSlot}</>
       </Flex>
