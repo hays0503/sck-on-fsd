@@ -33,7 +33,7 @@ const ProductDetailBreadcrumb: React.FC<IProductBreadcrumbProps> = (props) => {
     const title = selectDataByLangCategory(category, localeActive) ??
     selectDataByLangCategory(category, "ru")
     return {
-      title: <Link href={`/${city}/catalog/${category.slug}`}>{title}</Link>,
+      title: <Link href={`/city/${city}/catalog/${category.slug}`}>{title}</Link>,
     };
   });
 
@@ -41,7 +41,7 @@ const ProductDetailBreadcrumb: React.FC<IProductBreadcrumbProps> = (props) => {
     <Flex style={{ width: "100%" }} >
     <Breadcrumb
       items={[
-        { title: <Link href={`/${city}/main`}>{t('glavnaya')}</Link> },
+        { title: <Link href={`/city/${city}/main`}>{t('glavnaya')}</Link> },
         { title: t('catalog')},
         ...breadcrumbsItems,
         {

@@ -16,6 +16,7 @@ interface IRenderImagesProps {
   width: number;
   height: number;
   name: string | undefined | null;
+  src?: string | undefined | null;
 }
 
 interface IRenderSwiperProps {
@@ -24,14 +25,13 @@ interface IRenderSwiperProps {
   name: string | undefined | null;
   width: number;
   height: number;
-  
 }
 
 const RenderImages: React.FC<IRenderImagesProps> = (props) => {
-  const {name,width,height} = props
+  const { name, width, height, src } = props;
   return (
     <Image
-      src="/nofoto.jpg"
+      src={src ?? "/nofoto.jpg"}
       alt={`${name}-no-image`}
       width={width}
       height={height}
@@ -87,11 +87,26 @@ const ProductCartSwiper: React.FC<IProductCartSwiperProps> = (props) => {
   };
 
   return (
-    <div style={{ width: width, height: height,overflow: "hidden" }}>
+    <div style={{ width: width, height: height, overflow: "hidden" }}>
       {images?.length > 0 ? (
-        <RenderSwiper images={images} paramsSwiper={paramsSwiper} name={name}  width={width} height={height} />
+        images?.length > 1 ? (
+          <RenderSwiper
+            images={images}
+            paramsSwiper={paramsSwiper}
+            name={name}
+            width={width}
+            height={height}
+          />
+        ) : (
+          <RenderImages
+            width={width}
+            height={height}
+            name={name}
+            src={images[0]}
+          />
+        )
       ) : (
-        <RenderImages width={width} height={height} name={name}/>
+        <RenderImages width={width} height={height} name={name} />
       )}
     </div>
   );

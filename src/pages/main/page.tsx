@@ -22,13 +22,7 @@ type PageProps = {
   searchParams: Promise<SearchParams>;
 };
 export default async function HomePage({ params, searchParams }: PageProps) {
-
-  console.log("params", params);
-  console.log("searchParams", searchParams);
-
   const { page } =  searchParamsCache.parse(await searchParams);
-  console.log("page", page);
-
 
   const fetchCity = await (
     await fetch(UrlApiWithDomain.getCity, {

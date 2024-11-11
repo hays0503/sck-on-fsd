@@ -26,7 +26,7 @@ const nextConfig = {
     return [
       {
         source: "/",
-        destination: "/ru/Astana/main",
+        destination: "/ru/city/Astana/main",
         permanent: true,
       },
     ];

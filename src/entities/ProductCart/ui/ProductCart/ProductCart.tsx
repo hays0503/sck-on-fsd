@@ -51,7 +51,7 @@ const ProductCart: React.FC<IProductCartProps> = (props) => {
           />
         }
       />
-      <Link href={`/${currentCity}/product/${props.Product.slug}`} style={{ width: "100%" }}>
+      <Link href={`/city/${currentCity}/product/${props.Product.slug}`} style={{ width: "100%" }}>
         <Level2
           name={name}
           average_rating={Product?.average_rating}
