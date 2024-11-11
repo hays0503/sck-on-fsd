@@ -1,6 +1,6 @@
 "use client";
 import { CategoryListMobile } from "@/entities/Category";
-import { SearchProduct } from "@/features/search-product";
+import { SearchProduct } from "@/features/search-products";
 import { Flex } from "antd";
 
 export default function HeaderMobile() {

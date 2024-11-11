@@ -101,7 +101,8 @@ export default function ProductCatalogListPagination({
     },
   ];
 
-  const currentOrderText = items.find((item) => item!.key === sortOrder)?.label;
+  const selectedOrder = items.find((item) => item!.key === sortOrder) as { label: string };
+  const currentOrderText = selectedOrder.label; 
 
 
   return (

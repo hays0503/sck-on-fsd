@@ -23,7 +23,6 @@ export default function LoginWithSms() {
     if (numberString.replace(/\D/g, "").length === 10) {
       const number = "8" + numberString.replace(/\D/g, "");
       setPhone(number);
-      console.log(number);
     }
   };
   const SendCodeInSms = () => {

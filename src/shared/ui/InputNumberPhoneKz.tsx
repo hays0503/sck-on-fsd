@@ -10,7 +10,6 @@ export default function InputNumberPhoneKz({numberString, setNumberString}:{numb
   size="large"
   onChange={(e) => {
     const number = e.target.value.replace(/\D/g, "");
-    console.log(number.length);
     switch (number.length) {
       case 0:
         setNumberString(`(${number}`);

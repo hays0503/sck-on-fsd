@@ -8,10 +8,10 @@ import { FooterAboutMobile } from "@/widgets/FooterAboutMobile";
 import { FooterMobile } from "@/widgets/FooterMobile";
 import { HeaderMobile } from "@/widgets/HeaderMobile";
 import { LayoutMain } from "@/widgets/LayoutMain";
-import { ProductPopularListPagination } from "@/widgets/ProductPopularListPagination";
 import { Flex } from "antd";
 import { type SearchParams } from "nuqs/server";
-import { searchParamsCache } from "./search-params.pagination";
+import { searchParamsCache } from "./searchParams";
+import { ProductPopularListPagination } from "@/widgets/ProductPopularListPagination";
 
 type PageProps = {
   params: {
@@ -22,7 +22,13 @@ type PageProps = {
   searchParams: Promise<SearchParams>;
 };
 export default async function HomePage({ params, searchParams }: PageProps) {
-  const { page, sortOrder } = await searchParamsCache.parse(searchParams);
+
+  console.log("params", params);
+  console.log("searchParams", searchParams);
+
+  const { page } =  searchParamsCache.parse(await searchParams);
+  console.log("page", page);
+
 
   const fetchCity = await (
     await fetch(UrlApiWithDomain.getCity, {
@@ -103,6 +109,8 @@ export default async function HomePage({ params, searchParams }: PageProps) {
     };
   }
 
+
+  
   return (
     <ProvidersServer>
       <ProvidersClient params={params} fallback={fallback}>
@@ -110,7 +118,7 @@ export default async function HomePage({ params, searchParams }: PageProps) {
           headerContent={<HeaderMobile />}
           content={
             <Flex vertical={true} gap={20}>
-              <ProductPopularListPagination params={params} searchParams={{page, sortOrder}}/>
+              <ProductPopularListPagination searchParams={{ page }}/>
               <FooterAboutMobile />
             </Flex>
           }

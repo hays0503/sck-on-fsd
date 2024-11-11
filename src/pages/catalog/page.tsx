@@ -13,7 +13,7 @@ import { ProductCatalogListPagination } from "@/widgets/ProductCatalogListPagina
 import { Flex } from "antd";
 
 import { type SearchParams } from "nuqs/server";
-import { searchParamsCache } from "./search-params.pagination";
+import { searchParamsCache } from "./searchParams";
 
 type PageProps = {
   params: {
