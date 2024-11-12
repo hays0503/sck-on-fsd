@@ -3,11 +3,12 @@ import { AddToBasketProduct } from "@/features/add-to-basket-product";
 import { AddToFavoriteProduct } from "@/features/add-to-favorite-product";
 
 import { Products } from "@/shared/types/products";
+import { ProductsDetail } from "@/shared/types/productsDetail";
 import { Col, ColProps, Row } from "antd";
 
   
   interface Level1Props {
-    readonly Products: Products[]
+    readonly Products: Products[]|ProductsDetail[]
   }
   
   // Первый уровень карты (карточки товаров)

@@ -8,9 +8,10 @@ import { selectDataByLangProducts } from "@/shared/tools/selectDataByLang";
 import useSelectedCity from "@/shared/hooks/useSelectedCity";
 import { Link } from "@/i18n/routing";
 import { useGetCityParams } from "@/shared/hooks/useGetCityParams";
+import { ProductsDetail } from "@/shared/types/productsDetail";
 
 interface IProductCartProps {
-  readonly Product: Products;
+  readonly Product: Products|ProductsDetail;
   readonly addToCartSlot: JSX.Element;
   readonly addToFavoriteSlot: JSX.Element;
 }
