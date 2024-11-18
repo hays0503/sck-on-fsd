@@ -5,15 +5,17 @@ import { ProvidersClient } from "@/shared/providers/providersClient";
 import { ProvidersServer } from "@/shared/providers/providersServer";
 import { selectDataByLangCategory } from "@/shared/tools/selectDataByLang";
 import { iCity } from "@/shared/types/city";
+import { Products } from "@/shared/types/products";
+import { ProductsDetail } from "@/shared/types/productsDetail";
 import HeaderText from "@/shared/ui/HeaderText";
 import { FooterAboutMobile } from "@/widgets/FooterAboutMobile";
 import { FooterMobile } from "@/widgets/FooterMobile";
 import { LayoutCustom } from "@/widgets/LayoutCustom";
-import { ProductCatalogListPagination } from "@/widgets/ProductCatalogListPagination";
+import { ProductCatalog } from "@/widgets/ProductCatalog";
+import { ShowcaseMobile } from "@/widgets/ShowcaseMobile";
 import { Flex } from "antd";
 
 import { type SearchParams } from "nuqs/server";
-import { searchParamsCache } from "./searchParams";
 
 type PageProps = {
   params: {
@@ -28,9 +30,8 @@ async function CatalogPage({ params, searchParams }: PageProps) {
   // Slug - slug категории
   // locale - язык
   // city - город
+  console.log("seachParams", searchParams);
   const { slug, locale } = params;
-
-  const { page, sortOrder } = await searchParamsCache.parse(searchParams);
 
   const fetchCity = await (
     await fetch(UrlApiWithDomain.getCity, {
@@ -109,7 +110,12 @@ async function CatalogPage({ params, searchParams }: PageProps) {
           }
           content={
             <Flex vertical={true} gap={20}>
-              <ProductCatalogListPagination params={params} searchParams={{page, sortOrder}}/>
+              <ProductCatalog
+                params={params}
+                Catalog={
+                  (productRender: Products[] | ProductsDetail[])=>ShowcaseMobile({ Products: productRender })
+                }
+              />
               <FooterAboutMobile />
             </Flex>
           }

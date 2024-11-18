@@ -1,27 +1,32 @@
 "use client";
 
 import { Products } from "@/shared/types/products";
-import { Flex, Pagination } from "antd";
-import { Level1, Level2 } from "./SubComponent";
-import { useLayoutEffect } from "react";
+import { Flex } from "antd";
 import useSelectedCity from "@/shared/hooks/useSelectedCity";
 import useFetcherProductsByCatalog from "@/shared/api/fetch/productsByCatalog";
-import { parseAsInteger, useQueryState } from "nuqs";
-import { SortingProducts,useGetSortFunc } from "@/features/sorting-products";
-import { PaginationProducts } from "@/features/pagination-products/ui";
-import { useGetPaginationFunc } from "@/features/pagination-products";
+import { SortingProducts, useGetSortFunc } from "@/features/sorting-products";
+import {
+  useGetPaginationFunc,
+  PaginationProducts,
+} from "@/features/pagination-products";
+import React from "react";
 
-export default function ProductCatalogListPagination({
-  params,
-  searchParams,
-}: {
-  params: { locale: string; city: string; slug: string };
-  searchParams: {
-    page: number;
-    sortOrder: "asc" | "desc";
-  };
-}) {
- 
+interface ProductsCatalogProps {
+  params: { slug: string };
+  Catalog: any;
+}
+
+const ProductCatalog: React.FC<ProductsCatalogProps> = (props) => {
+
+  console.log("ProductCatalog:",props)
+
+  const { 
+    params,
+    Catalog 
+  } = props;
+
+  console.log(params)
+
   const selectedCity = useSelectedCity();
 
   const _Products: Products[] =
@@ -31,10 +36,12 @@ export default function ProductCatalogListPagination({
     }).data! ?? [];
 
   const sortFunc = useGetSortFunc();
-  
+
   const Products = _Products.sort(sortFunc);
 
-  const ProductOnPage = useGetPaginationFunc({Products});
+  const ProductOnPage = useGetPaginationFunc({ Products });
+
+  console.log(ProductOnPage)
 
   return (
     <Flex
@@ -45,8 +52,12 @@ export default function ProductCatalogListPagination({
       style={{ width: "100%", height: "100%", backgroundColor: "#EEEFF1" }}
     >
       <SortingProducts slugCatalog={params.slug} />
-      <Level1 Products={ProductOnPage} />
+      {/* <Catalog Products={ProductOnPage}/> */}
+      {/* <Catalog {...props} /> */}
+      {Catalog({ Products: ProductOnPage })}
       <PaginationProducts totalProducts={Products.length} />
     </Flex>
   );
-}
+};
+
+export default ProductCatalog;
