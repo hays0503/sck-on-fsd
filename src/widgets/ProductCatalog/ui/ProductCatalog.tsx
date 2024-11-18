@@ -52,9 +52,7 @@ const ProductCatalog: React.FC<ProductsCatalogProps> = (props) => {
       style={{ width: "100%", height: "100%", backgroundColor: "#EEEFF1" }}
     >
       <SortingProducts slugCatalog={params.slug} />
-      {/* <Catalog Products={ProductOnPage}/> */}
-      {/* <Catalog {...props} /> */}
-      {Catalog({ Products: ProductOnPage })}
+      <Catalog Products={ProductOnPage} />
       <PaginationProducts totalProducts={Products.length} />
     </Flex>
   );

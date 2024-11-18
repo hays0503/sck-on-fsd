@@ -1,3 +1,4 @@
+"use client";
 import { ProductCart } from "@/entities/ProductCart";
 import { AddToBasketProduct } from "@/features/add-to-basket-product";
 import { AddToFavoriteProduct } from "@/features/add-to-favorite-product";

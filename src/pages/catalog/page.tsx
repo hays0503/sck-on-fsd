@@ -112,9 +112,7 @@ async function CatalogPage({ params, searchParams }: PageProps) {
             <Flex vertical={true} gap={20}>
               <ProductCatalog
                 params={params}
-                Catalog={
-                  (productRender: Products[] | ProductsDetail[])=>ShowcaseMobile({ Products: productRender })
-                }
+                Catalog={ShowcaseMobile}
               />
               <FooterAboutMobile />
             </Flex>

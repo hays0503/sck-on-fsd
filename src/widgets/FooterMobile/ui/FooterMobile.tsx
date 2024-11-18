@@ -127,10 +127,10 @@ export default function FooterMobile({defaultKey}: {defaultKey?: string}) {
         onTabClick={(key: string) => {
           // Если выбран профиль
           if(key==="1"){
-            router.push(`/${currentCity}/main`)
+            router.push(`/city/${currentCity}/main`)
           }
           if(key==="4"){
-            router.push(`/${currentCity}/profile`)
+            router.push(`/city/${currentCity}/profile`)
           }
         }}
       />
