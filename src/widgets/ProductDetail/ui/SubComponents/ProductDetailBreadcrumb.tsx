@@ -33,7 +33,7 @@ const ProductDetailBreadcrumb: React.FC<IProductBreadcrumbProps> = (props) => {
     const title = selectDataByLangCategory(category, localeActive) ??
     selectDataByLangCategory(category, "ru")
     return {
-      title: <Link href={`/city/${city}/catalog/${category.slug}`}>{title}</Link>,
+      title: <Link href={`/city/${city}/catalog/category-slug/${category.slug}`}>{title}</Link>,
     };
   });
 

@@ -29,6 +29,11 @@ const nextConfig = {
         destination: "/ru/city/Astana/main",
         permanent: true,
       },
+      {
+        source: "/:lang/city/:city/catalog/menu",
+        destination: "/:lang/city/:city/catalog/menu/main",
+        permanent: true,
+      },
     ];
   },
   async rewrites() {

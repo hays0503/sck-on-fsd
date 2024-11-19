@@ -129,6 +129,9 @@ export default function FooterMobile({defaultKey}: {defaultKey?: string}) {
           if(key==="1"){
             router.push(`/city/${currentCity}/main`)
           }
+          if(key==="2"){
+            router.push(`/city/${currentCity}/catalog/menu/main`)
+          }
           if(key==="4"){
             router.push(`/city/${currentCity}/profile`)
           }

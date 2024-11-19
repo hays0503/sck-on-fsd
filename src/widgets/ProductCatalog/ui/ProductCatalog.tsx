@@ -10,10 +10,12 @@ import {
   PaginationProducts,
 } from "@/features/pagination-products";
 import React from "react";
+import { ProductsDetail } from "@/shared/types/productsDetail";
+
 
 interface ProductsCatalogProps {
   params: { slug: string };
-  Catalog: any;
+  Catalog: React.FC<{readonly Products: Products[] | ProductsDetail[]}>;
 }
 
 const ProductCatalog: React.FC<ProductsCatalogProps> = (props) => {
@@ -37,11 +39,9 @@ const ProductCatalog: React.FC<ProductsCatalogProps> = (props) => {
 
   const sortFunc = useGetSortFunc();
 
-  const Products = _Products.sort(sortFunc);
+  const ProductOnPage = _Products.sort(sortFunc);
 
-  const ProductOnPage = useGetPaginationFunc({ Products });
-
-  console.log(ProductOnPage)
+  const Products = useGetPaginationFunc({ Products:ProductOnPage });
 
   return (
     <Flex
@@ -52,7 +52,7 @@ const ProductCatalog: React.FC<ProductsCatalogProps> = (props) => {
       style={{ width: "100%", height: "100%", backgroundColor: "#EEEFF1" }}
     >
       <SortingProducts slugCatalog={params.slug} />
-      <Catalog Products={ProductOnPage} />
+      <Catalog Products={Products} />
       <PaginationProducts totalProducts={Products.length} />
     </Flex>
   );

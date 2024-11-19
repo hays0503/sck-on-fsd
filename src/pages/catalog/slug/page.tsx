@@ -5,8 +5,6 @@ import { ProvidersClient } from "@/shared/providers/providersClient";
 import { ProvidersServer } from "@/shared/providers/providersServer";
 import { selectDataByLangCategory } from "@/shared/tools/selectDataByLang";
 import { iCity } from "@/shared/types/city";
-import { Products } from "@/shared/types/products";
-import { ProductsDetail } from "@/shared/types/productsDetail";
 import HeaderText from "@/shared/ui/HeaderText";
 import { FooterAboutMobile } from "@/widgets/FooterAboutMobile";
 import { FooterMobile } from "@/widgets/FooterMobile";
@@ -15,7 +13,7 @@ import { ProductCatalog } from "@/widgets/ProductCatalog";
 import { ShowcaseMobile } from "@/widgets/ShowcaseMobile";
 import { Flex } from "antd";
 
-import { type SearchParams } from "nuqs/server";
+// import { type SearchParams } from "nuqs/server";
 
 type PageProps = {
   params: {
@@ -23,14 +21,18 @@ type PageProps = {
     locale: string;
     city: string;
   };
-  searchParams: Promise<SearchParams>;
+  // searchParams: Promise<SearchParams>;
 };
 
-async function CatalogPage({ params, searchParams }: PageProps) {
+async function CatalogPage(
+  { params,
+    //  searchParams 
+    }: PageProps) {
+
   // Slug - slug категории
   // locale - язык
   // city - город
-  console.log("seachParams", searchParams);
+
   const { slug, locale } = params;
 
   const fetchCity = await (
