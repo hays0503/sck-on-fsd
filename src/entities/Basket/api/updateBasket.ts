@@ -13,7 +13,7 @@ const updateBasket: UpdateBasket = async (uuid,basket) => {
         "Content-Type": "application/json",
         "Accept": "application/json",
       },
-      body: JSON.stringify({ uuid: uuid,basket_items: basket }),
+      body: JSON.stringify({ uuid_id: uuid,basket_items: basket }),
     }).then((response) => response.json());
   }
 

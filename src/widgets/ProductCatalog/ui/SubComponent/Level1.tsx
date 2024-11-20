@@ -1,5 +1,5 @@
 import { ProductCart } from "@/entities/ProductCart";
-import { AddToBasketProduct } from "@/features/add-to-basket-product";
+import { AddToBasketProduct } from "@/features/operation-in-basket-product";
 import { AddToFavoriteProduct } from "@/features/add-to-favorite-product";
 
 import { Products } from "@/shared/types/products";
