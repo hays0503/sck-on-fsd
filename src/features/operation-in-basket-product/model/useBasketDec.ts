@@ -1,10 +1,11 @@
 
 import { delProduct } from "@/entities/Basket";
 import useFetcherBasket from "@/shared/api/fetch/basket";
-// import { useReadLocalStorage } from "usehooks-ts";
+import { useReadLocalStorage } from "usehooks-ts";
 
 const useBasketDec = ({ prod_id }: { prod_id: number }) => {
-  const uuid = "1f";//useReadLocalStorage<string>("uuid");
+  const uuid = useReadLocalStorage<string>("uuid_id")!;
+  
   const { mutate } = useFetcherBasket({ by_id: uuid });
 
   const delAction = async () => {

@@ -16,16 +16,14 @@ const BasketDetail: React.FC<IBasketDetailProps> = ({ Products }) => {
 
   const selectedCity = useSelectedCity();
 
-  const allPrice = Products.reduce(
-    (acc, item) => acc + (item?.prod?.price?.[selectedCity] ?? 0) * item.count,
-    0
-  );
-
-  const allPriceString = beautifulCost(allPrice);
+  const allPrice = Products.reduce((acc, item) => {
+    const { price } = getPrice(item.prod, selectedCity);
+    return acc + (price ?? 0) * item.count;
+  }, 0);
 
   const allDiscount = Products.reduce((acc, item) => {
-    const { discountPrice } = getPrice(item.prod, selectedCity);
-    return acc + (discountPrice ?? 0) * item.count;
+    const { discountPrice, price } = getPrice(item.prod, selectedCity);
+    return acc + (discountPrice ?? price ?? 0) * item.count;
   }, 0);
 
   const deltaPrice = allPrice - allDiscount;
@@ -33,6 +31,35 @@ const BasketDetail: React.FC<IBasketDetailProps> = ({ Products }) => {
   const deltaPriceString = beautifulCost(deltaPrice);
 
   const allDiscountString = beautifulCost(allDiscount);
+
+  const allPriceString = beautifulCost(allPrice);
+
+  const Discount = () => {
+    return (
+      <>
+        {deltaPrice!==0 && (
+          <Flex align="center" justify="space-between" style={{ width: "95%" }}>
+            <Text
+              style={{
+                color: "#808185",
+                fontSize: "14px",
+                fontWeight: "400",
+                lineHeight: "22px",
+                letterSpacing: "-0.084px",
+              }}
+            >
+              {t("ekonomiya")}
+            </Text>
+            <Text
+              style={{
+                color: "#19B28D",
+              }}
+            >{`${deltaPriceString}`}</Text>
+          </Flex>
+        )}
+      </>
+    );
+  };
 
   return (
     <Flex
@@ -57,24 +84,7 @@ const BasketDetail: React.FC<IBasketDetailProps> = ({ Products }) => {
         </Text>
         <Text>{allDiscountString}</Text>
       </Flex>
-      <Flex align="center" justify="space-between" style={{ width: "95%" }}>
-        <Text
-          style={{
-            color: "#808185",
-            fontSize: "14px",
-            fontWeight: "400",
-            lineHeight: "22px",
-            letterSpacing: "-0.084px",
-          }}
-        >
-          {t("ekonomiya")}
-        </Text>
-        <Text
-          style={{
-            color: "#19B28D",
-          }}
-        >{`${deltaPriceString}`}</Text>
-      </Flex>
+      <Discount />
       <Divider />
       <Flex align="center" justify="space-between" style={{ width: "95%" }}>
         <Text

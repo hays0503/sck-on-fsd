@@ -7,6 +7,8 @@ import type { GetProps } from "antd";
 import { useLocalStorage } from "usehooks-ts";
 import InputNumberPhoneKz from "@/shared/ui/InputNumberPhoneKz";
 import { useTranslations } from "next-intl";
+import { useRouter } from "@/i18n/routing";
+import { useGetCityParams } from "@/shared/hooks/useGetCityParams";
 
 const { Title, Text } = Typography;
 type OTPProps = GetProps<typeof Input.OTP>;
@@ -19,6 +21,9 @@ export default function LoginWithSms() {
   const [, setRefreshToken] = useLocalStorage("refreshToken", { token: "" });
   const t = useTranslations();
 
+  const city = useGetCityParams();
+  const router = useRouter();
+
   const SendSmsTo = () => {
     if (numberString.replace(/\D/g, "").length === 10) {
       const number = "8" + numberString.replace(/\D/g, "");
@@ -30,6 +35,7 @@ export default function LoginWithSms() {
       getSmsAuthToken(code, smsIdentifier).then((response) => {
         setAccessToken(response.access);
         setRefreshToken(response.refresh);
+        router.push(`/city/${city}/main`);
       });
     }
   };

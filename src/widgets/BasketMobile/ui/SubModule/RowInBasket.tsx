@@ -76,7 +76,7 @@ const RowInBasket: React.FC<IRowInBasketProps> = ({
         <Flex gap={10} align="center" justify="right">
           <DecBasketSlot count={count} prod_id={Product.id}/>
           <Text style={{ color: "gray" }}>{count}</Text>
-          <IncBasketSlot count={count} prod_id={Product.id}/>
+          <IncBasketSlot prod_id={Product.id}/>
         </Flex>
       </Flex>
     </Flex>

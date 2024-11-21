@@ -39,20 +39,11 @@ async function BasketPage({params}: BasketPageProps) {
   console.log(UrlApiWithDomainBasketByUuid_id)
   console.log(UrlApiBasketByUuid_id)
 
-  const fetchBasketByUuid_id = await (
-    await fetch(UrlApiWithDomainBasketByUuid_id, {
-      ...UrlRevalidate.getPopulatesId,
-      headers: {
-        "Content-Type": "application/json",
-        Accept: "application/json",
-      },
-    })
-  ).json();
-
   const fallback = {
-    [UrlApi.getCity]: fetchCity,
-    [UrlApiBasketByUuid_id]: fetchBasketByUuid_id
+    [UrlApi.getCity]: fetchCity    
   };
+
+
 
   const t = await getTranslations()
 

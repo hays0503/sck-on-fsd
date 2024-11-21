@@ -5,6 +5,7 @@ import { Flex, Tabs, TabsProps, Typography } from "antd";
 import {  useTranslations } from "next-intl";
 import Image from "next/image";
 import { CSSProperties, useState } from "react";
+import { useReadLocalStorage } from "usehooks-ts";
 
 const { Text } = Typography;
 
@@ -13,6 +14,8 @@ export default function FooterMobile({defaultKey}: {defaultKey?: string}) {
   const currentCity = useGetCityParams();
   const [current, setCurrent] = useState<string>(defaultKey??"1");
   const router = useRouter();
+
+  const uuid_id = useReadLocalStorage<string>("uuid_id");
 
   const items: TabsProps["items"] = [
     {
@@ -131,6 +134,9 @@ export default function FooterMobile({defaultKey}: {defaultKey?: string}) {
           }
           if(key==="2"){
             router.push(`/city/${currentCity}/catalog/menu/main`)
+          }
+          if(key==="3"){
+            router.push(`/city/${currentCity}/basket/${uuid_id}`)
           }
           if(key==="4"){
             router.push(`/city/${currentCity}/profile`)

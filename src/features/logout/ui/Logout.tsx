@@ -11,6 +11,7 @@ export default function Logout() {
   const router = useRouter();
   const [,,removeAccessToken] = useLocalStorage("accessToken", { token: "" });
   const [,,removeRefreshToken] = useLocalStorage("refreshToken", { token: "" });
+  const [,,removeUuid] = useLocalStorage("uuid_id", { token: "" });
   return (
     <Flex
       vertical={true}
@@ -27,7 +28,8 @@ export default function Logout() {
             // Отчистка локал стора
             removeAccessToken();
             removeRefreshToken();
-            router.replace(`/${currentCity}/main`);
+            removeUuid();
+            router.replace(`/city/${currentCity}/main`);
           }}
         >
           Да

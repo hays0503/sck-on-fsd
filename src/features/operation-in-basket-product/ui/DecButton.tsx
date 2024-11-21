@@ -55,7 +55,7 @@ const DecButton: TDecButton = ({ count, prod_id }) => {
       </svg>
     );
 
-  console.log("TDecButton => ", count, prod_id);
+  // console.log("TDecButton => ", count, prod_id);
 
   const delProduct = useBasketDec({ prod_id });
 

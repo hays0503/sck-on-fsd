@@ -23,7 +23,7 @@ const ShowcaseMobile: React.FC<ShowcaseMobileProps> = (props) => {
         <Col {...ColResponsive} key={index}>
           <ProductCart
             Product={item}
-            addToCartSlot={<AddToBasketProduct />}
+            addToCartSlot={<AddToBasketProduct prod_id={item.id}/>}
             addToFavoriteSlot={<AddToFavoriteProduct />}
           />
         </Col>

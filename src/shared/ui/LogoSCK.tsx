@@ -45,7 +45,7 @@ const LogoSCK: React.FC<ILogoSCKProps> = ({ size = "small" }) => {
 
   return (
     <>
-      <Link href={`/${currentCity}/main`}>
+      <Link href={`/city/${currentCity}/main`}>
         <div
           style={{
             position: "relative",

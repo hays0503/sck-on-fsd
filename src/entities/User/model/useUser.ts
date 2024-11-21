@@ -101,17 +101,18 @@ const useUserInfo = () => {
     userInfo();
   }, [userInfo]);
 
-  return { info, error };
+  return { info, error,accessToken };
 };
 
 // Custom hook for user logic
 const useUser = () => {
-  const { info, error } = useUserInfo();
+  const { info, error,accessToken } = useUserInfo();
 
   return {
     useIsAnonymous,
     info,
     error,
+    accessToken
   };
 };
 

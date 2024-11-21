@@ -3,13 +3,12 @@ import { CSSProperties } from "react";
 import {useBasketAdd} from "../model";
 
 interface IIncButtonProps {
-  readonly count: number;
   readonly prod_id: number;
 }
 
 type TIncButton = React.FC<IIncButtonProps>
 
-const IncButton: TIncButton = ({ count, prod_id }) => {
+const IncButton: TIncButton = ({ prod_id }) => {
 
   const styleButton: CSSProperties = {
     color: "gray",
@@ -19,7 +18,7 @@ const IncButton: TIncButton = ({ count, prod_id }) => {
     backgroundColor: "#F5F5F5",
   };
 
-  console.log("IncButton => ",count, prod_id)
+  // console.log("IncButton => ", prod_id)
 
   const addProduct = useBasketAdd({ prod_id });
 

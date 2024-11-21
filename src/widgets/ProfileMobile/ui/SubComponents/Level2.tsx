@@ -87,7 +87,7 @@ const Level2: React.FC<Level2Props> = (props) => {
     <Flex vertical={true} gap={10} align="center" style={{ width: "100%" }}>
       <ElementList
         title={t("istoriya-zakazov")}
-        href={`/${currentCity}/main`}
+        href={`/city/${currentCity}/main`}
         disabled={isGuest}
         icon={
           <svg
@@ -109,7 +109,7 @@ const Level2: React.FC<Level2Props> = (props) => {
       />
       <ElementList
         title={t("izbrannye-tovary")}
-        href={`/${currentCity}/main`}
+        href={`/city/${currentCity}/main`}
         disabled={isGuest}
         icon={
           <svg
@@ -131,7 +131,7 @@ const Level2: React.FC<Level2Props> = (props) => {
       />
       <ElementList
         title={t("otzyvy")}
-        href={`/${currentCity}/main`}
+        href={`/city/${currentCity}/main`}
         disabled={isGuest}
         icon={
           <svg
@@ -153,7 +153,7 @@ const Level2: React.FC<Level2Props> = (props) => {
       />
       <ElementList
         title={t("sravnenie-tovarov")}
-        href={`/${currentCity}/main`}
+        href={`/city/${currentCity}/main`}
         icon={
           <svg
             width="28"
@@ -174,7 +174,7 @@ const Level2: React.FC<Level2Props> = (props) => {
       />
       <ElementList
         title={t("nastroi-ki")}
-        href={`/${currentCity}/main`}
+        href={`/city/${currentCity}/main`}
         icon={
           <svg
             width="28"
@@ -203,7 +203,7 @@ const Level2: React.FC<Level2Props> = (props) => {
 
       <ElementList
         title={t('vykhod')}
-        href={`/${currentCity}/logout`}
+        href={`/city/${currentCity}/logout`}
         disabled={isGuest}
         color="red"
         icon={
