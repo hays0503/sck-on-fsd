@@ -13,6 +13,7 @@ export default function useFetcherBasket({
   const urlForById = `${UrlApi.getBasketApi}/by/${by_id}`;
   const urlForByAccessToken = `${UrlApi.getBasketApi}/by_access_t/${by_access_token}`;
   const url = by_access_token ? urlForByAccessToken : urlForById;
+  console.log("useFetcherBasket =>",url)
   const object = useSWR<iBasket>(url, (url: string) =>
     defaultFetcher(url, {})
   );

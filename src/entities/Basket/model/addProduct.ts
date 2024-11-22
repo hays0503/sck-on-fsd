@@ -3,12 +3,14 @@ import { EditBasketResponse } from "./addPresent";
 
 type addProduct = (
   uuid: string,
-  productId: number
+  productId: number,
+  accessToken?:string
 ) => Promise<EditBasketResponse>;
 
-export const addProduct: addProduct = async (uuid, productId) => {
+export const addProduct: addProduct = async (uuid, productId, accessToken) => {
   try {
     const currentBasket = await getBasket(uuid);
+    const userData = accessToken?{ user_id: accessToken }:{}
     const newBasket = currentBasket.basket_items.map((item) => {
       if (item.prod_id === productId) {
         const newItem = {
@@ -35,11 +37,11 @@ export const addProduct: addProduct = async (uuid, productId) => {
           price: 0,
           count: 1,
         },
-      ]);
+      ], userData);
       return response;
     } else {
       // Увеличиваем кол-во товара
-      const response = updateBasket(uuid, newBasket);
+      const response = updateBasket(uuid, newBasket, userData);
       return response;
     }
   } catch (error) {

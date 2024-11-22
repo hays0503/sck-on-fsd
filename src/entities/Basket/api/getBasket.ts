@@ -6,7 +6,9 @@ type BasketResponse = CreateBasketResponse;
 type GetBasket = (uuid: string) => Promise<BasketResponse>;
 
 const getBasket: GetBasket = async (uuid) => {
-  return await fetch(`${UrlApi.getBasketApi}/by/${uuid}`, {
+  const url = `${UrlApi.getBasketApi}/by/${uuid}`;
+  console.log("URL=>",url)
+  return await fetch(url, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",

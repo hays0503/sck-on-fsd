@@ -106,7 +106,7 @@ const nextConfig = {
       // Запрос данных их корзины
       {
         source: "/basket_api/v1/bascket/:url*",
-        destination: "http://pimenov.kz:8777/basket_api/v1/bascket/:url*",
+        destination: "http://pimenov.kz:8777/basket_api/v1/bascket/:url*/",
       },
 
       // api заказа

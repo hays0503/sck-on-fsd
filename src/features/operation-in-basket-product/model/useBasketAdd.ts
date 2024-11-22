@@ -4,10 +4,11 @@ import { useCallback, useEffect } from "react";
 import { useLocalStorage } from "usehooks-ts";
 import { v4 as uuidv4 } from "uuid";
 import useGetUsersBasket from "./useGetUsersBasket";
+import { useUser } from "@/entities/User";
 
 const useBasketAdd = ({ prod_id }: { prod_id: number }) => {
   const userBasket = useGetUsersBasket();
-
+  const userData = useUser();
   const [uuid_id, setUuid_id] = useLocalStorage<string>("uuid_id", "");
 
   useEffect(() => {
@@ -25,7 +26,7 @@ const useBasketAdd = ({ prod_id }: { prod_id: number }) => {
 
   const addAction = useCallback(async () => {
     if (uuid_id) {
-      await addProduct(uuid_id, prod_id);
+      await addProduct(uuid_id, prod_id,userData.accessToken.token);
       try {
         mutate();
       } catch (error) {
