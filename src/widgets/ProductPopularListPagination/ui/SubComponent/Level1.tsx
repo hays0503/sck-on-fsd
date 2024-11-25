@@ -18,7 +18,6 @@ import { Col, ColProps, Row } from "antd";
       xs:{offset: 1}
     }
 
-
     return (
       <Row gutter={[16, 16]} justify="center" align="stretch">
         {Products?.map((item, index) => (

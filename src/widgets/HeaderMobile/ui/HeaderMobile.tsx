@@ -3,11 +3,16 @@ import { CategoryListMobile } from "@/entities/Category";
 import { SearchProduct } from "@/features/search-products";
 import { Flex } from "antd";
 
-export default function HeaderMobile() {
+interface IHeaderMobileProps {
+  readonly SelectCity: React.FC;
+}
+
+const HeaderMobile: React.FC<IHeaderMobileProps> = ({ SelectCity }) => {
   return (
     <Flex vertical={true} gap={5} style={{ width: "100%" }}>
       <Flex justify="space-around" align="center" style={{ width: "100%" }}>
-        <span>Выбор города </span> <span>{`8 000 0000 00 00`}</span>
+        <SelectCity />
+        <span>{`8 000 0000 00 00`}</span>
       </Flex>
       <Flex
         justify="space-between"
@@ -32,3 +37,4 @@ export default function HeaderMobile() {
     </Flex>
   );
 }
+export default HeaderMobile;

@@ -111,8 +111,8 @@ const nextConfig = {
 
       // api заказа
       {
-        source: "/basket_api/v1/order",
-        destination: "http://pimenov.kz:8989/basket_api/v1/order/",
+        source: "/basket_api/v1/order/:url*",
+        destination: "http://pimenov.kz:8777/basket_api/v1/order/:url*/",
       },
 
       //api по работе с пользователем

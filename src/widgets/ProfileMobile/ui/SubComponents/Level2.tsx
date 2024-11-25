@@ -70,15 +70,14 @@ const ElementList: React.FC<{
 };
 
 interface Level2Props {
-  readonly useIsAnonymous: () => boolean;
+  readonly IsAnonymous: boolean;
   readonly infoUser: UserInfo | null;
   readonly error: boolean;
 }
 
 const Level2: React.FC<Level2Props> = (props) => {
-  const { useIsAnonymous } = props;
 
-  const isGuest = useIsAnonymous();
+  const isGuest = props.IsAnonymous;
 
   const currentCity = useGetCityParams();
   const t = useTranslations();

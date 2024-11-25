@@ -7,7 +7,7 @@ import { useTranslations } from "next-intl";
 import Image from "next/image";
 
 interface Level1Props {
-  readonly useIsAnonymous: () => boolean;
+  readonly IsAnonymous: boolean;
   readonly infoUser: UserInfo | null;
   readonly error: boolean;
 }
@@ -18,7 +18,7 @@ const Level1: React.FC<Level1Props> = (props) => {
   const currentCity = useGetCityParams();
   const { infoUser } = props;
 
-  const isGuest = props.useIsAnonymous();
+  const isGuest = props.IsAnonymous;
 
   const t = useTranslations();
 

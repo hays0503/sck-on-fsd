@@ -5,25 +5,19 @@ import { ResponseUserInfo } from "../api/getUserInfo";
 import { useLocalStorage, useReadLocalStorage } from "usehooks-ts";
 import { ResponseRefreshToken } from "../api/getRefreshToken";
 
+// Тип токена
 type Token = { token: string };
 
-type useIsAnonymousFunc = () => boolean;
-
-// Авторизован ли пользователь
-const useIsAnonymous:useIsAnonymousFunc = () => {
-  const [token, setToken] = useState("");
+// Проверка: пользователь анонимный или нет
+const useIsAnonymous = (): boolean => {
   const accessToken = useReadLocalStorage<Token>("accessToken");
-
-  useEffect(() => {
-    setToken(accessToken?.token??"");
-  }, [accessToken?.token]);
-
-  return token.length === 0;
+  return !accessToken?.token;
 };
 
+// Получение информации о пользователе
 const useUserInfo = () => {
   const [info, setInfo] = useState<ResponseUserInfo | null>(null);
-  const [error, setError] = useState<boolean>(false);
+  const [error, setError] = useState(false);
 
   const [refreshToken, , removeRefreshToken] = useLocalStorage<Token>(
     "refreshToken",
@@ -32,87 +26,94 @@ const useUserInfo = () => {
   const [accessToken, setAccessToken, removeAccessToken] =
     useLocalStorage<Token>("accessToken", { token: "" });
 
+  // Обновление токена
   const fetchRefreshToken = useCallback(async () => {
+    if (!refreshToken.token) return;
+
     try {
-      if (refreshToken.token) {
-        const refreshResponse: ResponseRefreshToken = await getRefreshToken(
-          refreshToken.token
-        );
-        if (refreshResponse?.token) {
-          setAccessToken({ token: refreshResponse.token });
-          console.log("Токен обновлен");
-          return refreshResponse;
-        } else {
-          console.log("Не удалось обновить токен");
-          removeRefreshToken();
-          removeAccessToken();
-          setInfo(null);
-          setError(true);
-          return refreshResponse;
-        }
+      const refreshResponse: ResponseRefreshToken = await getRefreshToken(
+        refreshToken.token
+      );
+
+      if (refreshResponse?.token) {
+        setAccessToken({ token: refreshResponse.token });
+        console.log("Токен обновлен");
+        return refreshResponse.token;
+      } else {
+        console.log("Не удалось обновить токен");
+        removeRefreshToken();
+        removeAccessToken();
+        setInfo(null);
+        setError(true);
       }
-    } catch (error) {
+    } catch (err) {
+      console.error("Ошибка обновления токена", err);
       setError(true);
-      console.error("Ошибка обновления токена", error);
-      return undefined;
     }
   }, [
-    refreshToken?.token,
+    refreshToken.token,
+    setAccessToken,
     removeAccessToken,
     removeRefreshToken,
-    setAccessToken,
   ]);
 
+  // Получение информации о пользователе
   const userInfo = useCallback(async () => {
+    if (!accessToken.token) {
+      console.log("Пользователь не авторизован");
+      return;
+    }
+
     try {
-      if (accessToken.token) {
-        const response = await getUserInfo(accessToken.token);
-        // Проверка поведение токена
-        if (response?.detail) {
-          const tokenErrors = [
-            "Token expired",
-            "Signature verification failed",
-            "Not enough segments",
-            "Invalid crypto padding",
-          ];
-          if (tokenErrors.includes(response.detail)) {
-            const responseTryRefresh = await fetchRefreshToken();
-            if (responseTryRefresh?.token) {
-              const responseTry = await getUserInfo(responseTryRefresh?.token);
-              setInfo(responseTry);
-            } else {
-              console.log("Не вышло обновить токен");
-            }
+      const response = await getUserInfo(accessToken.token);
+
+      if (response?.detail) {
+        const tokenErrors = [
+          "Token expired",
+          "Signature verification failed",
+          "Not enough segments",
+          "Invalid crypto padding",
+        ];
+
+        if (tokenErrors.includes(response.detail)) {
+          const newToken = await fetchRefreshToken();
+          if (newToken) {
+            const refreshedResponse = await getUserInfo(newToken);
+            setInfo(refreshedResponse);
+          } else {
+            console.log("Не удалось обновить токен");
           }
-        } else {
-          setInfo(response);
-          console.log("Пользователь вошел в систему", response);
         }
       } else {
-        console.log("Пользователь не авторизован");
+        // if (JSON.stringify(response) !== JSON.stringify(info)) {
+          setInfo(response);
+          // console.log("Пользователь вошел в систему", response);
+        // }
+        
       }
-    } catch (error) {
+    } catch (err) {
+      console.error("Ошибка при получении информации о пользователе", err);
       setError(true);
-      console.error("Ошибка при получении информации о пользователе", error);
     }
-  }, [accessToken?.token, fetchRefreshToken]);
+  }, []);
 
+  // Автоматическая загрузка информации о пользователе
   useEffect(() => {
     userInfo();
   }, [userInfo]);
 
-  return { info, error,accessToken };
+  return { info, error, accessToken };
 };
 
-// Custom hook for user logic
+// Общий хук для работы с пользователем
 const useUser = () => {
-  const { info, error,accessToken } = useUserInfo();
+  const { info, error, accessToken } = useUserInfo();
 
   return {
-    useIsAnonymous,
+    isAnonymous: useIsAnonymous(),
     info,
     error,
-    accessToken
+    accessToken,
   };
 };
 

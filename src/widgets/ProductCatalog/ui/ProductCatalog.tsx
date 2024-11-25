@@ -53,7 +53,7 @@ const ProductCatalog: React.FC<ProductsCatalogProps> = (props) => {
     >
       <SortingProducts slugCatalog={params.slug} />
       <Catalog Products={Products} />
-      <PaginationProducts totalProducts={Products.length} />
+      <PaginationProducts totalProducts={_Products.length} />
     </Flex>
   );
 };
