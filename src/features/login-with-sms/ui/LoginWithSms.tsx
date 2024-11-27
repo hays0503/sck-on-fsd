@@ -13,7 +13,7 @@ import { useGetCityParams } from "@/shared/hooks/useGetCityParams";
 const { Title, Text } = Typography;
 type OTPProps = GetProps<typeof Input.OTP>;
 
-export default function LoginWithSms() {
+export default function LoginWithSms({callbackUrl}:{callbackUrl:string|undefined}) {
   const [numberString, setNumberString] = useState<string>("");
   const [code, setCode] = useState<string>("");
   const { smsIdentifier, setPhone } = useSendSms();
@@ -33,8 +33,12 @@ export default function LoginWithSms() {
   const SendCodeInSms = () => {
     if (smsIdentifier) {
       getSmsAuthToken(code, smsIdentifier).then((response) => {
+        // debugger;
         setAccessToken(response.access);
         setRefreshToken(response.refresh);
+        if(callbackUrl) {
+          window.open(callbackUrl)
+        }
         router.push(`/city/${city}/main`);
       });
     }

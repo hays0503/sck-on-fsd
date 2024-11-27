@@ -20,7 +20,8 @@
     "paths": {
       "@/*": ["./src/*"],
       "@/i18n/*": ["./src/i18n/*"],
-      "$/messages/*": ["./messages/*"]
+      "$/messages/*": ["./messages/*"],
+      "!/*":["./public/*"]
 
     }
   },

@@ -9,6 +9,7 @@ import useSelectedCity from "@/shared/hooks/useSelectedCity";
 import { selectDataByLangProducts } from "@/shared/tools/selectDataByLang";
 import { useLocale } from "next-intl";
 import type { TDecButton, TIncButton } from "@/features/operation-in-basket-product";
+import { iBasket } from "@/shared/types/basket";
 
 
 const { Text } = Typography;
@@ -18,6 +19,8 @@ interface IRowInBasketProps {
   readonly count: number;
   readonly IncBasketSlot: TIncButton;
   readonly DecBasketSlot: TDecButton;
+  readonly token: string | undefined;
+  readonly userBasket: iBasket | undefined;
 }
 
 const RowInBasket: React.FC<IRowInBasketProps> = ({
@@ -25,6 +28,8 @@ const RowInBasket: React.FC<IRowInBasketProps> = ({
   count,
   IncBasketSlot,
   DecBasketSlot,
+  token,
+  userBasket,
 }) => {
   const localeActive = useLocale();
   const selectedCity = useSelectedCity();
@@ -74,9 +79,9 @@ const RowInBasket: React.FC<IRowInBasketProps> = ({
           )}
         </Flex>
         <Flex gap={10} align="center" justify="right">
-          <DecBasketSlot count={count} prod_id={Product.id}/>
+          <DecBasketSlot count={count} prod_id={Product.id} token={token}/>
           <Text style={{ color: "gray" }}>{count}</Text>
-          <IncBasketSlot prod_id={Product.id}/>
+          <IncBasketSlot prod_id={Product.id} userBasket={userBasket} token={token}/>
         </Flex>
       </Flex>
     </Flex>

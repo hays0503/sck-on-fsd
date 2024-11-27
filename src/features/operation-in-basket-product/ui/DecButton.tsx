@@ -5,11 +5,12 @@ import { useBasketDec } from "../model";
 interface IDecButtonProps {
   readonly count: number;
   readonly prod_id: number;
+  readonly token: string | undefined
 }
 
 type TDecButton = React.FC<IDecButtonProps>;
 
-const DecButton: TDecButton = ({ count, prod_id }) => {
+const DecButton: TDecButton = ({ count, prod_id, token }) => {
 
 
   const styleButtonDeleted: CSSProperties = {
@@ -57,7 +58,7 @@ const DecButton: TDecButton = ({ count, prod_id }) => {
 
   // console.log("TDecButton => ", count, prod_id);
 
-  const delProduct = useBasketDec({ prod_id });
+  const delProduct = useBasketDec({ prod_id,token });
 
   return <Button
   onClick={delProduct} 

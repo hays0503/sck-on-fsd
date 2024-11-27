@@ -228,5 +228,21 @@
   "ekonomiya": "Сақтау",
   "korzina-pusta": "Себет бос",
   "na-glavnuyu": "Үй",
-  "obratite-vnimanie": "Ескерту"
+  "obratite-vnimanie": "Ескерту",
+  "onlain-oplata": "Онлайн төлем",
+  "oplata-pri-poluchenii": "Төлем алу кезінде",
+  "ulica": "Көше",
+  "dom": "Үй",
+  "kvartira-ofis": "Пәтер\\Кеңсе",
+  "podezd": "Кіру",
+  "etazh": "Еден",
+  "kommentarii-dlya-kurera": "Курьерге түсініктеме",
+  "potverdet": "Растау",
+  "zapolnite-pole": "Өрістерді толығымен толтырыңыз",
+  "error": "Қате орын алды",
+  "success": "Сәттілік",
+  "oformit-tovar": "Кассаға өтіңіз",
+  "vyberite-sposob-oplaty": "Төлем әдісін таңдаңыз",
+  "poluchatel": "Алушы",
+  "k-stranice-avtorizacii": "Жүйеге кіру бетіне өтіңіз"
 }

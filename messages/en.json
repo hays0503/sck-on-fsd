@@ -229,5 +229,21 @@
   "ekonomiya": "Saving",
   "korzina-pusta": "Cart is empty",
   "na-glavnuyu": "Home",
-  "obratite-vnimanie": "Please note"
+  "obratite-vnimanie": "Please note",
+  "onlain-oplata": "Online payment",
+  "oplata-pri-poluchenii": "Payment upon receipt",
+  "ulica": "Street",
+  "dom": "House",
+  "kvartira-ofis": "Apartment\\Office",
+  "podezd": "Entrance",
+  "etazh": "Floor",
+  "kommentarii-dlya-kurera": "Comment for the courier",
+  "potverdet": "Confirm",
+  "zapolnite-pole": "Fill in the fields completely",
+  "error": "An error has occurred",
+  "success": "Success",
+  "oformit-tovar": "Go to checkout",
+  "vyberite-sposob-oplaty": "Select payment method",
+  "poluchatel": "Recipient",
+  "k-stranice-avtorizacii": "Go to login page"
 }

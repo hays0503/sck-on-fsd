@@ -1,14 +1,17 @@
 import { Button } from "antd";
 import { CSSProperties } from "react";
-import {useBasketAdd} from "../model";
+import { useBasketAdd } from "../model";
+import { iBasket } from "@/shared/types/basket";
 
 interface IIncButtonProps {
   readonly prod_id: number;
+  readonly userBasket:iBasket | undefined
+  readonly token: string | undefined
 }
 
 type TIncButton = React.FC<IIncButtonProps>
 
-const IncButton: TIncButton = ({ prod_id }) => {
+const IncButton: TIncButton = ({ prod_id, userBasket,token }) => {
 
   const styleButton: CSSProperties = {
     color: "gray",
@@ -20,7 +23,7 @@ const IncButton: TIncButton = ({ prod_id }) => {
 
   // console.log("IncButton => ", prod_id)
 
-  const addProduct = useBasketAdd({ prod_id });
+  const addProduct = useBasketAdd({ prod_id, userBasket,token });
 
   return (
     <Button
@@ -47,5 +50,5 @@ const IncButton: TIncButton = ({ prod_id }) => {
   );
 };
 
-export {IncButton};
-export type {TIncButton}
+export { IncButton };
+export type { TIncButton }

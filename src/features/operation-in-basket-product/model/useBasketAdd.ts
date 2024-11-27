@@ -4,19 +4,28 @@ import { useCallback, useEffect } from "react";
 import { useLocalStorage } from "usehooks-ts";
 import { v4 as uuidv4 } from "uuid";
 import { useDebounceCallback } from "usehooks-ts";
-import useGetUsersBasket from "./useGetUsersBasket";
-import { useUser } from "@/entities/User";
+import { iBasket } from "@/shared/types/basket";
 
-const useBasketAdd = ({ prod_id }: { prod_id: number }) => {
-  const userBasket = useGetUsersBasket();
-  const userData = useUser();
+
+const useBasketAdd = ({
+  prod_id,
+  userBasket,
+  token
+}: {
+  prod_id: number;
+  userBasket:iBasket | undefined
+  token: string | undefined
+}) => {
+
+
   const [uuid_id, setUuid_id] = useLocalStorage<string>("uuid_id", "");
 
   // Установка UUID для пользователя
   useEffect(() => {
-    if (userBasket?.uuid_id && userBasket.uuid_id !== uuid_id) {
-      setUuid_id(userBasket.uuid_id);
-    } else if (!uuid_id) {
+    // if (userBasket?.uuid_id && userBasket.uuid_id !== uuid_id) {
+    //   setUuid_id(userBasket.uuid_id);
+    // } else 
+    if (!uuid_id) {
       const Unique_ID = uuidv4();
       setUuid_id(Unique_ID);
     }
@@ -35,18 +44,18 @@ const useBasketAdd = ({ prod_id }: { prod_id: number }) => {
 
   // Добавление продукта в корзину
   const addAction = useCallback(async () => {
-    if (!uuid_id || !userData?.accessToken?.token) {
-      console.error("Не удалось добавить продукт: UUID или токен отсутствует.");
+    if (!uuid_id) {
+      console.error("Не удалось добавить продукт: UUID.");
       return;
     }
 
     try {
-      await addProduct(uuid_id, prod_id, userData.accessToken.token);
+      await addProduct(uuid_id, prod_id, token);
       debouncedMutate(); // Запускаем обновление с задержкой
     } catch (error) {
       console.error("Ошибка при добавлении в корзину:", error);
     }
-  }, [uuid_id, prod_id, userData?.accessToken?.token, debouncedMutate]);
+  }, [uuid_id, prod_id, token, debouncedMutate]);
 
   return addAction;
 };

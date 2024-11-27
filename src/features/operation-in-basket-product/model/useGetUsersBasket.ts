@@ -1,21 +1,18 @@
 import {getUsersBasket} from "@/entities/Basket";
-import { useUser } from "@/entities/User";
 import { iBasket } from "@/shared/types/basket";
-import { useCallback, useEffect, useState } from "react";
+import {  useEffect, useState } from "react";
 
-const useGetUsersBasket = () => {
+const useGetUsersBasket = (token: string|undefined) => {
+
   const [usersBasket, setUsersBasket] = useState<iBasket>();
-  const user = useUser();
-
-  const action = useCallback(async () => {
-    setUsersBasket(await getUsersBasket(user.accessToken.token));
-  }, [user.accessToken.token]);
 
   useEffect(() => {
-    if (user.accessToken.token) {
-      action();
+    if (token) {
+      getUsersBasket(token).then((data) => {
+        setUsersBasket(data);
+      });
     }
-  }, [user.accessToken.token, action]);
+  }, [token]);
   return usersBasket;
 };
 

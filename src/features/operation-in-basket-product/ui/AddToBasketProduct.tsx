@@ -2,25 +2,21 @@ import { Button, Flex, Typography } from "antd";
 import { useTranslations } from "next-intl";
 import type { TIncButton } from "./IncButton";
 import { useBasketAdd } from "../model";
-import { memo, useCallback } from "react";
+
 const { Text } = Typography;
 
 
 
-const AddToBasketProduct:TIncButton  = memo( function AddToBasketProduct({ prod_id }){
+const AddToBasketProduct:TIncButton  = ({ prod_id,userBasket,token }) => {
 
-  const addAction = useBasketAdd({ prod_id });
-
-  const handleAddToBasket = useCallback(() => {
-    addAction();
-  }, [addAction]);
+  const addAction = useBasketAdd({ prod_id,userBasket,token });
 
   const t = useTranslations();
 
   return (
     <Flex style={{ width: "100%" }}>
       <Button
-        onClick={handleAddToBasket}
+        onClick={addAction}
         shape="default"
         size="large"
         style={{ backgroundColor: "#4954F0", width: "100%" }}
@@ -38,6 +34,5 @@ const AddToBasketProduct:TIncButton  = memo( function AddToBasketProduct({ prod_
       </Button>
     </Flex>
   );
-});
-
+}
 export default AddToBasketProduct

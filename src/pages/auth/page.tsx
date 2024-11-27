@@ -8,6 +8,7 @@ import { useLocalStorage } from "usehooks-ts";
 
 const AuthPage = () => {
   const searchParams = useSearchParams();
+  const [callbackUrl,,removeCallbackUrl]  = useLocalStorage<{ url: string | undefined }>("callbackUrl", { url: undefined });
   const [, setAccessToken] = useLocalStorage("accessToken", { token: "" });
   const [, setRefreshToken] = useLocalStorage("refreshToken", { token: "" });
   const [, setUuid] = useLocalStorage('uuid_id', '');
@@ -30,8 +31,15 @@ const AuthPage = () => {
         }
       )
     }
-    const url = `/${parameters.locale}/city/${parameters.city}/main`;
-    router.replace(url)
+    if (callbackUrl?.url) {
+      const url = callbackUrl?.url;
+      removeCallbackUrl();
+      router.replace(url);
+    }else{
+      const url = `/${parameters.locale}/city/${parameters.city}/main`;
+      router.replace(url)
+    }
+
   }, []);
   return <>Save Token</>;
 };

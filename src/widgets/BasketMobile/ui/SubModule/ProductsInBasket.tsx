@@ -5,7 +5,9 @@ import { useState } from "react";
 import style from "./BasketMobile.module.css";
 import type { CheckboxOptionType, CheckboxProps } from "antd";
 import RowInBasket from "./RowInBasket";
-import { DecButton, IncButton } from "@/features/operation-in-basket-product";
+import { DecButton, IncButton, useGetUsersBasket } from "@/features/operation-in-basket-product";
+import { useUser } from "@/entities/User";
+import { useReadLocalStorage } from "usehooks-ts";
 
 const { Text } = Typography;
 const CheckboxGroup = Checkbox.Group;
@@ -33,6 +35,11 @@ const ProductsInBasket: React.FC<IProductsInBasketProps> = ({ Products }) => {
     setCheckedList(list);
   };
 
+  useUser()
+  const token = useReadLocalStorage<{ token: string }>("accessToken");
+  const userBasket = useGetUsersBasket(token?.token);
+  
+
   const GroupOptions: CheckboxOptionType[] = Products.map((item) => ({
     label: (
       <RowInBasket
@@ -40,6 +47,8 @@ const ProductsInBasket: React.FC<IProductsInBasketProps> = ({ Products }) => {
         count={item.count}
         IncBasketSlot={IncButton}
         DecBasketSlot={DecButton}
+        token={token?.token}
+        userBasket={userBasket}
       />
     ),
     value: item.prod_id,

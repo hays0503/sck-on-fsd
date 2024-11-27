@@ -12,9 +12,13 @@ import { Flex } from "antd";
 const LoginPage = async ({
   params,
 }: {
-  params: { locale: string; city: string };
+  params: { locale: string; city: string; link: string[] };
 }) => {
   const fallback = {};
+  
+  const urlCallback = `/${params?.link.join("/")}`; 
+
+  console.log("urlCallback=>",urlCallback)
 
   return (
     <ProvidersServer>
@@ -44,10 +48,9 @@ const LoginPage = async ({
                 align="stretch"
                 style={{ width: "100%" }}
               >
-                <LoginWithSms />
+                <LoginWithSms callbackUrl={urlCallback} />
               </Flex>
-              {/* <Text>{t('ili-voiti-s-pomoshyu')}</Text> */}
-              <LoginWithGoogle />
+              <LoginWithGoogle callbackUrl={urlCallback} />
             </Flex>
           }
           footerContent={<></>}

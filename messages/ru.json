@@ -227,5 +227,21 @@
   "detali-zakaza": "Детали заказа",
   "ekonomiya": "Экономия",
   "korzina-pusta": "Корзина пуста",
-  "na-glavnuyu": "На главную"
+  "na-glavnuyu": "На главную",
+  "vyberite-sposob-oplaty": "Выберите способ оплаты",
+  "onlain-oplata": "Онлайн оплата",
+  "oplata-pri-poluchenii": "Оплата при получении",
+  "poluchatel": "Получатель",
+  "ulica": "Улица",
+  "dom": "Дом",
+  "kvartira-ofis": "Квартира\\Офис",
+  "podezd": "Подъезд",
+  "etazh": "Этаж",
+  "kommentarii-dlya-kurera": "Комментарий для курьера",
+  "potverdet": "Подтвердить",
+  "zapolnite-pole": "Заполните поля полностью",
+  "error": "Произошла ошибка",
+  "success": "Успех",
+  "oformit-tovar": "Перейти к оформлению",
+  "k-stranice-avtorizacii": "К странице авторизации"
 }

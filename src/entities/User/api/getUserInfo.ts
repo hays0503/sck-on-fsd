@@ -10,7 +10,6 @@ export type GetUserInfo = (token: string) => Promise<ResponseUserInfo>;
 const getUserInfo: GetUserInfo = async (token) => {
   return await fetch("/auth_api/v1/user/info", {
     method: "POST",
-    cache: "force-cache",
     headers: {
       "Content-Type": "application/json",
       Accept: "application/json",
