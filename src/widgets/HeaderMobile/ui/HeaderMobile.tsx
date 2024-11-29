@@ -1,5 +1,6 @@
 "use client";
 import { CategoryListMobile } from "@/entities/Category";
+import { ChangeLanguage } from "@/features/change-language";
 import { SearchProduct } from "@/features/search-products";
 import { Flex } from "antd";
 
@@ -12,7 +13,10 @@ const HeaderMobile: React.FC<IHeaderMobileProps> = ({ SelectCity }) => {
     <Flex vertical={true} gap={5} style={{ width: "100%" }}>
       <Flex justify="space-around" align="center" style={{ width: "100%" }}>
         <SelectCity />
-        <span>{`8 000 0000 00 00`}</span>
+        <Flex gap={10} justify="center" align="center">
+          <span>{`8 000 0000 00 00`}</span>
+          <ChangeLanguage />
+        </Flex>
       </Flex>
       <Flex
         justify="space-between"
