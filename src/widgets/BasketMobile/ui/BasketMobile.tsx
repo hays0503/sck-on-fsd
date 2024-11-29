@@ -53,7 +53,7 @@ const BasketMobile: React.FC<IBasketMobileProps> = ({ basket_id }) => {
       return (<Flex
         align="center"
         justify="center">
-        <Link href={`/city/${city}/login/${pathname}`} style={{
+        <Link href={`/city/${city}/login-redirect/${pathname}`} style={{
           width: "100%",
           height: 50,
           backgroundColor: "#4954F0",

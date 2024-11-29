@@ -7,7 +7,7 @@ import { useTranslations } from "next-intl";
 import Image from "next/image";
 
 interface Level1Props {
-  readonly IsAnonymous: boolean;
+  readonly IsAnonymous: boolean|undefined;
   readonly infoUser: UserInfo | null;
   readonly error: boolean;
 }
@@ -62,7 +62,7 @@ const Level1: React.FC<Level1Props> = (props) => {
         justify="space-between"
       >
         <Flex gap={10}>
-          <Image src="/sck-user.svg" alt="user" width={66} height={66} />
+          <Image priority={true} src="/sck-user.svg" alt="user" width={66} height={66} />
           {isGuest ? <GuestUser /> : <AuthUser />}
         </Flex>
         <Link href={isGuest ? `/city/${currentCity}/login` : `/city/${currentCity}/user`}>

@@ -12,13 +12,11 @@ import { Flex } from "antd";
 const LoginPage = async ({
   params,
 }: {
-  params: { locale: string; city: string; link: string[] };
+  params: { locale: string; city: string; link: string[]|undefined };
 }) => {
   const fallback = {};
   
-  const urlCallback = `/${params?.link.join("/")}`; 
-
-  console.log("urlCallback=>",urlCallback)
+  const urlCallback = params?.link && `/${params?.link.join("/")}`; 
 
   return (
     <ProvidersServer>

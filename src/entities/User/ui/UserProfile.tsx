@@ -8,7 +8,7 @@ import { ResponseUserInfo } from "../api/getUserInfo";
 type UserProfileReturnValue = [
   JSX.Element,
   {
-    isAnonymous:boolean | undefined;
+    useIsAnonymous:() => boolean | undefined;
     info: ResponseUserInfo | null;
     error: boolean;
   }

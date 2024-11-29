@@ -1,5 +1,5 @@
 import { Dispatch, SetStateAction, useState } from 'react';
-import { Flex, Radio,Typography } from 'antd';
+import { Flex, Radio,RadioChangeEvent,Typography } from 'antd';
 import { useTranslations } from 'next-intl';
 import { OrderData } from '../OrderMobile';
 
@@ -13,7 +13,7 @@ interface IPaymentOptionsProps {
 const PaymentOptions: React.FC<IPaymentOptionsProps> = ({ setStep,orderManager }) => {
   const [paymentMethod, setPaymentMethod] = useState('');
 
-  const handlePaymentChange = (e) => {
+  const handlePaymentChange = (e:RadioChangeEvent) => {
     const [order, setOrder] = orderManager;
     setOrder({ ...order, payment_type: e.target.value });
     setPaymentMethod(e.target.value);

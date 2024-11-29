@@ -1,8 +1,7 @@
-import { Button, Flex, Form, Input, message, Typography } from "antd"
+import { Button, Flex, Form, Input, message } from "antd"
 import { useTranslations } from "next-intl"
-import { Dispatch } from "react"
-
-const { Title } = Typography
+import { Dispatch, SetStateAction } from "react"
+import { OrderData } from "../OrderMobile"
 
 interface IRecipientProps {
     setStep: Dispatch<React.SetStateAction<number>>

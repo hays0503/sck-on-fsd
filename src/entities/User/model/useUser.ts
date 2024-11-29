@@ -7,7 +7,7 @@ import { ResponseRefreshToken } from "../api/getRefreshToken";
 
 type Token = { token: string };
 
-type useIsAnonymousFunc = () => boolean;
+type useIsAnonymousFunc = () => boolean | undefined;
 
 // Авторизован ли пользователь
 const useIsAnonymous:useIsAnonymousFunc = () => {

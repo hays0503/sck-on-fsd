@@ -10,7 +10,6 @@ import useSelectedCity from "@/shared/hooks/useSelectedCity";
 import { getPrice } from "@/entities/ProductCart";
 import beautifulCost from "@/shared/tools/beautifulCost";
 import { useUser } from "@/entities/User";
-import { useRouter } from "next/navigation";
 import { useLocalStorage } from "usehooks-ts";
 
 const { Title } = Typography

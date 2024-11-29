@@ -24,37 +24,6 @@ export default function ProductPopularListPagination(
   const [currentPage, setCurrentPage] = useQueryState('page',parseAsInteger.withDefault(1));
   const Products: Products[] = useFetcherPopulates({ city: selectedCity}).data ?? []; 
 
-
-
-
-
-
-
-
-
-
-
-  // const Products = [_Products[0],_Products[1]]; 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
   const ProductsPerPage = 8;
   const indexOfLastProduct = currentPage * ProductsPerPage;
   const indexOfFirstProduct = indexOfLastProduct - ProductsPerPage;
@@ -64,10 +33,10 @@ export default function ProductPopularListPagination(
 
   console.log("selectedCity",0)
 
-  // useLayoutEffect(() => {
+  useLayoutEffect(() => {
   //   console.log(1)
-    // setCurrentPage(searchParams.page);
-  // }, []);
+    setCurrentPage(searchParams.page);
+  }, [searchParams.page, setCurrentPage]);
 
   return (
     <Flex vertical={true} align="center" justify="space-evenly" gap={10} style={{ width: "100%",height: "100%",backgroundColor: "#EEEFF1" }}>
