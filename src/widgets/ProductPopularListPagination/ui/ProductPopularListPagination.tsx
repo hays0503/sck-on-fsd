@@ -29,14 +29,9 @@ export default function ProductPopularListPagination(
   const indexOfFirstProduct = indexOfLastProduct - ProductsPerPage;
   const currentProducts = Products.slice(indexOfFirstProduct, indexOfLastProduct);
 
-  console.log("currentProducts",currentProducts.length)
-
-  console.log("selectedCity",0)
-
   useLayoutEffect(() => {
-  //   console.log(1)
     setCurrentPage(searchParams.page);
-  }, [searchParams.page, setCurrentPage]);
+  }, []);
 
   return (
     <Flex vertical={true} align="center" justify="space-evenly" gap={10} style={{ width: "100%",height: "100%",backgroundColor: "#EEEFF1" }}>
