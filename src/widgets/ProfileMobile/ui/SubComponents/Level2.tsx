@@ -4,6 +4,7 @@ import { UserInfo } from "@/shared/types/user";
 import { Flex, message, Typography } from "antd";
 import { useTranslations } from "next-intl";
 import React from "react";
+import { useReadLocalStorage } from "usehooks-ts";
 
 const { Title } = Typography;
 
@@ -81,12 +82,13 @@ const Level2: React.FC<Level2Props> = (props) => {
 
   const currentCity = useGetCityParams();
   const t = useTranslations();
+  const refreshToken = useReadLocalStorage<{token: string}>("refreshToken");
 
   return (
     <Flex vertical={true} gap={10} align="center" style={{ width: "100%" }}>
       <ElementList
         title={t("istoriya-zakazov")}
-        href={`/city/${currentCity}/main`}
+        href={`/city/${currentCity}/order-history/${refreshToken?.token}`}
         disabled={isGuest}
         icon={
           <svg

@@ -2,7 +2,7 @@ import { TagProd } from "@/shared/types/products";
 
 export const selectDataByTagProd = (
     object: TagProd | null | undefined,
-    currentLang: "ru" | "en" | "kz" | string
+    currentLang: "ru" | "en" | "kk" | string
   ) => {
     if (!object) return undefined;
     switch (currentLang) {
@@ -10,7 +10,7 @@ export const selectDataByTagProd = (
         return object.tag_text;
       case "en":
         return object.additional_data.EN;
-      case "kz":
+      case "kk":
         return object.additional_data.KZ;
       default:
         return undefined;

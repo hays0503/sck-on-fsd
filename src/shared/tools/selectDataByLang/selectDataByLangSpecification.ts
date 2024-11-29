@@ -8,7 +8,7 @@ import {
 export const selectDataByLangSpecificationName: SpecificationNameSpecificationParams =
   (
     object: Specification | NameSpecification | null | undefined,
-    currentLang: "ru" | "en" | "kz" | string
+    currentLang: "ru" | "en" | "kk" | string
   ): string | undefined => {
     if (!object) return undefined;
     if ((<Specification>object).product) {
@@ -17,7 +17,7 @@ export const selectDataByLangSpecificationName: SpecificationNameSpecificationPa
           return (<Specification>object).name_specification.name_specification;
         case "en":
           return (<Specification>object).name_specification.additional_data.EN;
-        case "kz":
+        case "kk":
           return (<Specification>object).name_specification.additional_data.KZ;
         default:
           return undefined;
@@ -29,7 +29,7 @@ export const selectDataByLangSpecificationName: SpecificationNameSpecificationPa
           return (<NameSpecification>object).name_specification;
         case "en":
           return (<NameSpecification>object).additional_data.EN;
-        case "kz":
+        case "kk":
           return (<NameSpecification>object).additional_data.KZ;
         default:
           return undefined;
@@ -41,7 +41,7 @@ export const selectDataByLangSpecificationName: SpecificationNameSpecificationPa
 
 export const selectDataByLangSpecificationValue = (
   object: Specification | ValueSpecification | null | undefined,
-  currentLang: "ru" | "en" | "kz" | string
+  currentLang: "ru" | "en" | "kk" | string
 ): string | undefined => {
   if (!object) return undefined;
 
@@ -51,7 +51,7 @@ export const selectDataByLangSpecificationValue = (
         return (<Specification>object).value_specification.value_specification;
       case "en":
         return (<Specification>object).value_specification.additional_data.EN;
-      case "kz":
+      case "kk":
         return (<Specification>object).value_specification.additional_data.KZ;
       default:
         return undefined;
@@ -63,7 +63,7 @@ export const selectDataByLangSpecificationValue = (
         return (<ValueSpecification>object).value_specification;
       case "en":
         return (<ValueSpecification>object).additional_data.EN;
-      case "kz":
+      case "kk":
         return (<ValueSpecification>object).additional_data.KZ;
       default:
         return undefined;

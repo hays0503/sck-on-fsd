@@ -244,5 +244,11 @@
   "oformit-tovar": "Кассаға өтіңіз",
   "vyberite-sposob-oplaty": "Төлем әдісін таңдаңыз",
   "poluchatel": "Алушы",
-  "k-stranice-avtorizacii": "Жүйеге кіру бетіне өтіңіз"
+  "k-stranice-avtorizacii": "Жүйеге кіру бетіне өтіңіз",
+  "novyi": "Жаңа",
+  "v-rabote": "Орындалуда",
+  "vypolnen": "Аяқталды",
+  "otmenen": "Бас тартылды",
+  "neizvestno": "Белгісіз",
+  "zakaz": "Тапсырыс беру"
 }

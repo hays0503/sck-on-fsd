@@ -2,7 +2,7 @@ import { Brands } from "@/shared/types/brand";
 
 export const selectDataByLangBrands = (
     object: Brands,
-    currentLang: "ru" | "en" | "kz" | string
+    currentLang: "ru" | "en" | "kk" | string
   ) => {
     if (!object) return undefined;
     switch (currentLang) {
@@ -10,7 +10,7 @@ export const selectDataByLangBrands = (
         return object.name_brand;
       case "en":
         return object.additional_data.EN;
-      case "kz":
+      case "kk":
         return object.additional_data.KZ;
       default:
         return undefined;

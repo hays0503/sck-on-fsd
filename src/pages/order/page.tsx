@@ -1,6 +1,6 @@
 "use server"
 
-import { ApiUrl, UrlApi, UrlApiWithDomain, UrlRevalidate } from "@/shared/api/url";
+import {UrlApi, UrlApiWithDomain, UrlRevalidate } from "@/shared/api/url";
 import { ProvidersClient } from "@/shared/providers/providersClient";
 import { ProvidersServer } from "@/shared/providers/providersServer";
 import HeaderText from "@/shared/ui/HeaderText";
@@ -34,12 +34,6 @@ async function OrderPage({params}: OrderPageProps) {
         },
         })
     ).json();
-
-    const UrlApiBasketByUuid_id = `/basket_api/v1/bascket/by/${basket_id}/`;
-    const UrlApiWithDomainBasketByUuid_id = `${ApiUrl}:8777${UrlApiBasketByUuid_id}`;
-
-    console.log(UrlApiWithDomainBasketByUuid_id)
-    console.log(UrlApiBasketByUuid_id)
 
     const fallback = {
         [UrlApi.getCity]: fetchCity    

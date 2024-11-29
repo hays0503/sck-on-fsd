@@ -245,5 +245,11 @@
   "oformit-tovar": "Go to checkout",
   "vyberite-sposob-oplaty": "Select payment method",
   "poluchatel": "Recipient",
-  "k-stranice-avtorizacii": "Go to login page"
+  "k-stranice-avtorizacii": "Go to login page",
+  "novyi": "New",
+  "v-rabote": "In progress",
+  "vypolnen": "Completed",
+  "otmenen": "Canceled",
+  "neizvestno": "Unknown",
+  "zakaz": "Order"
 }

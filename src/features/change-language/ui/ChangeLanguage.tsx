@@ -26,7 +26,7 @@ const ChangeLanguage = () => {
 
     const items = [
         {
-          key: 'kz',
+          key: 'kk',
           label: <Space>
           <Typography.Text>Қазақ</Typography.Text>
           </Space>,

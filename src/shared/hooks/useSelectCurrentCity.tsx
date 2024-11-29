@@ -18,7 +18,7 @@ export default function useSelectCurrentCity(
   switch (locale) {
     case "ru":
       return selectCurrentCity({ cities, RusNameCity: NameCity });
-    case "kz":
+    case "kk":
       return selectCurrentCity({ cities, KzNameCity: NameCity });
     case "en":
       return selectCurrentCity({ cities, EngNameCity: NameCity });

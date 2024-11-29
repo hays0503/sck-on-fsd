@@ -243,5 +243,11 @@
   "error": "Произошла ошибка",
   "success": "Успех",
   "oformit-tovar": "Перейти к оформлению",
-  "k-stranice-avtorizacii": "К странице авторизации"
+  "k-stranice-avtorizacii": "К странице авторизации",
+  "novyi": "Новый",
+  "v-rabote": "В работе",
+  "vypolnen": "Выполнен",
+  "otmenen": "Отменен",
+  "neizvestno": "Неизвестно",
+  "zakaz": "Заказ"
 }

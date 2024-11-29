@@ -26,11 +26,11 @@ export interface ValueSpecification {
 
 
 export type SpecificationNameSpecificationParams = {
-    (object:Specification | null,currentLang: "ru" | "en" | "kz" | string): string|undefined;
-    (object:NameSpecification,currentLang: "ru" | "en" | "kz" | string): string|undefined;
+    (object:Specification | null,currentLang: "ru" | "en" | "kk" | string): string|undefined;
+    (object:NameSpecification,currentLang: "ru" | "en" | "kk" | string): string|undefined;
 };
 
 export type SpecificationValueSpecificationParams = {
-    (object:Specification | null,currentLang: "ru" | "en" | "kz" | string): string|undefined;
-    (object:ValueSpecification,currentLang: "ru" | "en" | "kz" | string): string|undefined;
+    (object:Specification | null,currentLang: "ru" | "en" | "kk" | string): string|undefined;
+    (object:ValueSpecification,currentLang: "ru" | "en" | "kk" | string): string|undefined;
 };
