@@ -14,6 +14,7 @@ export function generateStaticParams() {
   return locales.map((locale) => ({ locale }));
 }
 
+
 const inter = Inter({
   subsets: ["cyrillic", "latin"],
 });

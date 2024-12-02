@@ -251,5 +251,7 @@
   "vypolnen": "Completed",
   "otmenen": "Canceled",
   "neizvestno": "Unknown",
-  "zakaz": "Order"
+  "zakaz": "Order",
+  "stranica-v-razrabotke": "Page under construction",
+  "pozhaluista-vernites-pozdnee": "Please come back later."
 }
