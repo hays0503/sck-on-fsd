@@ -2,7 +2,7 @@ import { ProvidersServer } from "@/shared/providers/providersServer";
 import { Metadata } from "next";
 import {setRequestLocale} from 'next-intl/server';
 import { Inter } from "next/font/google";
-import { locales } from "@/i18n/routing";
+import { ApiUrl, UrlApi } from "@/shared/api/url";
 
 
 export const metadata: Metadata = {
@@ -10,8 +10,15 @@ export const metadata: Metadata = {
   description: "Сайт в разработке dev.SCK-1.kz",
 };
 
-export function generateStaticParams() {
-  return locales.map((locale) => ({ locale }));
+export async function generateStaticParams() {
+  const url = `${ApiUrl}${UrlApi.getProducts}all/slugs/`
+  const fetchSlugs = await(await fetch(url,{
+    headers: {
+      "Content-Type": "application/json",
+      Accept: "application/json",
+    },
+  })).json();
+  return fetchSlugs.map((slug: string) => ({ slug: slug }))
 }
 
 const inter = Inter({
