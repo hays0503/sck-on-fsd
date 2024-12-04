@@ -1,6 +1,6 @@
 
 
-export const ApiUrl = "http://pimenov.kz";
+export const ApiUrl = "http://pimenov.kz:8888";
 
 const UrlApi = {
   //Запрос всех городов
