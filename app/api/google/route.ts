@@ -5,13 +5,10 @@ export async function GET(request: NextRequest) {
   const queryParamsCode = request.nextUrl.searchParams.get("code");
   if (queryParamsCode) {
     const Tokens = await createGoogleAccount(queryParamsCode);
-    return Response.redirect(
-      process.env.HOST_URL +
-        "/auth?accessTokenData=" +
-        Tokens.access.token +
-        "&refreshTokenData=" +
-        Tokens.refresh.token
-    );
+    const port = `:${process.env.API_PORT}`
+    const url = `${process.env.HOST_URL}${port??""}/auth?accessTokenData=${Tokens.access.token}&refreshTokenData=${Tokens.refresh.token}`
+
+    return Response.redirect(url);
   }
   return Response.redirect(process.env.HOST_URL??"http://pimenov.kz:3000");
 }
