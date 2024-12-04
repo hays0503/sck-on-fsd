@@ -1,6 +1,9 @@
 
 
 export const ApiUrl = process.env.API_URL;
+const ApiPort = `:${process.env.API_PORT}`
+const ApiAuthPort = `:${process.env.API_AUTH_PORT}`
+const ApiBasketPort = `:${process.env.API_BASKET_PORT}`
 
 const UrlApi = {
   //Запрос всех городов
@@ -26,25 +29,25 @@ const UrlApi = {
 };
 
 const UrlApiWithDomain = {
-  getCity: `${ApiUrl}${UrlApi.getCity}`,
-  getCategory: `${ApiUrl}${UrlApi.getCategory}`,
-  getPopulatesId: `${ApiUrl}${UrlApi.getPopulatesId}`,
-  getProducts: `${ApiUrl}${UrlApi.getProducts}`,
-  getProductSpecificationsById: `${ApiUrl}${UrlApi.getProductSpecificationsById}`,
-  getProductReviewsById: `${ApiUrl}${UrlApi.getProductReviewsById}`,
+  getCity: `${ApiUrl}${ApiPort}${UrlApi.getCity}`,
+  getCategory: `${ApiUrl}${ApiPort}${UrlApi.getCategory}`,
+  getPopulatesId: `${ApiUrl}${ApiPort}${UrlApi.getPopulatesId}`,
+  getProducts: `${ApiUrl}${ApiPort}${UrlApi.getProducts}`,
+  getProductSpecificationsById: `${ApiUrl}${ApiPort}${UrlApi.getProductSpecificationsById}`,
+  getProductReviewsById: `${ApiUrl}${ApiPort}${UrlApi.getProductReviewsById}`,
 
-  getBasketApi: `${ApiUrl}${UrlApi.getBasketApi}`,
-  getOrderApi: `${ApiUrl}${UrlApi.getOrderApi}`,
+  getBasketApi: `${ApiUrl}${ApiBasketPort}${UrlApi.getBasketApi}`,
+  getOrderApi: `${ApiUrl}${ApiBasketPort}${UrlApi.getOrderApi}`,
 
-  getUserInfoApi: `${ApiUrl}${UrlApi.getUserInfoApi}`,
+  getUserInfoApi: `${ApiUrl}${ApiAuthPort}${UrlApi.getUserInfoApi}`,
 
-  getUserUrlGoogle: `${ApiUrl}${UrlApi.getUserUrlGoogle}`,
-  getUserAuthGoogle: `${ApiUrl}${UrlApi.getUserAuthGoogle}`,
+  getUserUrlGoogle: `${ApiUrl}${ApiAuthPort}${UrlApi.getUserUrlGoogle}`,
+  getUserAuthGoogle: `${ApiUrl}${ApiAuthPort}${UrlApi.getUserAuthGoogle}`,
 
-  getUserSmsUrl: `${ApiUrl}${UrlApi.getUserSmsUrl}`,
-  getUserSmsAuth: `${ApiUrl}${UrlApi.getUserSmsAuth}`,
+  getUserSmsUrl: `${ApiUrl}${ApiAuthPort}${UrlApi.getUserSmsUrl}`,
+  getUserSmsAuth: `${ApiUrl}${ApiAuthPort}${UrlApi.getUserSmsAuth}`,
 
-  getUserRefreshTokenApi: `${ApiUrl}${UrlApi.getUserRefreshTokenApi}`,
+  getUserRefreshTokenApi: `${ApiUrl}${ApiAuthPort}${UrlApi.getUserRefreshTokenApi}`,
 };
 
 const revalidateDefault = 60;

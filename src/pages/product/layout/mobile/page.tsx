@@ -58,15 +58,20 @@ const ProductPage: ProductPageComponent = async (props) => {
 
   const urlBuilderSpecification = `${UrlApi.getProductSpecificationsById}filter_by_prod/${fetchProduct.id}`;
   const urlBuilderSpecificationWithDomain = `${UrlApiWithDomain.getProductSpecificationsById}filter_by_prod/${fetchProduct.id}`;
-  const fetchSpecification:Specification[] = await (
-    await fetch(urlBuilderSpecificationWithDomain,{
+  let fetchSpecification:Specification[] = [];
+  try{
+    const _fetchSpecification = await fetch(urlBuilderSpecificationWithDomain,{
       ...UrlRevalidate.getProductSpecificationsById,
       headers: {
         "Content-Type": "application/json",
         Accept: "application/json",
       },
     })
-  ).json();
+    fetchSpecification = await _fetchSpecification.json();
+  }catch(e){
+    console.log("Не вышло запросить спецификации продукта",e)
+  }
+
 
   const urlBuilderReviews = `${UrlApi.getProductReviewsById}${fetchProduct.id}`
   const urlBuilderReviewsWithDomain = `${UrlApiWithDomain.getProductReviewsById}${fetchProduct.id}`
