@@ -51,7 +51,9 @@ export default async function HomePage({ params, searchParams }: PageProps) {
       if (FindCity.length > 0) {
         const RusCity: string = FindCity[0].name_city;
         const UrlPopulatesByCity = `/api/by_city/populates?city=${RusCity}`;
-        const UrlWithDomainPopulatesByCity = `${process.env.HOST_URL}${UrlPopulatesByCity}`;
+        const port = `:${process.env.PORT}`;
+        const UrlWithDomainPopulatesByCity = `${process.env.HOST_URL}${port??""}${UrlPopulatesByCity}`;
+        console.log("UrlWithDomainPopulatesByCity=>",UrlWithDomainPopulatesByCity);
         const fetchPopulatesByCity = await (
           await fetch(UrlWithDomainPopulatesByCity, {
             ...UrlRevalidate.getPopulatesId,

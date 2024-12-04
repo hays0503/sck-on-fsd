@@ -3,7 +3,7 @@
 import { getUsersBasket } from "@/entities/Basket";
 import { iBasket } from "@/shared/types/basket";
 import { useRouter, useSearchParams } from "next/navigation";
-import { Suspense, useEffect } from "react";
+import { useEffect } from "react";
 import { useLocalStorage } from "usehooks-ts";
 
 const AuthPage = () => {
@@ -44,14 +44,4 @@ const AuthPage = () => {
   return <>Save Token</>;
 };
 
-const AuthPageWrapper = () => {
-  return (
-    <>
-      <Suspense>
-        <AuthPage />
-      </Suspense>
-    </>
-  );
-};
-
-export default AuthPageWrapper;
+export default AuthPage;
