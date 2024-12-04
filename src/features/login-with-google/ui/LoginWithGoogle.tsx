@@ -11,7 +11,6 @@ import { useGetCityParams } from "@/shared/hooks/useGetCityParams";
 export default function LoginWithGoogle({ callbackUrl }: { callbackUrl: string | undefined }) {
 
   const url = useLoginWithGoogle() ?? "";
-  //  const url = _url.replace("http://pimenov.kz:3000","http://localhost:3000");
   const [, setParameter] = useLocalStorage<
     { locale: undefined | string, city: undefined | string }
   >('parameters', { locale: undefined, city: undefined });
