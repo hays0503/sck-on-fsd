@@ -134,26 +134,27 @@ const OrderMobile: React.FC<{ basket_id: string }> = ({ basket_id }) => {
                         return response.json().then((res) => {
                             if (res?.detail !== 'Упсс ... ограничения базы данных.') {
                                 removeUUID();
-                                window.location.href = res
-                            } else {
                                 messageApi.open({
                                     type: 'error',
-                                    content: JSON.stringify(res),
+                                    content: "Упсс ... ограничения базы данных.",
                                 });
-                                return
+                            }
+                            else {
+                                setLoading(false)
+                                messageApi.open({
+                                    type: 'success',
+                                    content: t("success"),
+                                });
+                                setTimeout(() => {
+                                    window.location.href = res
+                                }, 500)
                             }
                         }
                         );
-                    }, 5000)
+                    }, 3000)
                 }
             })
-            setTimeout(() => {
-                setLoading(false)
-                messageApi.open({
-                    type: 'success',
-                    content: t("success"),
-                });
-            }, 5000)
+
         } catch (e) {
             console.log(e)
             setTimeout(() => {
@@ -162,7 +163,7 @@ const OrderMobile: React.FC<{ basket_id: string }> = ({ basket_id }) => {
                     type: 'error',
                     content: JSON.stringify(e),
                 });
-            }, 5000)
+            }, 3000)
         }
     }
 

@@ -51,11 +51,13 @@ const Recipient: React.FC<IRecipientProps> = ({setStep,orderManager}) => {
                     <Input placeholder="8 776 34191 15" />
                 </Form.Item>
                 <Form.Item label="E-mail" name="email" rules={[
+                    { required: true },
                     {
                         type: 'email',
                         message: 'The input is not valid E-mail!',
                     }
-                ]}>
+                    
+                ]} required={true}>
                     <Input placeholder={"main@mail.kz"} />
                 </Form.Item>
             </Form>
