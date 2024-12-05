@@ -138,8 +138,10 @@ const OrderMobile: React.FC<{ basket_id: string }> = ({ basket_id }) => {
                                     type: 'error',
                                     content: "Упсс ... ограничения базы данных.",
                                 });
+                                setLoading(false)
                             }
                             else {
+                                removeUUID();
                                 setLoading(false)
                                 messageApi.open({
                                     type: 'success',
