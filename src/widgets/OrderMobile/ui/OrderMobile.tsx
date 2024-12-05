@@ -132,7 +132,7 @@ const OrderMobile: React.FC<{ basket_id: string }> = ({ basket_id }) => {
                 if (response.ok) {
                     return setTimeout(() => {
                         return response.json().then((res) => {
-                            if (res?.detail !== 'Упсс ... ограничения базы данных.') {
+                            if (res?.detail === 'Упсс ... ограничения базы данных.') {
                                 removeUUID();
                                 messageApi.open({
                                     type: 'error',
