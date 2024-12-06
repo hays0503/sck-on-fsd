@@ -251,5 +251,7 @@
   "neizvestno": "Неизвестно",
   "zakaz": "Заказ",
   "stranica-v-razrabotke": "Страница в разработке",
-  "pozhaluista-vernites-pozdnee": "Пожалуйста, вернитесь позднее."
+  "pozhaluista-vernites-pozdnee": "Пожалуйста, вернитесь позднее.",
+  "vyberite-sposob-dostavki-i-sposob-oplaty": "Выберите способ доставки и способ оплаты",
+  "vyberite-adres-dostavki": "Выберите адрес доставки"
 }

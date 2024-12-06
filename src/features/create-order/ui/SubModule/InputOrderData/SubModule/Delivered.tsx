@@ -2,11 +2,12 @@ import { Button, Flex, Form, Input } from "antd"
 import { useTranslations } from "next-intl"
 import { Dispatch, SetStateAction } from "react";
 import { message } from "antd";
-import { OrderData } from "../OrderMobile";
+import { IOrderCreate } from "@/shared/types/order";
+
 
 interface IDeliveredProps {
     setStep: Dispatch<React.SetStateAction<number>>;
-    orderManager: [OrderData, Dispatch<SetStateAction<OrderData>>]
+    orderManager: [IOrderCreate, Dispatch<SetStateAction<IOrderCreate>>]
 }
 
 const Delivered: React.FC<IDeliveredProps> = ({ setStep, orderManager }) => {

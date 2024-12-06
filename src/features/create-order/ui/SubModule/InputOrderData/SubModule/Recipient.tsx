@@ -1,11 +1,12 @@
+import { IOrderCreate } from "@/shared/types/order"
 import { Button, Flex, Form, Input, message } from "antd"
 import { useTranslations } from "next-intl"
 import { Dispatch, SetStateAction } from "react"
-import { OrderData } from "../OrderMobile"
+
 
 interface IRecipientProps {
     setStep: Dispatch<React.SetStateAction<number>>
-    orderManager: [OrderData, Dispatch<SetStateAction<OrderData>>]
+    orderManager: [IOrderCreate, Dispatch<SetStateAction<IOrderCreate>>]
 }
 
 const Recipient: React.FC<IRecipientProps> = ({setStep,orderManager}) => {

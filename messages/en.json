@@ -253,5 +253,7 @@
   "neizvestno": "Unknown",
   "zakaz": "Order",
   "stranica-v-razrabotke": "Page under construction",
-  "pozhaluista-vernites-pozdnee": "Please come back later."
+  "pozhaluista-vernites-pozdnee": "Please come back later.",
+  "vyberite-sposob-dostavki-i-sposob-oplaty": "Select delivery method and payment method",
+  "vyberite-adres-dostavki": "Select delivery address"
 }

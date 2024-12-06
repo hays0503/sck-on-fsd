@@ -1,13 +1,14 @@
 import { Dispatch, SetStateAction, useState } from 'react';
 import { Flex, Radio,RadioChangeEvent,Typography } from 'antd';
 import { useTranslations } from 'next-intl';
-import { OrderData } from '../OrderMobile';
+import { IOrderCreate } from '@/shared/types/order';
+
 
 const { Text } = Typography
 
 interface IPaymentOptionsProps {
   setStep: Dispatch<React.SetStateAction<number>>,
-  orderManager: [OrderData, Dispatch<SetStateAction<OrderData>>]
+  orderManager: [IOrderCreate, Dispatch<SetStateAction<IOrderCreate>>]
 }
 
 const PaymentOptions: React.FC<IPaymentOptionsProps> = ({ setStep,orderManager }) => {
