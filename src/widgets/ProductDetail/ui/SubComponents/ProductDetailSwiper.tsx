@@ -3,7 +3,8 @@ import "swiper/css/pagination";
 import "swiper/css/effect-cube";
 import { Swiper, SwiperProps, SwiperSlide } from "swiper/react";
 import { Pagination, Navigation, EffectCube } from "swiper/modules";
-import Image from "next/image";
+import { Image } from "antd";
+// import Image from "next/image";
 
 interface IProductCartSwiperProps {
   name: string | undefined | null;

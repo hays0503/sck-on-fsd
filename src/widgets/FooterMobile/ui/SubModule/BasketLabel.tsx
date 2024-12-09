@@ -50,5 +50,5 @@ const BasketLabelBadger: React.FC<{ uuid_id: string, styleActive: CSSProperties,
 }
 
 export const BasketLabel: React.FC<{ uuid_id: string|undefined|null, styleActive: CSSProperties, styleActiveBg: string, styleActiveAccent: string }> = ({ uuid_id, styleActive, styleActiveBg, styleActiveAccent }) => {
-    return <BasketLabelBadger uuid_id={uuid_id} styleActive={styleActive} styleActiveBg={styleActiveBg} styleActiveAccent={styleActiveAccent} />
+    return <BasketLabelBadger uuid_id={uuid_id??""} styleActive={styleActive} styleActiveBg={styleActiveBg} styleActiveAccent={styleActiveAccent} />
 }

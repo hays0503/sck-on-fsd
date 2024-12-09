@@ -27,7 +27,7 @@ type PageProps = {
 async function CatalogPage(
   { params,
     //  searchParams 
-    }: PageProps) {
+  }: PageProps) {
 
   // Slug - slug категории
   // locale - язык
@@ -76,23 +76,33 @@ async function CatalogPage(
   };
 
   if (FindCity.length > 0) {
-    const RusCity: string = FindCity[0].name_city;
-    const urlBuilderProductsByCategory = `/api/by_city/catalog?slug=${slug}&city=${RusCity}`;
-    const urlBuilderProductsByCategoryWithDomain = `${process.env.HOST_URL}${urlBuilderProductsByCategory}`;
-    const fetchProductsByCategory = await (
-      await fetch(urlBuilderProductsByCategoryWithDomain, {
+    try {
+      const port = process.env.HOST_PORT?`:${process.env.HOST_PORT}`:"";
+      const RusCity: string = FindCity[0].name_city;
+      const urlBuilderProductsByCategory = `/api/by_city/catalog?slug=${slug}&city=${RusCity}`;
+      const urlBuilderProductsByCategoryWithDomain = `${process.env.HOST_URL}${port}${urlBuilderProductsByCategory}`;
+console.log(urlBuilderProductsByCategoryWithDomain)
+      const fetchProductsByCategory = await fetch(urlBuilderProductsByCategoryWithDomain, {
         ...UrlRevalidate.getProducts,
         headers: {
           "Content-Type": "application/json",
           Accept: "application/json",
         },
       })
-    ).json();
+    
+      try {
+        const data = await fetchProductsByCategory.json();
+        fallback = {
+          ...fallback,
+          [urlBuilderProductsByCategory]: data,
+        };
+      }catch (error) {
+        console.log(`Ошибка [разбора] запроса каталога по городам ${params.city} = > ${error}`,);
+      }
+    } catch (error) {
 
-    fallback = {
-      ...fallback,
-      [urlBuilderProductsByCategory]: fetchProductsByCategory,
-    };
+      console.log(`Ошибка запроса каталога по городам ${params.city} = > ${error}`,);
+    }
   }
 
 

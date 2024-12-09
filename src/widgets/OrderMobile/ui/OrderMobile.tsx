@@ -1,6 +1,6 @@
 "use client";
 
-import { Flex, message, Typography } from "antd";
+import { Flex, Typography } from "antd";
 import { Total } from "./SubModule";
 import { useTranslations } from "next-intl";
 import useFetcherBasket from "@/shared/api/fetch/basket";
@@ -15,7 +15,7 @@ const { Title } = Typography
 const OrderMobile: React.FC<{ basket_id: string }> = ({ basket_id }) => {
 
     const { data: dataBasket, isLoading, error } = useFetcherBasket({ by_id: basket_id });
-    const [messageApi, contextHolder] = message.useMessage();
+
 
     const t = useTranslations();
 
@@ -45,7 +45,7 @@ const OrderMobile: React.FC<{ basket_id: string }> = ({ basket_id }) => {
 
 
     return <Flex justify="center" align="center" >
-        {contextHolder}
+
         <Flex vertical style={{ width: "95%" }}>
             <LoadingTotal dataBasket={dataBasket} isLoading={isLoading} error={error} />
             <CreateOrder basket_id={basket_id} />

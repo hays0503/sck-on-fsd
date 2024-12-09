@@ -11,7 +11,7 @@ import { useGetCityParams } from "@/shared/hooks/useGetCityParams";
 import { ProductsDetail } from "@/shared/types/productsDetail";
 
 interface IProductCartProps {
-  readonly Product: Products|ProductsDetail;
+  readonly Product: Products | ProductsDetail;
   readonly addToCartSlot: JSX.Element;
   readonly addToFavoriteSlot: JSX.Element;
 }
@@ -44,12 +44,14 @@ const ProductCart: React.FC<IProductCartProps> = (props) => {
         discount={discount}
         addToFavoriteSlot={addToFavoriteSlot}
         Swiper={
-          <ProductCartSwiper
-            name={name}
-            images={props.Product.list_url_to_image}
-            width={CartWidth}
-            height={CartWidth} //Квадрат высота равна ширине
-          />
+          <Link href={`/city/${currentCity}/product/${props.Product.slug}`}>
+            <ProductCartSwiper
+              name={name}
+              images={props.Product.list_url_to_image}
+              width={CartWidth}
+              height={CartWidth} //Квадрат высота равна ширине
+            />
+          </Link>
         }
       />
       <Link href={`/city/${currentCity}/product/${props.Product.slug}`} style={{ width: "100%" }}>
