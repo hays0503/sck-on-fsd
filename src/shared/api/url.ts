@@ -1,6 +1,6 @@
 
 
-export const ApiUrl = process.env.API_URL;
+export const ApiUrl = process.env.API_URL
 const ApiPort = `:${process.env.API_PORT}`
 const ApiAuthPort = `:${process.env.API_AUTH_PORT}`
 const ApiBasketPort = `:${process.env.API_BASKET_PORT}`

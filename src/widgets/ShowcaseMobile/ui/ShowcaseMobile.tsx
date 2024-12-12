@@ -31,7 +31,7 @@ const ShowcaseMobile: React.FC<ShowcaseMobileProps> = (props) => {
           <ProductCart
             Product={item}
             addToCartSlot={<AddToBasketProduct prod_id={item.id} userBasket={userBasket} token={token?.token} />}
-            addToFavoriteSlot={<AddToFavoriteProduct />}
+            addToFavoriteSlot={<AddToFavoriteProduct prod_id={item.id}/>}
           />
         </Col>
       ))}

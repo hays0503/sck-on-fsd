@@ -81,7 +81,7 @@ async function CatalogPage(
       const RusCity: string = FindCity[0].name_city;
       const urlBuilderProductsByCategory = `/api/by_city/catalog?slug=${slug}&city=${RusCity}`;
       const urlBuilderProductsByCategoryWithDomain = `${process.env.HOST_URL}${port}${urlBuilderProductsByCategory}`;
-console.log(urlBuilderProductsByCategoryWithDomain)
+
       const fetchProductsByCategory = await fetch(urlBuilderProductsByCategoryWithDomain, {
         ...UrlRevalidate.getProducts,
         headers: {
@@ -100,7 +100,6 @@ console.log(urlBuilderProductsByCategoryWithDomain)
         console.log(`Ошибка [разбора] запроса каталога по городам ${params.city} = > ${error}`,);
       }
     } catch (error) {
-
       console.log(`Ошибка запроса каталога по городам ${params.city} = > ${error}`,);
     }
   }

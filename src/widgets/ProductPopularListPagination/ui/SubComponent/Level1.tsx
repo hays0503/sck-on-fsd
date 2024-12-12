@@ -34,7 +34,7 @@ const Level1: React.FC<Level1Props> = (props) => {
             addToCartSlot={
               <AddToBasketProduct prod_id={item.id} userBasket={userBasket} token={token?.token} />
             }
-            addToFavoriteSlot={<AddToFavoriteProduct />}
+            addToFavoriteSlot={<AddToFavoriteProduct prod_id={item.id}/>}
           />
         </Col>
       ))}

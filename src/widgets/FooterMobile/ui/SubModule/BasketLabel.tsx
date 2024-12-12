@@ -2,7 +2,7 @@
 import useFetcherBasket from "@/shared/api/fetch/basket";
 import { Badge, Flex, Typography } from "antd"
 import { useTranslations } from "next-intl";
-import { CSSProperties, useEffect, useState } from "react";
+import { CSSProperties, useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
 const { Text } = Typography;
 
@@ -37,10 +37,17 @@ const BasketLabelBadger: React.FC<{ uuid_id: string, styleActive: CSSProperties,
     const { data: dataBasket } = useFetcherBasket({ by_id: uuid_id });
     const countProductInBasket = dataBasket?.basket_items?.reduce((acc, item) => acc + item.count, 0);
     const [animation, setAnimation] = useState(false);
+    const firstRender = useRef(true);
     useEffect(() => {
-        setAnimation(true);
-        setTimeout(() => setAnimation(false), 200);
-    },[countProductInBasket])
+        if(firstRender.current){
+            if(dataBasket){
+                firstRender.current = false;
+            }            
+        }else{
+            setAnimation(true);
+            setTimeout(() => setAnimation(false), 200);
+        }
+    },[countProductInBasket, dataBasket]);
     return <Badge count={countProductInBasket ?? 0} size="small" >
             <motion.div animate={{ x: animation ? [0, 10, 0,-10, 0,0, 10, 0,-10, 0,0, 10, 0,-10, 0,0, 10, 0,-10, 0,0, 10, 0,-10, 0,0, 10, 0,-10, 0] : 0 }}>
                 <Label styleActive={styleActive} styleActiveBg={styleActiveBg} styleActiveAccent={styleActiveAccent} />

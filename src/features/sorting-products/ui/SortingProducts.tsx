@@ -19,7 +19,7 @@ const SortingProducts: React.FC<SortingProductsProps> = ({ slugCatalog }) => {
       key: "asc",
       label: (
         <Link
-          href={`/city/${city}/catalog/${slugCatalog}?&sortOrder=asc`}
+          href={`/city/${city}/catalog/category-slug/${slugCatalog}?&sortOrder=asc`}
           style={{ color: "black" }}
         >
           {t('po-vozrastaniyu-ceny')}
@@ -30,7 +30,7 @@ const SortingProducts: React.FC<SortingProductsProps> = ({ slugCatalog }) => {
       key: "desc",
       label: (
         <Link
-          href={`/city/${city}/catalog/${slugCatalog}?&sortOrder=desc`}
+          href={`/city/${city}/catalog/category-slug/${slugCatalog}?&sortOrder=desc`}
           style={{ color: "black" }}
         >
           {t('po-ubyvaniyu-ceny')}

@@ -7,11 +7,16 @@ const withNextIntl = createNextIntlPlugin();
 
 
 const nextConfig = {
-
+  env:{
+    HOST_URL:process.env.HOST_URL,
+    HOST_PORT:process.env.HOST_PORT,
+    API_URL:process.env.API_URL,
+    API_PORT:process.env.API_PORT,
+    API_AUTH_PORT:process.env.API_AUTH_PORT,
+    API_BASKET_PORT:process.env.API_BASKET_PORT
+  },
   reactStrictMode: true,
   productionBrowserSourceMaps: true,
-
-
   experimental: {
     turbo: {
       rules: {
@@ -96,6 +101,11 @@ const nextConfig = {
       {
         source: `/api/v1/specif/filter_by_prod/:prod_pk`,
         destination: `${process.env.API_URL}:${process.env.API_PORT}/api/v1/specif/filter_by_prod/:prod_pk/`,
+      },
+      //Спецификации на товар
+      {
+        source: `/api/v1/specif/configurations/:prod_pk*`,
+        destination: `${process.env.API_URL}:${process.env.API_PORT}/api/v1/specif/configurations/:prod_pk*/`,
       },
 
       // Обработка картинок (проксирование)

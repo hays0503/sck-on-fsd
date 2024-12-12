@@ -31,6 +31,8 @@ const RenderImages: React.FC<IRenderImagesProps> = (props) => {
   const { name, width, height, src } = props;
   return (
     <Image
+      priority={true}
+      fetchPriority="high"
       src={src ?? "/nofoto.jpg"}
       alt={`${name}-no-image`}
       width={width}
@@ -51,6 +53,8 @@ const RenderSwiper: React.FC<IRenderSwiperProps> = (props) => {
       {images.map((item, index) => (
         <SwiperSlide key={index}>
           <Image
+            priority={true}
+            fetchPriority="high"
             src={item}
             alt={`${name}-slide-${index}`}
             width={width}

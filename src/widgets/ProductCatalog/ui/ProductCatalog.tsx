@@ -11,6 +11,7 @@ import {
 } from "@/features/pagination-products";
 import React from "react";
 import { ProductsDetail } from "@/shared/types/productsDetail";
+import { ProductFilter } from "@/features/product-filter";
 
 
 interface ProductsCatalogProps {
@@ -19,15 +20,11 @@ interface ProductsCatalogProps {
 }
 
 const ProductCatalog: React.FC<ProductsCatalogProps> = (props) => {
-
-  console.log("ProductCatalog:",props)
-
+  
   const { 
     params,
     Catalog 
   } = props;
-
-  console.log(params)
 
   const selectedCity = useSelectedCity();
 
@@ -51,7 +48,10 @@ const ProductCatalog: React.FC<ProductsCatalogProps> = (props) => {
       gap={10}
       style={{ width: "100%", height: "100%", backgroundColor: "#EEEFF1" }}
     >
-      <SortingProducts slugCatalog={params.slug} />
+      <Flex style={{ width: "100%",background:"#EEEFF1" }} justify="space-between">
+        <SortingProducts slugCatalog={params.slug} />
+        <ProductFilter Products={_Products}/>
+      </Flex>
       <Catalog Products={Products} />
       <PaginationProducts totalProducts={_Products.length} />
     </Flex>
