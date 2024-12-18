@@ -105,7 +105,7 @@ const nextConfig = {
       //Спецификации на товар
       {
         source: `/api/v1/specif/configurations/:prod_pk*`,
-        destination: `${process.env.API_URL}:${process.env.API_PORT}/api/v1/specif/configurations/:prod_pk*/`,
+        destination: `http://185.100.67.246:${process.env.API_PORT}/api/v1/specif/configurations/:prod_pk*/`,
       },
 
       // Обработка картинок (проксирование)
