@@ -4,122 +4,27 @@ import type { CollapseProps } from 'antd';
 import { useTranslations } from "next-intl"
 import { CSSProperties, Dispatch, ReactNode, SetStateAction, useEffect, useLayoutEffect, useState } from "react";
 import { DownOutlined, UpOutlined } from '@ant-design/icons';
+import { getRawSpecsByProductIdsAndParse } from "../model";
+import { SpecificationTypeParse } from "../model/parserSpecifications";
+
 
 const { Text, Title } = Typography
-
-type ProductSpecsType = {
-    id: number;
-    name_specification: {
-        id: number;
-        additional_data: {
-            EN: string;
-            KZ: string;
-        };
-        name_specification: string;
-    };
-    value_specification: {
-        id: number;
-        additional_data: {
-            EN: string;
-            KZ: string;
-        };
-        value_specification: string;
-    };
-    product: number;
-};
-
-type SpecificationType = Map<string, Map<string, Set<number>>>;
-type SelectedFilterType = { key: string; value_ru: string };
-
-const ParserSpecifications = (data: ProductSpecsType[]): SpecificationType => {
-    const specifications: SpecificationType = new Map();
-
-    data.forEach((item: ProductSpecsType) => {
-        const key = item.name_specification?.name_specification;
-        const value = item.value_specification?.value_specification;
-
-        if (key && value) {
-            // Получить или инициализировать карту значений для этой спецификации
-            const values = specifications.get(key) ?? new Map();
-
-            // Получить или инициализировать набор ID продуктов для этого значения
-            const productIds = values.get(value) ?? new Set();
-
-            // Добавить текущий ID продукта
-            productIds.add(item.product);
-
-            // Обновить карты с новыми значениями
-            values.set(value, productIds);
-            specifications.set(key, values);
-        }
-    });
-
-    return specifications;
-};
-
-const SelectFilterOptions = (
-    specifications: SpecificationType,
-    selectedFilter: SelectedFilterType
-): number[] => {
-    const SelectedKey = specifications.get(selectedFilter.key);
-    if (!SelectedKey) {
-        // Нет такой спецификации
-        return [];
-    }
-    const SelectedFiltered = SelectedKey.get(selectedFilter.value_ru);
-    return SelectedFiltered ? Array.from(SelectedFiltered) : [];
-};
-
-// Получаем сырые данные спецификаций
-const getRawSpecsByProductIds = async (
-    productIds: number[]
-): Promise<ProductSpecsType[]> => {
-    const urlsProductSpecs = `/api/v1/specif/configurations/${productIds.join(",")}/`;
-    let responseProductSpecs: Response;
-    try {
-        responseProductSpecs = await fetch(urlsProductSpecs);
-    } catch (error) {
-        console.log("Шаг 4.");
-        console.log("Ошибка при получении спецификации продуктов", error);
-        return [];
-    }
-
-    let productSpecs: ProductSpecsType[];
-    try {
-        productSpecs = await responseProductSpecs.json();
-    } catch (error) {
-        console.log("Шаг 5.");
-        console.log("Ошибка при парсинге спецификации продуктов", error);
-        return [];
-    }
-
-    return productSpecs;
-};
-
-
-const getRawSpecsByProductIdsAndParse = async (
-    productIds: number[]
-): Promise<SpecificationType | undefined> => {
-    // Получаем сырые данные спецификаций
-    const productSpecs = await getRawSpecsByProductIds(productIds);
-
-    let specifications: SpecificationType;
-    try {
-        specifications = ParserSpecifications(productSpecs);
-    } catch (error) {
-        console.log("Шаг 6.");
-        console.log("Ошибка при разборе спецификации по продуктам", error);
-        return undefined;
-    }
-
-    return specifications;
-};
 
 
 const ExpandedCheckboxGroup: React.FC<{
     specificationsKey: string,
     specifications: Map<string, Set<number>>,
-    selectedTagState: any
+    selectedTagState: [{
+        [key: string]: {
+            key: string;
+            id: number[];
+        }[];
+    } | undefined, Dispatch<SetStateAction<{
+        [key: string]: {
+            key: string;
+            id: number[];
+        }[];
+    } | undefined>>]
 }> = ({
     specificationsKey,
     specifications,
@@ -135,11 +40,12 @@ const ExpandedCheckboxGroup: React.FC<{
                 id: key,
                 label: <Flex gap={3}><Text>{key}</Text><Text style={{ color: "gray" }}>{productIds.size}</Text></Flex>,
                 value: key,
-                name: key
+                name: key,
+                disabled: false
             }
         })
 
-        const onChange = (checkedValues: any) => {
+        const onChange = (checkedValues: string[]) => {
             const [selectedTag, setSelectedTag] = selectedTagState;
             // Проверяем есть ключ
             const pair = {
@@ -155,10 +61,11 @@ const ExpandedCheckboxGroup: React.FC<{
 
         return <Flex vertical>
             <Checkbox.Group
+                disabled
                 onChange={onChange}
                 style={{ flexDirection: 'column' }}
                 options={options}
-                value={selectedTagState[0]?.[specificationsKey]?.map((item: any) => item.key)}
+                value={selectedTagState[0]?.[specificationsKey]?.map((item: { key: string, id: number[] }) => item.key)}
             />
             {needExpanded && <Text onClick={() => setExpand(!expand)}
                 style={{
@@ -173,8 +80,18 @@ const ExpandedCheckboxGroup: React.FC<{
     }
 
 const CollapseListSpecification: React.FC<{
-    specifications: SpecificationType,
-    selectedTagState: any
+    specifications: SpecificationTypeParse,
+    selectedTagState: [{
+        [key: string]: {
+            key: string;
+            id: number[];
+        }[];
+    } | undefined, Dispatch<SetStateAction<{
+        [key: string]: {
+            key: string;
+            id: number[];
+        }[];
+    } | undefined>>]
 }> = ({ specifications, selectedTagState }) => {
     const specificationsKeys = specifications.keys().toArray()
 
@@ -203,9 +120,30 @@ const CollapseListSpecification: React.FC<{
 }
 
 
-const ModalFilter: React.FC<{ children: ReactNode, specificationsDefault: SpecificationType }> = ({ children, specificationsDefault }) => {
+const ModalFilter: React.FC<{ children: ReactNode, specificationsDefault: SpecificationTypeParse }> = ({ children, specificationsDefault }) => {
     const [open, setOpen] = useState(false);
-    const [selectedTagState, setSelectedTagState] = useState<{ [key: string]: { key: string, id: number[] }[] }| undefined>(undefined);
+    const [selectedTagState, setSelectedTagState] = useState<{ [key: string]: { key: string, id: number[] }[] } | undefined>(undefined);
+    const [newFilter, setNewFilter] = useState<SpecificationTypeParse | undefined>(undefined);
+    useEffect(()=>{
+        if(selectedTagState){
+            const ProductIdByTag = Object.keys(selectedTagState).map((key) => {
+                const specifications = selectedTagState?.[key].map((item) => {
+                    return item.id
+                })
+                return {[key]:specifications.flat()};
+            });
+            ProductIdByTag.forEach((item)=>{
+                const key = Object.keys(item)[0];
+                const ids = item[key];
+                // debugger;
+                getRawSpecsByProductIdsAndParse(ids).then((l)=>{
+                    console.log(l)
+                    setNewFilter(l)
+                })
+            })
+            console.log(newFilter)
+        }
+    },[selectedTagState])
 
     const RenderTag = () => {
         return <Flex style={{
@@ -218,19 +156,18 @@ const ModalFilter: React.FC<{ children: ReactNode, specificationsDefault: Specif
             {
                 selectedTagState && Object.keys(selectedTagState).map((key) => {
                     return selectedTagState?.[key].map((item) => {
-                        return <Tag 
-                                    key={`${key}-${item}`}
-                                    style={{ fontSize: "12px", marginRight: "5px", marginLeft: "5px" }}
-                                    // color="blue"
-                                    closable
-                                    onClose={() => {
-                                        const newSelectedTagState = { ...selectedTagState };
-                                        newSelectedTagState[key] = newSelectedTagState[key].filter((i) => i.key !== item.key);
-                                        setSelectedTagState(newSelectedTagState);
-                                    }}
-                                >
-                                    {item.key}
-                                </Tag>
+                        return <Tag
+                            key={`${key}-${item}`}
+                            style={{ fontSize: "12px", marginRight: "5px", marginLeft: "5px" }}
+                            closable
+                            onClose={() => {
+                                const newSelectedTagState = { ...selectedTagState };
+                                newSelectedTagState[key] = newSelectedTagState[key].filter((i) => i.key !== item.key);
+                                setSelectedTagState(newSelectedTagState);
+                            }}
+                        >
+                            {item.key}
+                        </Tag>
                     })
                 })
             }
@@ -238,25 +175,26 @@ const ModalFilter: React.FC<{ children: ReactNode, specificationsDefault: Specif
     }
 
     return <>
-        <Modal style={{ top: 0, width: "100%", "--ant-modal-content-padding": "0" } as CSSProperties} open={true} footer={null} closeIcon={null} onCancel={() => setOpen(false)}>
-
-            {/* {JSON.stringify(selectedTagState)} */}
-            <RenderTag/>
+        <Modal style={{ top: 0, width: "100%", "--ant-modal-content-padding": "0" } as CSSProperties} open={true} footer={null} closeIcon={null}  onCancel={() => setOpen(false)}>
+            <RenderTag />
             <Flex style={{ width: "100%", height: "90dvh", backgroundColor: "#ffff", gap: '3px', paddingTop: '10px', overflowX: 'auto' }} vertical>
-
                 <CollapseListSpecification specifications={specificationsDefault} selectedTagState={[selectedTagState, setSelectedTagState]} />
             </Flex>
+            <Button style={{ width: "100%",backgroundColor: "#000AAA", color: "#fff" }} >
+                Показать товаров
+            </Button>
         </Modal>
-        <Button onClick={() => setOpen(!open)}>
+        <Button type="primary" onClick={() => setOpen(!open)}>
             {children}
         </Button>
+
     </>
 }
 
 
 const ProductFilter: React.FC<{ Products: Products[] }> = ({ Products }) => {
 
-    const [specificationsDefault, setSpecificationsDefault] = useState<SpecificationType | undefined>(undefined);
+    const [specificationsDefault, setSpecificationsDefault] = useState<SpecificationTypeParse | undefined>(undefined);
 
     const t = useTranslations();
 

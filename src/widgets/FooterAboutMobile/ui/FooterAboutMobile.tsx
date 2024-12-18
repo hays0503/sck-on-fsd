@@ -1,5 +1,5 @@
 "use client";
-import { Link } from "@/i18n/routing";
+// import { Link } from "@/i18n/routing";
 import LogoSCK from "@/shared/ui/LogoSCK";
 import { Flex,Typography } from "antd";
 
@@ -15,31 +15,31 @@ export default function FooterAboutMobile() {
         <Title level={5}>РЕКВИЗИТЫ</Title> 
         <Text>ТОО «SCK»</Text>
         <Text>БИН 160440027443</Text>
-        <Text>Республика Казахстан, г. Петропавловск, ул. Букетова 31А, БЦ «Алем», офис 5</Text>
-        <Text>Тел. +7 705 655 00 00, +7 705 552 21 57</Text>
-        <Text>www.sck -1.kz</Text>
+        {/* <Text>Республика Казахстан, г. Петропавловск, ул. Букетова 31А, БЦ «Алем», офис 5</Text> */}
+        <Text>{"Тел. +7 705 655 00 00 "}</Text>
+        {/* <Text>www.sck -1.kz</Text>
         <Text>АО &quot;Народный Банк Казахстана&quot;</Text>
         <Text>БИК HSBKKZKX</Text>
-        <Text>ИИК KZ93601A251001294031</Text>
+        <Text>ИИК KZ93601A251001294031</Text> */}
       </Flex>
 
-      <Flex vertical={true}>
+      {/* <Flex vertical={true}>
       <Title level={5}>СОЦИАЛЬНЫЕ СЕТИ</Title>
       <Link href={"https://wa.me/77056550000"}>WHATSAPP</Link>
-      </Flex>
+      </Flex> */}
 
-      <Flex vertical={true}>
+      {/* <Flex vertical={true}>
       <Title level={5}>Компания</Title>
       <Text>О нас</Text>
       <Text>Реквизиты</Text>
       <Text>Контакты</Text>
-      <Text>Адреса</Text></Flex>
+      <Text>Адреса</Text></Flex> */}
 
-      <Flex vertical={true}>
+      {/* <Flex vertical={true}>
       <Title level={5}>ПОЛИТИКА КОНФИДЕНЦИАЛЬНОСТИ</Title>
       <Text>Политика конфиденциальности</Text>
       <Text>Политика возвратов</Text>
-      </Flex>
+      </Flex> */}
 
       <Text>2024 © SCK All rights reserved</Text>
 

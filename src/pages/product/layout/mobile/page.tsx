@@ -5,9 +5,9 @@ import findRootAndDescendants from "@/shared/tools/findRootAndDescandants";
 import {
   selectDataByLangCategory,
 } from "@/shared/tools/selectDataByLang";
-import { Category } from "@/shared/types/category";
-import { ProductsDetail } from "@/shared/types/productsDetail";
-import { Reviews } from "@/shared/types/reviews";
+// import { Category } from "@/shared/types/category";
+// import { ProductsDetail } from "@/shared/types/productsDetail";
+// import { Reviews } from "@/shared/types/reviews";
 import { Specification } from "@/shared/types/specification";
 import HeaderText from "@/shared/ui/HeaderText";
 import { FooterMobile } from "@/widgets/FooterMobile";
@@ -27,47 +27,85 @@ type ProductPageComponent = (props: IProductPageProps) => Promise<JSX.Element>;
 const ProductPage: ProductPageComponent = async (props) => {
   const { locale, slug } = props.params;
 
-  const fetchCity = await (
-    await fetch(UrlApiWithDomain.getCity, {
-      ...UrlRevalidate.getCity,
-      headers: {
-        "Content-Type": "application/json",
-        Accept: "application/json",
-      },
-    })
-  ).json();
+  let fetchCity = undefined;
+  try {
+      const response = await fetch(UrlApiWithDomain.getCity, {
+          ...UrlRevalidate.getCity,
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+          },
+        })
+      
+
+      try{
+        fetchCity = await response.json();
+      }catch(e){
+        console.log("Не вышло запросить города так как не получилось разобрать их в ответе",e)
+      }
+      fetchCity = await response.json();
+
+  } catch (error) {
+    console.log("Ошибка запроса города ", error);
+  }
 
   const UrlProduct = `${UrlApi.getProducts}${slug}`;
   const UrlWithDomainProduct = `${UrlApiWithDomain.getProducts}${slug}`;
 
-  const fetchProduct: ProductsDetail = await (
-    await fetch(UrlWithDomainProduct, {
-      ...UrlRevalidate.getProducts,
-    })
-  ).json();
+  let fetchProduct = undefined;
+  try {
+    const responseFetchProduct = await fetch(UrlWithDomainProduct, {
+        ...UrlRevalidate.getProducts,
+      });
+    
+    try{
+      fetchProduct = await responseFetchProduct.json();
+    }catch(e){
+      console.log("Не вышло запросить продукт так как не получилось разобрать его в ответе",e)
+    }
+  } catch (error) {
+    console.log("Ошибка запроса продукта ", error);
+  }
 
-  const fetchCategory: Category[] = await (
-    await fetch(UrlApiWithDomain.getCategory, {
+  let fetchCategory = undefined;
+  try {
+    const responseFetchCategory =   await fetch(UrlApiWithDomain.getCategory, {
       ...UrlRevalidate.getCategory,
       headers: {
         "Content-Type": "application/json",
         Accept: "application/json",
       },
-    })
-  ).json();
+    });
+
+    try {
+      fetchCategory = await responseFetchCategory.json();
+    } catch (e) {
+      console.log("Не вышло запросить категории так как не получилось разобрать их в ответе",e)
+    }
+  } catch (error) {
+    console.log("Ошибка запроса категории ", error);
+  }
+
+
 
   const urlBuilderSpecification = `${UrlApi.getProductSpecificationsById}filter_by_prod/${fetchProduct.id}`;
   const urlBuilderSpecificationWithDomain = `${UrlApiWithDomain.getProductSpecificationsById}filter_by_prod/${fetchProduct.id}`;
   let fetchSpecification:Specification[] = [];
   try{
-    const _fetchSpecification = await fetch(urlBuilderSpecificationWithDomain,{
+    const responseFetchSpecification = await fetch(urlBuilderSpecificationWithDomain,{
       ...UrlRevalidate.getProductSpecificationsById,
       headers: {
         "Content-Type": "application/json",
         Accept: "application/json",
       },
     })
-    fetchSpecification = await _fetchSpecification.json();
+
+    try {
+      fetchSpecification = await responseFetchSpecification.json();
+    } catch (e) {
+      console.log("Не вышло запросить спецификации продукта так как не получилось разобрать их в ответе",e)
+    }
+    
   }catch(e){
     console.log("Не вышло запросить спецификации продукта",e)
   }
@@ -75,16 +113,26 @@ const ProductPage: ProductPageComponent = async (props) => {
 
   const urlBuilderReviews = `${UrlApi.getProductReviewsById}${fetchProduct.id}`
   const urlBuilderReviewsWithDomain = `${UrlApiWithDomain.getProductReviewsById}${fetchProduct.id}`
-  const fetchReviews:Reviews[] = await (
-    await fetch(urlBuilderReviewsWithDomain,{
+
+  let fetchReviews = undefined;
+  try {
+    const responseFetchReviews = await fetch(urlBuilderReviewsWithDomain, {
       ...UrlRevalidate.getProductReviewsById,
       headers: {
         "Content-Type": "application/json",
         Accept: "application/json",
       },
     })
-  ).json();
 
+    try {
+      fetchReviews = await responseFetchReviews.json();
+    } catch (e) {
+      console.log("Не вышло запросить отзывы продукта так как не получилось разобрать их в ответе",e)
+    }
+  } catch (error) {
+    console.log("Ошибка запроса отзывов продукта ", error);
+  }
+  
   const fallback = {
     [UrlApi.getCity]: fetchCity,
     [UrlApi.getCategory]: fetchCategory,

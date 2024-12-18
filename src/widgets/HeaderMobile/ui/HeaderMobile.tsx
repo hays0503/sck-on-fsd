@@ -14,7 +14,7 @@ const HeaderMobile: React.FC<IHeaderMobileProps> = ({ SelectCity }) => {
       <Flex justify="space-around" align="center" style={{ width: "100%" }}>
         <SelectCity />
         <Flex gap={10} justify="center" align="center">
-          <span>{`8 000 0000 00 00`}</span>
+          <span>{"+7 705 655 00 00"}</span>
           <ChangeLanguage />
         </Flex>
       </Flex>

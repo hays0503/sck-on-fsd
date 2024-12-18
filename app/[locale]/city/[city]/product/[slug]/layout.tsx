@@ -11,7 +11,8 @@ export const metadata: Metadata = {
 };
 
 export async function generateStaticParams() {
-  const url = `${ApiUrl}${UrlApi.getProducts}all/slugs/`
+  const ApiPort = `:${process.env.API_PORT}`
+  const url = `${ApiUrl}${ApiPort}${UrlApi.getProducts}all/slugs/`
   const fetchSlugs = await(await fetch(url,{
     headers: {
       "Content-Type": "application/json",
