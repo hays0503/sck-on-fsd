@@ -107,6 +107,11 @@ const nextConfig = {
         source: `/api/v1/specif/configurations/:prod_pk*`,
         destination: `http://185.100.67.246:${process.env.API_PORT}/api/v1/specif/configurations/:prod_pk*/`,
       },
+      //Поиск продуктов
+      {
+        source: `/search/product/:search_text`,
+        destination: `${process.env.API_URL}:${process.env.API_PORT}/search/product/:search_text/`,
+      },
 
       // Обработка картинок (проксирование)
       {
