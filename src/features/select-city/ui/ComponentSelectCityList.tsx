@@ -8,8 +8,10 @@ import { useLocale } from "next-intl";
 
 export default function ComponentSelectCityList({
   cities,
+  setCityLocale,
 }: {
   cities: iCity[];
+  setCityLocale: (city: { city: string; locale: string }) => void;
 }) {
   const currentLocale = useLocale();
   const router = useRouter();
@@ -21,6 +23,7 @@ export default function ComponentSelectCityList({
             key={city.id}
             data-testid="btn-city"
             onClick={() => {
+                setCityLocale({city: city.additional_data.EN, locale: currentLocale});
                 router.replace(`/city/${city.additional_data.EN}/main`);              
             }}
           >

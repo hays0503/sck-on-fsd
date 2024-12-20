@@ -257,5 +257,8 @@
   "vyberite-sposob-dostavki-i-sposob-oplaty": "Select delivery method and payment method",
   "vyberite-adres-dostavki": "Select delivery address",
   "pokazat-eshe": "Show more",
-  "spryatat": "Hide"
+  "spryatat": "Hide",
+  "vyberite-gorod-v-kotorom-vy-khotite-sovershit-pokupku": "Select the city in which you want to make a purchase",
+  "pereiti-k-vyboru-goroda": "Go to city selection",
+  "vybrannyi-vami-gorod": "Your chosen city"
 }

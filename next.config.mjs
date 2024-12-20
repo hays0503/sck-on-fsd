@@ -33,7 +33,7 @@ const nextConfig = {
     return [
       {
         source: `/`,
-        destination: `/ru/city/Astana/main`,
+        destination: `/ru/city/Karaganda/main`,
         permanent: true,
       },
       {
