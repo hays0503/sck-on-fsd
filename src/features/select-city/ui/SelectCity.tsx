@@ -93,12 +93,12 @@ const SelectCity = () => {
                 <Space direction="vertical" size={[16, 16]}>
                     <Row gutter={{ xs: 8, sm: 16, md: 24, lg: 32 }}>
                         <Col span={24}>
-                            <Text>Выбор города</Text>
+                            <Text>{t('selectCity')}</Text>
                         </Col>
                     </Row>
                     <Row gutter={{ xs: 8, sm: 16, md: 24, lg: 32 }}>
                         <Col span={24}>
-                            <Search data-testid="search-city" onChange={onSearch} style={{ width: "320px" }} />
+                            <Search data-testid="search-city" onChange={onSearch} style={{ width: "100%" }} />
                         </Col>
                     </Row>
                     <Row gutter={{ xs: 8, sm: 16, md: 24, lg: 32 }}>

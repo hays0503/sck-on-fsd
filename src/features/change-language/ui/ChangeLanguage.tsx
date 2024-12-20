@@ -46,8 +46,9 @@ const ChangeLanguage = () => {
 
       return <Dropdown
       menu={{ items, onClick }}
-      overlayStyle={{ zIndex: 2000 }}>
-      <Space>
+      overlayStyle={{ zIndex: 2000 }}
+      >
+      <Space size={'small'} style={{height: "10px"}}>
         <Typography.Text>{items.find(({ key }) => key === localActive)?.label}</Typography.Text>
         <DownOutlined />
       </Space>

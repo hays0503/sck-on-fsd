@@ -14,7 +14,7 @@ const LayoutMain: React.FC<ILayoutMainProps> = (props) => {
   const { headerContent, content, footerContent } = props;
 
   const h = "px";
-  const hightHeader = 155;
+  const hightHeader = 130;
   const hightFooter = 70;
   const hightContent = hightFooter+hightHeader;
 
