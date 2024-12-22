@@ -25,6 +25,7 @@ const ProductDetailConfiguration: React.FC<IProductDetailConfiguration> = (props
             {fetchProduct.configuration.map((item) => {
               return (
                 <Link
+                  prefetch={true}
                   key={item.id}
                   href={`/${currentCity}/product/${item.slug}`}
                 >

@@ -44,7 +44,7 @@ const ProductCart: React.FC<IProductCartProps> = (props) => {
         discount={discount}
         addToFavoriteSlot={addToFavoriteSlot}
         Swiper={
-          <Link href={`/city/${currentCity}/product/${props.Product.slug}`}>
+          <Link href={`/city/${currentCity}/product/${props.Product.slug}`} prefetch={true}>
             <ProductCartSwiper
               name={name}
               images={props.Product.list_url_to_image}
@@ -54,7 +54,7 @@ const ProductCart: React.FC<IProductCartProps> = (props) => {
           </Link>
         }
       />
-      <Link href={`/city/${currentCity}/product/${props.Product.slug}`} style={{ width: "100%" }}>
+      <Link href={`/city/${currentCity}/product/${props.Product.slug}`} style={{ width: "100%" }} prefetch={true}>
         <Level2
           name={name}
           average_rating={Product?.average_rating}

@@ -73,35 +73,51 @@ class GetFilterCategory {
     }
   }
 
-  // Получаем сырые данные спецификаций
-  async getRawSpecsByProductIds(
-    productIds: number[]
-  ): Promise<ProductSpecsType[]> {
-    const urlsProductSpecs = `${
-      this.apiUrl
-    }/api/v1/specif/configurations/${productIds.join(",")}/`;
-    let responseProductSpecs: Response;
-
-    try {
-      responseProductSpecs = await fetch(urlsProductSpecs,{
-        cache:"force-cache",
-        headers: {
-          "Content-Type": "application/json",
-          Accept: "application/json",
-        }        
-      });
-    } catch (error) {
-      console.log("Ошибка при получении спецификации продуктов", error);
+  async getRawSpecsByProductIds(productIds: number[]): Promise<ProductSpecsType[]> {
+    if (!productIds.length) {
+      console.log("Список идентификаторов продуктов пуст");
       return [];
     }
-
-    try {
-      const data = await responseProductSpecs.json();
-      return data;
-    } catch (error) {
-      console.log("Ошибка при парсинге спецификации продуктов", error);
-      return [];
+  
+    // Разделение массива на порции (если API не поддерживает слишком длинный запрос)
+    const batchSize = 50; // Максимальное количество ID за один запрос
+    const batches = [];
+    for (let i = 0; i < productIds.length; i += batchSize) {
+      batches.push(productIds.slice(i, i + batchSize));
     }
+  
+    let allSpecs: ProductSpecsType[] = [];
+  
+    for (const batch of batches) {
+      const url = `${this.apiUrl}/api/v1/specif/configurations/${batch.join(",")}/`;
+  
+      try {
+        const response = await Promise.race([
+          fetch(url, {
+            cache: "force-cache",
+            headers: {
+              "Content-Type": "application/json",
+              Accept: "application/json",
+            },
+          }),
+          new Promise<never>((_, reject) =>
+            setTimeout(() => reject(new Error("Timeout")), 10000) // Тайм-аут 10 секунд
+          ),
+        ]);
+  
+        if (!response.ok) {
+          console.error(`Ошибка запроса: ${response.status} ${response.statusText}`);
+          continue;
+        }
+  
+        const data: ProductSpecsType[] = await response.json();
+        allSpecs = allSpecs.concat(data);
+      } catch (error) {
+        console.error("Ошибка при обработке запроса", error);
+      }
+    }
+  
+    return allSpecs;
   }
 
   // Получаем сырые данные спецификаций и разбираем их

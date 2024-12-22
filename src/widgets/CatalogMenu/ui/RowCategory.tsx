@@ -27,7 +27,7 @@ const RowCategory: React.FC<{ item: Category }> = ({ item }) => {
   return (
     <>
       <li style={RowStyle}>
-        <Link href={url}>
+        <Link href={url} prefetch={true}>
           <Title level={5}>{name}</Title>
         </Link>
         {item.children.length > 0 && (

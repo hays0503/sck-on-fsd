@@ -26,7 +26,7 @@ const BasketMobile: React.FC<IBasketMobileProps> = ({ basket_id }) => {
     return (
       <Flex justify="center" align="center" vertical={true}>
         <Typography.Title level={3}>{t("korzina-pusta")}</Typography.Title>
-        <Link href={`/city/${city}/main`}>{t("na-glavnuyu")}</Link>
+        <Link href={`/city/${city}/main`} prefetch={true}>{t("na-glavnuyu")}</Link>
       </Flex>
     );
   };
@@ -37,7 +37,7 @@ const BasketMobile: React.FC<IBasketMobileProps> = ({ basket_id }) => {
       return (<Flex
         align="center"
         justify="center">
-        <Link href={`/city/${city}/order/${basket_id}`} style={{
+        <Link prefetch={true} href={`/city/${city}/order/${basket_id}`} style={{
           width: "100%",
           height: 50,
           backgroundColor: "#4954F0",
@@ -53,7 +53,7 @@ const BasketMobile: React.FC<IBasketMobileProps> = ({ basket_id }) => {
       return (<Flex
         align="center"
         justify="center">
-        <Link href={`/city/${city}/login-redirect/${pathname}`} style={{
+        <Link prefetch={true} href={`/city/${city}/login-redirect/${pathname}`} style={{
           width: "100%",
           height: 50,
           backgroundColor: "#4954F0",

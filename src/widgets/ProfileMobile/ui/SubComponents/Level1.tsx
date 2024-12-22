@@ -65,7 +65,7 @@ const Level1: React.FC<Level1Props> = (props) => {
           <Image priority={true} src="/sck-user.svg" alt="user" width={66} height={66} />
           {isGuest ? <GuestUser /> : <AuthUser />}
         </Flex>
-        <Link href={isGuest ? `/city/${currentCity}/login` : `/city/${currentCity}/user`}>
+        <Link prefetch={true} href={isGuest ? `/city/${currentCity}/login` : `/city/${currentCity}/user`}>
           <Button
             shape="circle"
             type="text"

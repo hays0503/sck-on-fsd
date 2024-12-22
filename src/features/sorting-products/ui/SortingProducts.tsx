@@ -4,7 +4,7 @@ import { Dropdown, Flex, MenuProps, Typography } from "antd";
 import { useTranslations } from "next-intl";
 import { useQueryState } from "nuqs";
 
-const { Text,Title } = Typography;
+const { Text, Title } = Typography;
 
 interface SortingProductsProps {
   slugCatalog: string;
@@ -52,7 +52,7 @@ const SortingProducts: React.FC<SortingProductsProps> = ({ slugCatalog }) => {
         backgroundColor: "#fff",
         marginTop: "1px",
       }}
-      gap={10}
+      gap={5}
     >
       <svg
         width="18"
@@ -69,12 +69,14 @@ const SortingProducts: React.FC<SortingProductsProps> = ({ slugCatalog }) => {
           strokeLinejoin="round"
         />
       </svg>
-      <Title level={5} style={{ color: "gray" }}>
-        {t("sortirovka")}
-      </Title>
-      <Dropdown menu={{ items }}>
-        <Text>{currentOrderText}</Text>
-      </Dropdown>
+      <Flex align="baseline" wrap>
+        <Title level={5} style={{ color: "gray" }}>
+          {t("sortirovka")}
+        </Title>
+        <Dropdown menu={{ items }}>
+          <Text>{currentOrderText}</Text>
+        </Dropdown>
+      </Flex>
     </Flex>
   );
 };

@@ -35,7 +35,7 @@ const Filter: React.FC<{ category: string, filterActive: number[], setFilterActi
             console.log("filterActive", filterActive.length)
             api.destroy();
             api.info({
-                btn: <Link href='#catalog' onClick={() => {
+                btn: <Link href='#catalog' scroll={true} onClick={() => {
                     api.destroy();
                     setIsOpen(false);
                 }}>Посмотреть</Link>,

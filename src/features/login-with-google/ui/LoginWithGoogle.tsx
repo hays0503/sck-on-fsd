@@ -27,7 +27,7 @@ export default function LoginWithGoogle({ callbackUrl }: { callbackUrl: string |
   return (
     <div>
       {url ? (
-        <Link href={url}>
+        <Link href={url} prefetch={true}>
           <Image priority={true} width={32} height={32} src="/google-logo.svg" alt="GoogleAuth" />
         </Link>
       ) : (
