@@ -19,7 +19,7 @@ interface BannerMobileSliderProps {
 }
 
 const BannerMobileSlider: React.FC<BannerMobileSliderProps> = ({ category }) => {
-    const progressCircle: MutableRefObject<HTMLElement | null> = useRef(null);
+    const progressCircle: MutableRefObject<SVGSVGElement | null> = useRef(null);
     const progressContent: MutableRefObject<HTMLElement | null> = useRef(null);
     
     const onAutoplayTimeLeft = (s: unknown, time: number, progress: number): void => {
