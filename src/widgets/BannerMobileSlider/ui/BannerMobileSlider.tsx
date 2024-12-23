@@ -11,7 +11,7 @@ import 'swiper/css';
 
 import './styles.css';
 import { Category } from "@/shared/types/category";
-import { Link, useRouter } from "@/i18n/routing";
+import {  useRouter } from "@/i18n/routing";
 import { useGetCityParams } from "@/shared/hooks/useGetCityParams";
 
 interface BannerMobileSliderProps {
@@ -21,7 +21,7 @@ interface BannerMobileSliderProps {
 const BannerMobileSlider: React.FC<BannerMobileSliderProps> = ({ category }) => {
     const progressCircle = useRef(null);
     const progressContent = useRef(null);
-    const onAutoplayTimeLeft = (s: any, time: number, progress: number) => {
+    const onAutoplayTimeLeft = (s: unknown, time: number, progress: number) => {
         if (progressCircle.current && progressContent.current) {
             progressCircle.current.style.setProperty('--progress', 1 - progress);
             progressContent.current.textContent = `${Math.ceil(time / 1000)}s`;
