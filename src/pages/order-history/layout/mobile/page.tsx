@@ -45,7 +45,7 @@ const OrderHistoryPage = async ({ params }: OrderPageProps) => {
     let fetchAccessToken = undefined;
     try{
         fetchAccessToken = await (
-            await fetch(`http://pimenov.kz:8999/auth_api/v1/token/refresh`, {
+            await fetch(`http://sck.kz:8999/auth_api/v1/token/refresh`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -69,7 +69,7 @@ const OrderHistoryPage = async ({ params }: OrderPageProps) => {
     
     let Orders = [];
     try{
-        const getHistory = await fetch('http://pimenov.kz:8777/basket_api/v1/order/by_access_t/', {
+        const getHistory = await fetch('http://sck.kz:8777/basket_api/v1/order/by_access_t/', {
                 headers: {
                     "Content-Type": "application/json",
                     Accept: "application/json",

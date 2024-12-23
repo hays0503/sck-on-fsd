@@ -13,6 +13,9 @@ import { type SearchParams } from "nuqs/server";
 import { searchParamsCache } from "./searchParams";
 import { ProductPopularListPagination } from "@/widgets/ProductPopularListPagination";
 import { SelectCity } from "@/features/select-city";
+import { Category } from "@/shared/types/category";
+import { fetchCategory } from "@/shared/api/fallback/fallback";
+import { BannerMobileSlider } from "@/widgets/BannerMobileSlider";
 
 type PageProps = {
   params: {
@@ -52,8 +55,8 @@ export default async function HomePage({ params, searchParams }: PageProps) {
         const RusCity: string = FindCity[0].name_city;
         const UrlPopulatesByCity = `/api/by_city/populates?city=${RusCity}`;
         const port = `:${process.env.PORT}`;
-        const UrlWithDomainPopulatesByCity = `${process.env.HOST_URL}${port??""}${UrlPopulatesByCity}`;
-        console.log("UrlWithDomainPopulatesByCity=>",UrlWithDomainPopulatesByCity);
+        const UrlWithDomainPopulatesByCity = `${process.env.HOST_URL}${port ?? ""}${UrlPopulatesByCity}`;
+        console.log("UrlWithDomainPopulatesByCity=>", UrlWithDomainPopulatesByCity);
         const fetchPopulatesByCity = await (
           await fetch(UrlWithDomainPopulatesByCity, {
             ...UrlRevalidate.getPopulatesId,
@@ -78,7 +81,7 @@ export default async function HomePage({ params, searchParams }: PageProps) {
   }
 
   try {
-    const fetchCategory = await (
+    const fetchCategory: Category[] = await (
       await fetch(UrlApiWithDomain.getCategory, {
         ...UrlRevalidate.getCategory,
         headers: {
@@ -129,24 +132,26 @@ export default async function HomePage({ params, searchParams }: PageProps) {
     console.error("Возникла ошибка при получении населенных пунктов:", error);
   }
 
+  const categoryForBanner:Category[] = [...fetchCategory.filter((i:Category)=>i.list_url_to_baner.length>0)] ;
 
   return (
     <ProvidersServer>
       <ProvidersClient params={params} fallback={fallback}>
         <LayoutMain
           headerContent={
-            <HeaderMobile SelectCity={SelectCity}/>
+            <HeaderMobile SelectCity={SelectCity} />
           }
           content={
             <Flex vertical={true} gap={20}>
+              <BannerMobileSlider  category={categoryForBanner} />
               <ProductPopularListPagination
-              searchParams={{ page }}
+                searchParams={{ page }}
               />
               <FooterAboutMobile />
             </Flex>
           }
           footerContent={
-            
+
             <FooterMobile />
           }
         />
