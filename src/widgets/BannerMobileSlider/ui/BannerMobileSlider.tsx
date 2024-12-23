@@ -3,7 +3,7 @@ import { Flex } from "antd";
 import Image from "next/image";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Pagination, Navigation } from 'swiper/modules';
-import { useRef } from "react";
+import { MutableRefObject, useRef } from "react";
 
 // Import Swiper styles
 import 'swiper/css';
@@ -19,15 +19,15 @@ interface BannerMobileSliderProps {
 }
 
 const BannerMobileSlider: React.FC<BannerMobileSliderProps> = ({ category }) => {
-    const progressCircle = useRef(null);
-    const progressContent = useRef(null);
-    const onAutoplayTimeLeft = (s: unknown, time: number, progress: number) => {
+    const progressCircle: MutableRefObject<HTMLElement | null> = useRef(null);
+    const progressContent: MutableRefObject<HTMLElement | null> = useRef(null);
+    
+    const onAutoplayTimeLeft = (s: unknown, time: number, progress: number): void => {
         if (progressCircle.current && progressContent.current) {
-            progressCircle.current.style.setProperty('--progress', 1 - progress);
+            progressCircle.current.style.setProperty('--progress', `${1 - progress}`);
             progressContent.current.textContent = `${Math.ceil(time / 1000)}s`;
         }
     };
-
     const router = useRouter();
     const city = useGetCityParams();
 
