@@ -4,7 +4,7 @@ import { ProductsDetail } from "@/shared/types/productsDetail";
 import { Flex } from "antd";
 import ProductDetailSwiper from "./SubComponents/ProductDetailSwiper";
 
-import useSelectedCity from "@/shared/hooks/useSelectedCity";
+// import useSelectedCity from "@/shared/hooks/useSelectedCity";
 import { ReviewsList } from "@/entities/Reviews";
 import {
   ProductDetailBreadcrumb,
@@ -30,11 +30,12 @@ const ProductDetail: React.FC<IProductDetailProps> = (props) => {
     params: slug,
   }).data! as ProductsDetail;
 
-  const selectedCity = useSelectedCity();
+  //const selectedCity = useSelectedCity();
 
-  const related_products = fetchProduct.related_product.filter((item) => {
-    return selectedCity in item.price!;
-  });
+  const related_products = fetchProduct.related_product;  // .filter((item) => {
+  //   return selectedCity in item.price!;
+  // });
+
 
   return (
     <Flex vertical={true} gap={10}>

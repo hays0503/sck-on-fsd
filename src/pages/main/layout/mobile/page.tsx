@@ -29,7 +29,7 @@ export default async function HomePage({ params, searchParams }: PageProps) {
   const { page } = searchParamsCache.parse(await searchParams);
 
   let fallback = {};
-
+  console.log(1)
   try {
     const fetchCity = await (
       await fetch(UrlApiWithDomain.getCity, {
@@ -40,6 +40,7 @@ export default async function HomePage({ params, searchParams }: PageProps) {
         },
       })
     ).json();
+    console.log(2)
 
     fallback = { [UrlApi.getCity]: fetchCity };
 
@@ -49,6 +50,7 @@ export default async function HomePage({ params, searchParams }: PageProps) {
         (i: iCity) => i.additional_data.EN === params.city
       );
 
+      console.log(3)
 
       // Если найден город, добавляем данные о населенных пунктах города
       if (FindCity.length > 0) {
@@ -66,6 +68,7 @@ export default async function HomePage({ params, searchParams }: PageProps) {
             },
           })
         ).json();
+        console.log(4)
 
         fallback = {
           ...fallback,
@@ -90,6 +93,7 @@ export default async function HomePage({ params, searchParams }: PageProps) {
         },
       })
     ).json();
+    console.log(5)
 
     fallback = { [UrlApi.getCategory]: fetchCategory, ...fallback };
   } catch (error) {
@@ -106,6 +110,7 @@ export default async function HomePage({ params, searchParams }: PageProps) {
         },
       })
     ).json();
+    console.log(6)
     fallback = { [UrlApi.getPopulatesId]: fetchPopulates, ...fallback };
     try {
       const PopularProductsByIds = `by_ids/${fetchPopulates
@@ -123,6 +128,7 @@ export default async function HomePage({ params, searchParams }: PageProps) {
           },
         })
       ).json();
+      console.log(7)
 
       fallback = { [UrlApiPopularProductsByIds]: fetchPopularProductsByIds, ...fallback };
     } catch (error) {

@@ -1,10 +1,14 @@
 import { UrlApiWithDomain, UrlRevalidate } from "@/shared/api/url";
 import { Populates } from "@/shared/types/populates";
 import { Products } from "@/shared/types/products";
-import { NextRequest } from "next/server";
+import { ProductsDetail } from "@/shared/types/productsDetail";
+// import { Products } from "@/shared/types/products";
+// import { NextRequest } from "next/server";
 
-export async function GET(request: NextRequest) {
-  const city = request.nextUrl.searchParams.get("city") as string;
+export async function GET(
+  // request: NextRequest
+) {
+  // const city = request.nextUrl.searchParams.get("city") as string;
 
   const fetchPopulates = await (
     await fetch(UrlApiWithDomain.getPopulatesId, {
@@ -34,13 +38,17 @@ export async function GET(request: NextRequest) {
   ).json();
 
 
-  const popularProductsByCity = fetchPopularProductsByIds.filter(
-    (i: Products) => i?.price && city in i.price
+  // const popularProductsByCity = fetchPopularProductsByIds.filter(
+  //   (i: Products) => i?.price && city in i.price
+  // );
+
+  const ProductsHavePrice = fetchPopularProductsByIds.filter(
+    (i: Products | ProductsDetail) => i?.price && Object.keys(i?.price).length > 0
   );
 
   
 
-  return new Response(JSON.stringify(popularProductsByCity), {
+  return new Response(JSON.stringify(ProductsHavePrice), {
     status: 200,
   });
 }

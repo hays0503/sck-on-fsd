@@ -44,8 +44,8 @@ export default function SearchProduct() {
           });
 
           try {
-            const _products: Products[] = await responseProducts.json();
-            const products: Products[] = _products.filter(product => product.price &&(city in product.price));
+            const products: Products[] = await responseProducts.json();
+            //const products: Products[] = _products.filter(product => product.price &&(city in product.price));
             const options = products.map((product: Products) => ({
               value: product.slug,
               label: <>

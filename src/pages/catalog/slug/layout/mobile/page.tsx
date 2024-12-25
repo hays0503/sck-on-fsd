@@ -14,21 +14,16 @@ import { ProductCatalog } from "@/widgets/ProductCatalog";
 import { ShowcaseMobile } from "@/widgets/ShowcaseMobile";
 import { Flex } from "antd";
 
-
-// import { type SearchParams } from "nuqs/server";
-
 type PageProps = {
   params: {
     slug: string;
     locale: string;
     city: string;
   };
-  // searchParams: Promise<SearchParams>;
 };
 
 async function CatalogPage(
   { params,
-    //  searchParams 
   }: PageProps) {
 
   // Slug - slug категории

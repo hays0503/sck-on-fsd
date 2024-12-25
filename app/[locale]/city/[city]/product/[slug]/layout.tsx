@@ -2,7 +2,7 @@ import { ProvidersServer } from "@/shared/providers/providersServer";
 import { Metadata } from "next";
 import {setRequestLocale} from 'next-intl/server';
 import { Inter } from "next/font/google";
-import { ApiUrl, UrlApi } from "@/shared/api/url";
+// import { ApiUrl, UrlApi } from "@/shared/api/url";
 
 
 export const metadata: Metadata = {
@@ -10,17 +10,17 @@ export const metadata: Metadata = {
   description: "Сайт в разработке dev.SCK-1.kz",
 };
 
-export async function generateStaticParams() {
-  const ApiPort = `:${process.env.API_PORT}`
-  const url = `${ApiUrl}${ApiPort}${UrlApi.getProducts}all/slugs/`
-  const fetchSlugs = await(await fetch(url,{
-    headers: {
-      "Content-Type": "application/json",
-      Accept: "application/json",
-    },
-  })).json();
-  return fetchSlugs.map((slug: string) => ({ slug: slug }))
-}
+// export async function generateStaticParams() {
+//   const ApiPort = `:${process.env.API_PORT}`
+//   const url = `${ApiUrl}${ApiPort}${UrlApi.getProducts}all/slugs/`
+//   const fetchSlugs = await(await fetch(url,{
+//     headers: {
+//       "Content-Type": "application/json",
+//       Accept: "application/json",
+//     },
+//   })).json();
+//   return fetchSlugs.map((slug: string) => ({ slug: slug }))
+// }
 
 const inter = Inter({
   subsets: ["cyrillic", "latin"],
