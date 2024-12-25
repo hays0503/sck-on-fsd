@@ -8,6 +8,8 @@ import { Inter } from "next/font/google";
 export const metadata: Metadata = {
   title: "dev.SCK-1.kz",
   description: "Сайт в разработке dev.SCK-1.kz",
+  themeColor: '#FFFF',
+  manifest: '/manifest.json',
 };
 
 // export function generateStaticParams() {
@@ -28,6 +30,11 @@ export default async function LocaleLayout({
   setRequestLocale(locale);
   return (
     <html lang={locale}>
+      <head>
+        <link rel="manifest" href="/manifest.json" />
+        <link rel="apple-touch-icon" href="/icons/android-chrome-192x192.png" />
+        <meta name="theme-color" content="#FFFF" />
+      </head>
       <body className={inter.className}>
       <ProvidersServer>{children}</ProvidersServer>
       </body>
