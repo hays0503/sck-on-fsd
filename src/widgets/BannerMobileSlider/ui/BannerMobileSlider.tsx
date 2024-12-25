@@ -2,8 +2,7 @@
 import { Flex } from "antd";
 import Image from "next/image";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Autoplay, Pagination, Navigation } from 'swiper/modules';
-import { MutableRefObject, useRef } from "react";
+import { Autoplay, Navigation } from 'swiper/modules';
 
 // Import Swiper styles
 import 'swiper/css';
@@ -19,15 +18,7 @@ interface BannerMobileSliderProps {
 }
 
 const BannerMobileSlider: React.FC<BannerMobileSliderProps> = ({ category }) => {
-    const progressCircle: MutableRefObject<SVGSVGElement | null> = useRef(null);
-    const progressContent: MutableRefObject<HTMLElement | null> = useRef(null);
-    
-    const onAutoplayTimeLeft = (s: unknown, time: number, progress: number): void => {
-        if (progressCircle.current && progressContent.current) {
-            progressCircle.current.style.setProperty('--progress', `${1 - progress}`);
-            progressContent.current.textContent = `${Math.ceil(time / 1000)}s`;
-        }
-    };
+
     const router = useRouter();
     const city = useGetCityParams();
 
@@ -42,8 +33,7 @@ const BannerMobileSlider: React.FC<BannerMobileSliderProps> = ({ category }) => 
                 disableOnInteraction: false,
             }}
             navigation={true}
-            modules={[Autoplay, Pagination, Navigation]}
-            onAutoplayTimeLeft={onAutoplayTimeLeft}
+            modules={[Autoplay,Navigation]}
         >
 
             {category.map((item: Category) => {
@@ -70,12 +60,6 @@ const BannerMobileSlider: React.FC<BannerMobileSliderProps> = ({ category }) => 
                 </SwiperSlide>
                 )
             })}
-            <div className="autoplay-progress" slot="container-end">
-                <svg viewBox="0 0 24 24" ref={progressCircle}>
-                    <circle cx="12" cy="12" r="10"></circle>
-                </svg>
-                <span ref={progressContent}></span>
-            </div>
         </Swiper>
     </Flex>
 };

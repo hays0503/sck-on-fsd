@@ -1,0 +1,28 @@
+{
+  "theme_color": "#8936FF",
+  "background_color": "#2EC6FE",
+  "icons": [
+    {
+      "purpose": "maskable",
+      "sizes": "192x192",
+      "src": "/icon/android-chrome-192x192.png",
+      "type": "image/png"
+    },
+    {
+      "purpose": "any",
+      "src": "/icon/android-chrome-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ],
+  "orientation": "portrait",
+  "display": "standalone",
+  "dir": "auto",
+  "lang": "ru",
+  "name": "Sck интернет магазин",
+  "short_name": "sck",
+  "start_url": "http://sck.kz",
+  "scope": "http://sck.kz",
+  "description": "Интернет магазин электроники мебели и других товаров ",
+  "id": "http://sck.kz"
+}
