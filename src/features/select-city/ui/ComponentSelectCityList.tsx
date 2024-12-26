@@ -24,7 +24,7 @@ export default function ComponentSelectCityList({
             data-testid="btn-city"
             onClick={() => {
                 setCityLocale({city: city.additional_data.EN, locale: currentLocale});
-                router.replace(`/city/${city.additional_data.EN}/main`);              
+                router.push(`/city/${city.additional_data.EN}/main`);              
             }}
           >
             {selectDataByLangCity(city, currentLocale)}

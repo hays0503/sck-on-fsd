@@ -31,6 +31,10 @@ export default async function LocaleLayout({
   return (
     <html lang={locale}>
       <head>
+        <meta name="viewport" content="width=device-width"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>      
+        <meta name="mobile-wep-app-capable" content="yes"/>
+        <meta name="apple-mobile-wep-app-capable" content="yes"/>
         <link rel="manifest" href="/manifest.json" />
         <link rel="apple-touch-icon" href="/icons/android-chrome-192x192.png" />
         <meta name="theme-color" content="#FFFF" />
