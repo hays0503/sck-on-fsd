@@ -4,7 +4,7 @@ export default function InputNumberPhoneKz({numberString, setNumberString}:{numb
   const t = useTranslations();
   return <Input
   type="tel"
-  addonBefore="8"
+  addonBefore="+7"
   value={numberString}
   placeholder={t('vash-telefon')}
   size="large"
