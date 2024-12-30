@@ -28,7 +28,9 @@ export async function GET(request: NextRequest) {
     (i: Products | ProductsDetail) => i?.price && Object.keys(i?.price).length > 0
   );
 
-  return new Response(JSON.stringify(ProductsHavePrice), {
+  const ProductsHaveImage = ProductsHavePrice.filter((i: Products) => i?.list_url_to_image && i?.list_url_to_image?.length > 0);
+
+  return new Response(JSON.stringify(ProductsHaveImage), {
     status: 200,
   });
 }

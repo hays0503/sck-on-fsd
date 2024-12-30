@@ -39,7 +39,7 @@ const Heart: React.FC<{ isFavorite: boolean }> = ({ isFavorite }) => {
 };
 
 // Основной компонент
-const AddToBasketProduct: React.FC<{ prod_id: number }> = ({ prod_id }) => {
+const AddToFavoriteProduct: React.FC<{ prod_id: number }> = ({ prod_id }) => {
   const { favoriteProducts, addFavoriteProduct } = useAddToLocalFavorite();
   const { removeFavoriteProduct } = useRemoveToLocalFavorite();
 
@@ -59,4 +59,4 @@ const AddToBasketProduct: React.FC<{ prod_id: number }> = ({ prod_id }) => {
   );
 };
 
-export default React.memo(AddToBasketProduct);
+export default React.memo(AddToFavoriteProduct);

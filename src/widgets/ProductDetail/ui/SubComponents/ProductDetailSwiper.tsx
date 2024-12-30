@@ -4,7 +4,7 @@ import "swiper/css/effect-cube";
 import { Swiper, SwiperProps, SwiperSlide } from "swiper/react";
 import { Pagination, Navigation, EffectCube } from "swiper/modules";
 import { Image } from "antd";
-// import Image from "next/image";
+import type { ImagePreviewType } from "rc-image";
 
 interface IProductCartSwiperProps {
   name: string | undefined | null;
@@ -52,6 +52,9 @@ const RenderSwiper: React.FC<IRenderSwiperProps> = (props) => {
       {images.map((item, index) => (
         <SwiperSlide key={index}>
           <Image
+            preview={{
+              mask: null
+            }as ImagePreviewType}
             src={item}
             alt={`${name}-slide-${index}`}
             width={width}

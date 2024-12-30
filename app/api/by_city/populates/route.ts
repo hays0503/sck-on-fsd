@@ -46,9 +46,9 @@ export async function GET(
     (i: Products | ProductsDetail) => i?.price && Object.keys(i?.price).length > 0
   );
 
-  
+  const ProductsHaveImage = ProductsHavePrice.filter((i: Products) => i?.list_url_to_image && i?.list_url_to_image?.length > 0);
 
-  return new Response(JSON.stringify(ProductsHavePrice), {
+  return new Response(JSON.stringify(ProductsHaveImage), {
     status: 200,
   });
 }

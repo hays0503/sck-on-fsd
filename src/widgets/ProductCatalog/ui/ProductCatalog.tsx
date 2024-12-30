@@ -12,22 +12,23 @@ import {
 import React, { Dispatch, SetStateAction, useState } from "react";
 import { ProductsDetail } from "@/shared/types/productsDetail";
 import useFetcherProducts from "@/shared/api/fetch/product";
+
 // import { Filter } from "@/features/new-product-filter";
 // import { ProductFilter } from "@/features/product-filter";
 
 
 interface ProductsCatalogProps {
   params: { slug: string };
-  Catalog: React.FC<{readonly Products: Products[] | ProductsDetail[]}>;
-  Filter: React.FC<{category: string,filterActive: number[], setFilterActive: Dispatch<SetStateAction<number[]>>}>
+  Catalog: React.FC<{ readonly Products: Products[] | ProductsDetail[] }>;
+  Filter: React.FC<{ category: string, filterActive: number[], setFilterActive: Dispatch<SetStateAction<number[]>> }>
 }
 
 const ProductCatalog: React.FC<ProductsCatalogProps> = (props) => {
-  
-  const { 
+
+  const {
     params,
     Catalog,
-    Filter 
+    Filter
   } = props;
 
   const selectedCity = useSelectedCity();
@@ -38,21 +39,24 @@ const ProductCatalog: React.FC<ProductsCatalogProps> = (props) => {
 
 
   const _Products: Products[] =
-  useFetcherProductsByCatalog({
-    city: selectedCity,
-    slug: params.slug,
-  }).data! ?? [];
+    useFetcherProductsByCatalog({
+      city: selectedCity,
+      slug: params.slug,
+    }).data! ?? [];
 
-  const _ProductsByIds = useFetcherProducts({
-    as:'by_ids',
+  const ProductsByIds = useFetcherProducts({
+    as: 'by_ids',
     params: activeFilterProductIds,
   }).data! as Products[] ?? [];
+
+
+  const _ProductsByIds = ProductsByIds?.length > 0 ? ProductsByIds.filter((item: Products) => item?.list_url_to_image && item?.list_url_to_image.length > 0) : [];
 
   const sortFunc = useGetSortFunc();
 
   const ProductOnPage = _ProductsByIds.length > 0 ? _ProductsByIds.sort(sortFunc) : _Products.sort(sortFunc);
 
-  const Products = useGetPaginationFunc({ Products:ProductOnPage });
+  const Products = useGetPaginationFunc({ Products: ProductOnPage });
 
 
   return (
@@ -63,14 +67,14 @@ const ProductCatalog: React.FC<ProductsCatalogProps> = (props) => {
       gap={10}
       style={{ width: "100%", height: "100%", backgroundColor: "#EEEFF1" }}
     >
-      
-      <Flex style={{ width: "100%",background:"#EEEFF1" }} justify="space-between">
+
+      <Flex style={{ width: "100%", background: "#EEEFF1" }} justify="space-between">
         <SortingProducts slugCatalog={params.slug} />
-        <Filter category={params.slug} filterActive={activeFilterProductIds} setFilterActive={setActiveFilterProductIds}/>
-  
+        <Filter category={params.slug} filterActive={activeFilterProductIds} setFilterActive={setActiveFilterProductIds} />
+
         {/* <ProductFilter Products={_Products}/> */}
       </Flex>
-      <span id='catalog'/>
+      <span id='catalog' />
       <Catalog Products={Products} />
       <PaginationProducts totalProducts={ProductOnPage.length} />
     </Flex>

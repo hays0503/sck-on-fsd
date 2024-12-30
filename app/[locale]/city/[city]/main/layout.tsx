@@ -2,19 +2,13 @@ import { ProvidersServer } from "@/shared/providers/providersServer";
 import { Metadata } from "next";
 import {setRequestLocale} from 'next-intl/server';
 import { Inter } from "next/font/google";
-// import { locales } from "@/i18n/routing";
-
 
 export const metadata: Metadata = {
   title: "dev.SCK-1.kz",
   description: "Сайт в разработке dev.SCK-1.kz",
-  themeColor: '#FFFF',
   manifest: '/manifest.json',
 };
 
-// export function generateStaticParams() {
-//   return locales.map((locale) => ({ locale }));
-// }
 
 const inter = Inter({
   subsets: ["cyrillic", "latin"],

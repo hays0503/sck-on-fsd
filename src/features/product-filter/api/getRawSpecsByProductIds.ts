@@ -1,23 +1,3 @@
-// type ProductSpecsType = {
-//     id: number;
-//     name_specification: {
-//         id: number;
-//         additional_data: {
-//             EN: string;
-//             KZ: string;
-//         };
-//         name_specification: string;
-//     };
-//     value_specification: {
-//         id: number;
-//         additional_data: {
-//             EN: string;
-//             KZ: string;
-//         };
-//         value_specification: string;
-//     };
-//     product: number;
-// };
 
 import { Specification } from "@/shared/types/specification";
 

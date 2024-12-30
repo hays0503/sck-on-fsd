@@ -27,7 +27,7 @@ export default function useFetcherProducts({
       const urls = `${UrlApi.getProducts}${params}`
       // eslint-disable-next-line react-hooks/rules-of-hooks
       return useSWR<ProductsDetail>(urls, () =>
-        defaultFetcher(urls, UrlRevalidate.getProducts)
+        defaultFetcher(urls, UrlRevalidate.getProducts) as Promise<ProductsDetail>
       );
     }
     // Фильтрация продуктов по категории
@@ -35,7 +35,7 @@ export default function useFetcherProducts({
       const urls = `${UrlApi.getProducts}${as}/${params}`
       // eslint-disable-next-line react-hooks/rules-of-hooks
       return useSWR<Products[]>(urls, () =>
-        defaultFetcher(urls, UrlRevalidate.getProducts)
+        defaultFetcher(urls, UrlRevalidate.getProducts) as Promise<Products[]>
       );
     }
     //Получение списка слагов всех продуктов
@@ -43,7 +43,7 @@ export default function useFetcherProducts({
       const urls = `${UrlApi.getProducts}${as}`
       // eslint-disable-next-line react-hooks/rules-of-hooks
       return useSWR<Products[]>(urls, () =>
-        defaultFetcher(urls, UrlRevalidate.getProducts)
+        defaultFetcher(urls, UrlRevalidate.getProducts) as Promise<Products[]>
       );
     }
     //Получение продуктов по списку идентификаторов.
@@ -51,7 +51,7 @@ export default function useFetcherProducts({
       const urls = `${UrlApi.getProducts}${as}/${params}`
       // eslint-disable-next-line react-hooks/rules-of-hooks
       return useSWR<Products[]>(urls, () => {
-        return defaultFetcher(urls, UrlRevalidate.getProducts);
+        return defaultFetcher(urls, UrlRevalidate.getProducts) as Promise<Products[]>
       });
     }
     //Фильтрация продуктов по различным параметрам.
@@ -62,14 +62,14 @@ export default function useFetcherProducts({
         defaultFetcher(urls, {
           ...UrlRevalidate.getProducts,
           body: JSON.stringify(params),
-        })
+        }) as Promise<Products[]>
       );
     }
     //Список всех продуктов
     default: {
       // eslint-disable-next-line react-hooks/rules-of-hooks
       return useSWR<Products[]>(UrlApi.getProducts, (url: string) =>
-        defaultFetcher(url, UrlRevalidate.getProducts)
+        defaultFetcher(url, UrlRevalidate.getProducts) as Promise<Products[]>
       );
     }
 

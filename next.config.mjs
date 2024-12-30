@@ -5,6 +5,7 @@ const withNextIntl = createNextIntlPlugin();
 /** @type {import('next').NextConfig} */
 
 const nextConfig = {
+  // staticPageGenerationTimeout: 1000,
   env:{
     HOST_URL:process.env.HOST_URL,
     HOST_PORT:process.env.HOST_PORT,
