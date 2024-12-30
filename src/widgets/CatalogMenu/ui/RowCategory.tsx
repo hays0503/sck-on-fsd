@@ -3,8 +3,9 @@ import { Link, useRouter } from "@/i18n/routing";
 import { useGetCityParams } from "@/shared/hooks/useGetCityParams";
 import { selectDataByLangCategory } from "@/shared/tools/selectDataByLang";
 import { Category } from "@/shared/types/category";
-import { Button, Divider, Typography } from "antd";
+import { Button, Divider, Flex, Typography } from "antd";
 import { useLocale } from "next-intl";
+import Image from "next/image";
 
 const { Title } = Typography;
 
@@ -28,7 +29,15 @@ const RowCategory: React.FC<{ item: Category }> = ({ item }) => {
     <>
       <li style={RowStyle}>
         <Link href={url} prefetch={true}>
-          <Title level={5}>{name}</Title>
+          <Flex align="normal" gap={5} style={{ height: "24px" }}>
+            {item.list_url_to_image[0] ? <Image
+              src={item.list_url_to_image[0]}
+              alt={name ?? ""}
+              width={24}
+              height={24}
+            />: <div style={{width: 24, height: 24}}></div>}
+            <Title level={5}>{name}</Title>
+          </Flex>
         </Link>
         {item.children.length > 0 && (
           <Button
