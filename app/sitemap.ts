@@ -14,15 +14,23 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     }
 
     const data: iCity[] = await response.json();
+    const baseUrl = process.env.HOST_URL ?? ApiUrl;
 
-    const url = process.env.HOST_URL ?? ApiUrl;
+    return data.flatMap((city) => {
+      const citySlug = city.additional_data.EN;
 
-    return locales.flatMap((locale) =>
-      data.map((city) => ({
-        url: `${url}/${locale}/city/${city.additional_data.EN}/main`,
+      // Генерация для всех локалей
+      return locales.map((locale) => ({
+        url: `${baseUrl}/${locale}/city/${citySlug}/main`,
         lastModified: new Date(),
-      }))
-    );
+        alternates: {
+          languages: locales.reduce((acc, innerLocale) => {
+            acc[innerLocale] = `${baseUrl}/${innerLocale}/city/${citySlug}/main`;
+            return acc;
+          }, {} as Record<string, string>),
+        },
+      }));
+    });
   } catch (error) {
     console.error("Ошибка при создании sitemap:", error);
     return [];
