@@ -31,8 +31,9 @@ const RenderImages: React.FC<IRenderImagesProps> = (props) => {
   const { name, width, height, src } = props;
   return (
     <Image
-      priority={true}
-      fetchPriority="high"
+      loading="lazy"
+      priority={false}
+      fetchPriority="low"
       src={src ?? "/nofoto.jpg"}
       alt={`${name}-no-image`}
       width={width}
@@ -53,8 +54,9 @@ const RenderSwiper: React.FC<IRenderSwiperProps> = (props) => {
       {images.map((item, index) => (
         <SwiperSlide key={index}>
           <Image
-            priority={true}
-            fetchPriority="high"
+            loading="lazy"
+            priority={false}
+            fetchPriority="low"
             src={item}
             alt={`${name}-slide-${index}`}
             width={width}
@@ -76,6 +78,8 @@ const ProductCartSwiper: React.FC<IProductCartSwiperProps> = (props) => {
   const { images, width, height, name } = props;
 
   const paramsSwiper: SwiperProps = {
+    lazy:'true',
+    lazyPreloadPrevNext: 2,
     loop: true,
     pagination: true,
     navigation: true,
@@ -88,7 +92,7 @@ const ProductCartSwiper: React.FC<IProductCartSwiperProps> = (props) => {
       shadowScale: 0.94,
     },
     style: { width: width, height: height },
-  };
+  } as SwiperProps;
 
   return (
     <div style={{ width: width, height: height, overflow: "hidden" }}>

@@ -1,4 +1,6 @@
-import { UrlApi, UrlApiWithDomain, UrlRevalidate } from "@/shared/api/url";
+import { UrlApi, UrlApiWithDomain, 
+  // UrlRevalidate
+ } from "@/shared/api/url";
 import { ProvidersClient } from "@/shared/providers/providersClient";
 import { ProvidersServer } from "@/shared/providers/providersServer";
 import findRootAndDescendants from "@/shared/tools/findRootAndDescandants";
@@ -30,7 +32,8 @@ const ProductPage: ProductPageComponent = async (props) => {
   let fetchCity = undefined;
   try {
       const response = await fetch(UrlApiWithDomain.getCity, {
-          ...UrlRevalidate.getCity,
+          cache: "force-cache",
+          // ...UrlRevalidate.getCity,
           headers: {
             "Content-Type": "application/json",
             Accept: "application/json",
@@ -43,7 +46,7 @@ const ProductPage: ProductPageComponent = async (props) => {
       }catch(e){
         console.log("Не вышло запросить города так как не получилось разобрать их в ответе",e)
       }
-      fetchCity = await response.json();
+
 
   } catch (error) {
     console.log("Ошибка запроса города ", error);
@@ -55,7 +58,8 @@ const ProductPage: ProductPageComponent = async (props) => {
   let fetchProduct = undefined;
   try {
     const responseFetchProduct = await fetch(UrlWithDomainProduct, {
-        ...UrlRevalidate.getProducts,
+        cache: "force-cache",
+        // ...UrlRevalidate.getProducts,
       });
     
     try{
@@ -70,7 +74,8 @@ const ProductPage: ProductPageComponent = async (props) => {
   let fetchCategory = undefined;
   try {
     const responseFetchCategory =   await fetch(UrlApiWithDomain.getCategory, {
-      ...UrlRevalidate.getCategory,
+      cache: "force-cache",
+      // ...UrlRevalidate.getCategory,
       headers: {
         "Content-Type": "application/json",
         Accept: "application/json",
@@ -93,7 +98,8 @@ const ProductPage: ProductPageComponent = async (props) => {
   let fetchSpecification:Specification[] = [];
   try{
     const responseFetchSpecification = await fetch(urlBuilderSpecificationWithDomain,{
-      ...UrlRevalidate.getProductSpecificationsById,
+      cache: "force-cache",
+      // ...UrlRevalidate.getProductSpecificationsById,
       headers: {
         "Content-Type": "application/json",
         Accept: "application/json",
@@ -117,7 +123,8 @@ const ProductPage: ProductPageComponent = async (props) => {
   let fetchReviews = undefined;
   try {
     const responseFetchReviews = await fetch(urlBuilderReviewsWithDomain, {
-      ...UrlRevalidate.getProductReviewsById,
+      cache: "force-cache",
+      // ...UrlRevalidate.getProductReviewsById,
       headers: {
         "Content-Type": "application/json",
         Accept: "application/json",

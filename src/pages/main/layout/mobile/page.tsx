@@ -3,7 +3,7 @@ import { UrlApi, UrlApiWithDomain, UrlRevalidate } from "@/shared/api/url";
 import { ProvidersClient } from "@/shared/providers/providersClient";
 import { ProvidersServer } from "@/shared/providers/providersServer";
 import { iCity } from "@/shared/types/city";
-import { Populates } from "@/shared/types/populates";
+// import { Populates } from "@/shared/types/populates";
 import { FooterAboutMobile } from "@/widgets/FooterAboutMobile";
 import { FooterMobile } from "@/widgets/FooterMobile";
 import { HeaderMobile } from "@/widgets/HeaderMobile";
@@ -16,6 +16,7 @@ import { SelectCity } from "@/features/select-city";
 
 import { Category } from "@/shared/types/category";
 import { BannerMobileSlider } from "@/widgets/BannerMobileSlider";
+// import { Products } from "@/shared/types/products";
 
 type PageProps = {
   params: {
@@ -80,43 +81,43 @@ export default async function HomePage({ params, searchParams }: PageProps) {
     console.error("Возникла ошибка при получении населенных пунктов:", error);
   }
 
-  try {
-    const fetchPopulates = await (
-      await fetch(UrlApiWithDomain.getPopulatesId, {
-        ...UrlRevalidate.getPopulatesId,
-        headers: {
-          "Content-Type": "application/json",
-          Accept: "application/json",
-        },
-      })
-    ).json();
+  // try {
+  //   const fetchPopulates = await (
+  //     await fetch(UrlApiWithDomain.getPopulatesId, {
+  //       ...UrlRevalidate.getPopulatesId,
+  //       headers: {
+  //         "Content-Type": "application/json",
+  //         Accept: "application/json",
+  //       },
+  //     })
+  //   ).json();
 
-    fallback = { [UrlApi.getPopulatesId]: fetchPopulates, ...fallback };
-    try {
-      const PopularProductsByIds = `by_ids/${fetchPopulates
-        .flatMap((i: Populates) => i.products)
-        .join(",")}`;
-      const UrlApiPopularProductsByIds = UrlApi.getProducts + PopularProductsByIds;
-      const UrlApiWithDomainPopularProductsByIds =
-        UrlApiWithDomain.getProducts + PopularProductsByIds;
-      const fetchPopularProductsByIds = await (
-        await fetch(UrlApiWithDomainPopularProductsByIds, {
-          ...UrlRevalidate.getProducts,
-          headers: {
-            "Content-Type": "application/json",
-            Accept: "application/json",
-          },
-        })
-      ).json();
+  //   fallback = { [UrlApi.getPopulatesId]: fetchPopulates, ...fallback };
+  //   try {
+  //     const PopularProductsByIds = `by_ids/${fetchPopulates
+  //       .flatMap((i: Populates) => i.products)
+  //       .join(",")}`;
+  //     const UrlApiPopularProductsByIds = UrlApi.getProducts + PopularProductsByIds;
+  //     const UrlApiWithDomainPopularProductsByIds =
+  //       UrlApiWithDomain.getProducts + PopularProductsByIds;
+  //     const fetchPopularProductsByIds: Products[] = await (
+  //       await fetch(UrlApiWithDomainPopularProductsByIds, {
+  //         ...UrlRevalidate.getProducts,
+  //         headers: {
+  //           "Content-Type": "application/json",
+  //           Accept: "application/json",
+  //         },
+  //       })
+  //     ).json();
 
 
-      fallback = { [UrlApiPopularProductsByIds]: fetchPopularProductsByIds, ...fallback };
-    } catch (error) {
-      console.error("Возникла ошибка при получении популярных продуктов:", error);
-    }
-  } catch (error) {
-    console.error("Возникла ошибка при получении населенных пунктов:", error);
-  }
+  //     // fallback = { [UrlApiPopularProductsByIds]: fetchPopularProductsByIds.slice(0, 8), ...fallback };
+  //   } catch (error) {
+  //     console.error("Возникла ошибка при получении популярных продуктов:", error);
+  //   }
+  // } catch (error) {
+  //   console.error("Возникла ошибка при получении населенных пунктов:", error);
+  // }
 
 
   let fetchCategory: Category[] = [];

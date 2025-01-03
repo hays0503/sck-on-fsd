@@ -49,7 +49,6 @@
   "dark": "қараңғы",
   "light": "жарық",
   "tema": "тақырып",
-  "lorem-ipsum": "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ex veritatis aspernatur temporibus maiores excepturi eum, dignissimos modi ea accusantium qui labore unde suscipit, libero inventore rerum fuga eos quia quod.",
   "loading": "Жүктелуде",
   "home": "Басты бет",
   "dobavit-v-korzinu": "Себетке қосу",
@@ -259,5 +258,7 @@
   "spryatat": "Жасыру",
   "vyberite-gorod-v-kotorom-vy-khotite-sovershit-pokupku": "Сатып алғыңыз келетін қаланы таңдаңыз",
   "pereiti-k-vyboru-goroda": "Қала таңдауына өтіңіз",
-  "vybrannyi-vami-gorod": "Сіз таңдаған қала"
+  "vybrannyi-vami-gorod": "Сіз таңдаған қала",
+  "kommentator": "Комментатор",
+  "kh-otsutstvuyut": "Сипаттамалары жоқ"
 }

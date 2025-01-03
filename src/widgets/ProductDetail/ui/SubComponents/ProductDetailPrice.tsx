@@ -31,8 +31,8 @@ const ProductDetailPrice: React.FC<IProductDetailPriceProps> = (props) => {
           <Text>{t("artikul")}</Text>
           <Text>{fetchProduct.vendor_code}</Text>
         </Flex>
-        <Flex gap={10} justify="space-between" align="center">
-          <Flex gap={5} justify="space-between" align="center">
+        <Flex gap={10} justify="space-between" align="center" itemProp="aggregateRating" itemScope={true} itemType="http://schema.org/AggregateRating">
+          <Flex gap={5} justify="space-between" align="center" >
             <svg
               width="18"
               height="18"
@@ -45,7 +45,7 @@ const ProductDetailPrice: React.FC<IProductDetailPriceProps> = (props) => {
                 fill="#FFA600"
               />
             </svg>
-            <Text style={{ color: "#FFA600" }}>
+            <Text style={{ color: "#FFA600" }} itemProp="ratingValue">
               {fetchProduct.average_rating ?? 0}
             </Text>
           </Flex>
@@ -62,6 +62,8 @@ const ProductDetailPrice: React.FC<IProductDetailPriceProps> = (props) => {
           <Flex gap={5} justify="space-between" align="center">
             <Text disabled>
               {"("}
+            </Text>
+            <Text disabled itemProp="reviewCount">
               {fetchProduct.reviews_count ?? 0}
             </Text>
             <Text disabled>
@@ -71,15 +73,15 @@ const ProductDetailPrice: React.FC<IProductDetailPriceProps> = (props) => {
           </Flex>
         </Flex>
       </Flex>
-      <Flex justify="space-between">
+      <Flex justify="space-between" itemProp="offers" itemScope={true} itemType="http://schema.org/Offer">
         <Flex vertical={true}>
           {discountPrice && (
-            <Text disabled delete>
+            <Text disabled delete >
               {beautifulCost(discountPrice ?? "")}
             </Text>
           )}
           {price && (
-            <Title level={5} style={{ color: "red" }}>
+            <Title level={5} style={{ color: "red" }} itemProp="price">
               {beautifulCost(price ?? "")}
             </Title>
           )}

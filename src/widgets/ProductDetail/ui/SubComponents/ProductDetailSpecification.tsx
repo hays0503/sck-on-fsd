@@ -21,63 +21,77 @@ interface IProductDetailDescriptionsProps {
 
 const { Text } = Typography;
 
-const ProductDetailSpecification: React.FC<IProductDetailDescriptionsProps> = (
-  props
-) => {
-  const { fetchProduct } = props;
+const ProductDetailSpecification: React.FC<IProductDetailDescriptionsProps> = ({
+  fetchProduct,
+}) => {
   const localeActive = useLocale();
   const t = useTranslations();
 
   const [expandedSpecification, setExpandedSpecification] = useState(false);
 
+  // Fetch specifications
   const fetchProductSpecification: Specification[] =
-    useFetcherSpecificationById(fetchProduct.id).data! as Specification[] | [];
+    useFetcherSpecificationById(fetchProduct.id)?.data || [];
 
-  const specification: DescriptionsProps["items"] =
-    fetchProductSpecification?.map((item) => {
-      return {
-        key: item.id,
-        label: selectDataByLangSpecificationName(
-          item.name_specification,
-          localeActive
-        ),
-        children: selectDataByLangSpecificationValue(
-          item.value_specification,
-          localeActive
-        ),
-      };
-    });
-
-  const specificationCount = fetchProductSpecification?.length;
-
-  const specificationHide: DescriptionsProps["items"] = specification?.slice(
-    0,
-    4
+  // Map specifications
+  const specification: DescriptionsProps["items"] = fetchProductSpecification?.map(
+    (item) => ({
+      key: item.id,
+      label: (
+        <span itemProp="name">
+          {selectDataByLangSpecificationName(
+            item.name_specification,
+            localeActive
+          )}
+        </span>
+      ),
+      children: (
+        <span itemProp="value">
+          {selectDataByLangSpecificationValue(
+            item.value_specification,
+            localeActive
+          )}
+        </span>
+      ),
+    })
   );
 
-  return (
-    <Flex vertical={true} style={{ width: "100%", padding: "10px" }}>
-      <Descriptions
-        title={t("kharakteristiki")}
-        items={expandedSpecification ? specification : specificationHide}
-        column={1}
-        contentStyle={{ justifyContent: "flex-end" }}
-      />
+  // Specifications count and shortened list
+  const specificationCount = fetchProductSpecification?.length || 0;
+  const specificationHide: DescriptionsProps["items"] = specification.slice(0, 4);
 
-      {specificationCount > 4 && (
-        <Button
-          onClick={() => {
-            setExpandedSpecification(!expandedSpecification);
-          }}
-        >
-          <Text style={{ color: "#4954F0" }}>
-            {expandedSpecification
-              ? t("svernut-kharakteristiki")
-              : t("smotret-vse-kharakteristiki")}
-          </Text>
-        </Button>
+  return (
+    <Flex
+      vertical={true}
+      style={{ width: "100%", padding: "10px" }}
+      itemScope={true}
+      itemProp="additionalProperty"
+      itemType="http://schema.org/PropertyValue"
+    >
+
+      {specificationCount > 0 ? (
+        <>
+          <Descriptions
+            title={t("kharakteristiki")}
+            items={expandedSpecification ? specification : specificationHide}
+            column={1}
+            contentStyle={{ justifyContent: "flex-end" }}
+          />
+          {specificationCount > 4 && (
+            <Button onClick={() => setExpandedSpecification((prev) => !prev)}>
+              <Text style={{ color: "#4954F0" }}>
+                {expandedSpecification
+                  ? t("svernut-kharakteristiki")
+                  : t("smotret-vse-kharakteristiki")}
+              </Text>
+            </Button>
+          )}
+        </>
+      ) : (
+        <Text>{t("kh-otsutstvuyut")}</Text>
       )}
     </Flex>
   );
 };
+
 export default ProductDetailSpecification;

@@ -19,15 +19,17 @@ const ProductDetailConfiguration: React.FC<IProductDetailConfiguration> = (props
     const localeActive = useLocale();
     const currentCity = useGetCityParams();
 
-    return <Flex vertical={true} gap={10} style={{ width: "100%",padding:"10px" }}>
-        <Title level={5}>{selectDataByLangProducts(fetchProduct, localeActive)}</Title>
+    return <Flex vertical={true} gap={10} style={{ width: "100%",padding:"10px" }}
+
+    >
+        <Title level={5} itemProp="name">{selectDataByLangProducts(fetchProduct, localeActive)}</Title>
           <Flex gap={10}>
             {fetchProduct.configuration.map((item) => {
               return (
                 <Link
                   prefetch={true}
                   key={item.id}
-                  href={`/${currentCity}/product/${item.slug}`}
+                  href={`/city/${currentCity}/product/${item.slug}`}
                 >
                   <Flex
                     style={{

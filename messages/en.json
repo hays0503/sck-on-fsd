@@ -49,7 +49,6 @@
   "tema": "theme",
   "dark": "dark",
   "light": "light",
-  "lorem-ipsum": "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ex veritatis aspernatur temporibus maiores excepturi eum, dignissimos modi ea accusantium qui labore unde suscipit, libero inventore rerum fuga eos quia quod.",
   "loading": "Loading",
   "home": "Home",
   "dobavit-v-korzinu": "Add to cart",
@@ -260,5 +259,7 @@
   "spryatat": "Hide",
   "vyberite-gorod-v-kotorom-vy-khotite-sovershit-pokupku": "Select the city in which you want to make a purchase",
   "pereiti-k-vyboru-goroda": "Go to city selection",
-  "vybrannyi-vami-gorod": "Your chosen city"
+  "vybrannyi-vami-gorod": "Your chosen city",
+  "kommentator": "Commentator",
+  "kh-otsutstvuyut": "No characteristics"
 }

@@ -42,7 +42,7 @@ const ProductDetailBreadcrumb: React.FC<IProductBreadcrumbProps> = (props) => {
     <Breadcrumb
       items={[
         { title: <Link prefetch={true} href={`/city/${city}/main`}>{t('glavnaya')}</Link> },
-        { title: t('catalog')},
+        { title: <Link prefetch={true} href={`/city/${city}/catalog`}>{t('catalog')}</Link>},
         ...breadcrumbsItems,
         {
           title:

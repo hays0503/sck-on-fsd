@@ -38,7 +38,7 @@ const ProductDetail: React.FC<IProductDetailProps> = (props) => {
 
 
   return (
-    <Flex vertical={true} gap={10}>
+    <Flex vertical={true} gap={10}     itemScope={true} itemType="http://schema.org/Product">
       <ProductDetailItem>
         <ProductDetailBreadcrumb fetchProduct={fetchProduct} />
       </ProductDetailItem>

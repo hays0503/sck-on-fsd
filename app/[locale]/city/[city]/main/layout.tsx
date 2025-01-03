@@ -4,8 +4,8 @@ import {setRequestLocale} from 'next-intl/server';
 import { Inter } from "next/font/google";
 
 export const metadata: Metadata = {
-  title: "dev.SCK-1.kz",
-  description: "Сайт в разработке dev.SCK-1.kz",
+  title: "sck.kz",
+  description: "Сайт в разработке sck.kz",
   manifest: '/manifest.json',
 };
 

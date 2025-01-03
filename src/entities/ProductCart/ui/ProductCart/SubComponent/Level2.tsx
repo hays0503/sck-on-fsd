@@ -25,7 +25,10 @@ const Level2: React.FC<ILevel2Props> = (props) => {
         width: "100%",
         minHeight: "120px",
       }}
+      itemScope
+      itemType="http://schema.org/Product"
     >
+      <meta itemProp="name" content={name || "Unnamed Product"} />
       <div
         style={{
           display: "-webkit-box",
@@ -47,7 +50,10 @@ const Level2: React.FC<ILevel2Props> = (props) => {
         {name}
       </div>
 
-      <Flex justify="space-around" align="center" gap={5}>
+      <Flex justify="space-around" align="center" gap={5} itemScope itemProp="aggregateRating" itemType="http://schema.org/AggregateRating">
+        <meta itemProp="ratingValue" content={(average_rating ?? 0).toString()} />
+        <meta itemProp="reviewCount" content={(reviews_count ?? 0).toString()} />
+
         <Flex align="center" justify="flex-start" gap={5}>
           <Text
             style={{
@@ -85,11 +91,15 @@ const Level2: React.FC<ILevel2Props> = (props) => {
       </Flex>
 
       {!discountPrice ? (
-        <Flex vertical={true} justify="flex-start">
+        <Flex vertical={true} justify="flex-start" itemScope itemProp="offers" itemType="http://schema.org/Offer">
+          <meta itemProp="price" content={(price ?? 0).toString()} />
+          <meta itemProp="priceCurrency" content="KZT" />
           <Text>{beautifulCost(price ?? 0)}</Text>
         </Flex>
       ) : (
-        <Flex vertical={true} justify="flex-start">
+        <Flex vertical={true} justify="flex-start" itemScope itemProp="offers" itemType="http://schema.org/Offer">
+        <meta itemProp="price" content={(price ?? 0).toString()} />
+        <meta itemProp="priceCurrency" content="KZT" />
           <Flex>
             <svg
               width="21"
