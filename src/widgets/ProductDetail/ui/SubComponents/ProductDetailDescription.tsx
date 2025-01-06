@@ -29,7 +29,7 @@ const ProductDetailDescription: React.FC<IProductDetailDescriptionsProps> = (pro
         expandedDescription
       );
 
-    return <Flex vertical={true} style={{ width: "100%",padding:"10px" }} itemProp="description" itemScope={true} itemType="http://schema.org/Product">
+    return <Flex vertical={true} style={{ width: "100%",padding:"10px" }} itemProp="description">
         <Title level={5}>{t("opisanie")}</Title>
           <Text disabled itemProp="description">
             {expandedDescription ? descriptionBody : descriptionBodyHide}

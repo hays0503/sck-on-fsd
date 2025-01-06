@@ -25,8 +25,7 @@ const Level2: React.FC<ILevel2Props> = (props) => {
         width: "100%",
         minHeight: "120px",
       }}
-      itemScope
-      itemType="http://schema.org/Product"
+
     >
       <meta itemProp="name" content={name || "Unnamed Product"} />
       <div
@@ -50,9 +49,16 @@ const Level2: React.FC<ILevel2Props> = (props) => {
         {name}
       </div>
 
-      <Flex justify="space-around" align="center" gap={5} itemScope itemProp="aggregateRating" itemType="http://schema.org/AggregateRating">
-        <meta itemProp="ratingValue" content={(average_rating ?? 0).toString()} />
-        <meta itemProp="reviewCount" content={(reviews_count ?? 0).toString()} />
+      <Flex justify="space-around" align="center" gap={5} >
+
+
+        {average_rating && average_rating != 0 && <div itemScope itemProp="aggregateRating" itemType="http://schema.org/AggregateRating">
+          <meta itemProp="bestRating" content="5" />
+          <meta itemProp="worstRating" content="0" />
+          <meta itemProp="ratingValue" content={(average_rating ?? 1).toString()} />
+          {reviews_count && reviews_count != 0 &&<meta itemProp="ratingCount" content={(reviews_count ?? 0).toString() ?? "0"} />}
+        </div>}
+
 
         <Flex align="center" justify="flex-start" gap={5}>
           <Text
@@ -92,14 +98,18 @@ const Level2: React.FC<ILevel2Props> = (props) => {
 
       {!discountPrice ? (
         <Flex vertical={true} justify="flex-start" itemScope itemProp="offers" itemType="http://schema.org/Offer">
+          <meta itemProp="availability" content="http://schema.org/InStock" />
           <meta itemProp="price" content={(price ?? 0).toString()} />
           <meta itemProp="priceCurrency" content="KZT" />
+          <meta itemProp="priceValidUntil" content="2030-12-31" />
           <Text>{beautifulCost(price ?? 0)}</Text>
         </Flex>
       ) : (
         <Flex vertical={true} justify="flex-start" itemScope itemProp="offers" itemType="http://schema.org/Offer">
-        <meta itemProp="price" content={(price ?? 0).toString()} />
-        <meta itemProp="priceCurrency" content="KZT" />
+          <meta itemProp="price" content={(price ?? 0).toString()} />
+          <meta itemProp="priceCurrency" content="KZT" />
+          <meta itemProp="priceValidUntil" content="2030-12-31" />
+          <meta itemProp="availability" content="http://schema.org/InStock" />
           <Flex>
             <svg
               width="21"

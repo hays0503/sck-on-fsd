@@ -35,7 +35,12 @@ const ReviewsList: React.FC<{ productId: number | string }> = ({ productId }) =>
         </Flex>
         <Flex gap={10}>
           <Text itemProp="reviewRating" itemScope={true} itemType="http://schema.org/Rating">
-            <span itemProp="ratingValue">{review.rating}</span> {t("iz")} 5
+            <meta itemProp="bestRating" content="5" />
+            <meta itemProp="worstRating" content="0" />
+            {review.rating !== 0 && (
+              <meta itemProp="ratingValue" content={(review.rating ?? 0).toString()} />
+            )}
+            <span>{review.rating}</span> {t("iz")} 5
           </Text>
           <Rate disabled defaultValue={review.rating} />
         </Flex>
@@ -45,18 +50,14 @@ const ReviewsList: React.FC<{ productId: number | string }> = ({ productId }) =>
   };
 
   const RenderReviews: React.FC = () => {
-    return reviews.map((item: Reviews) => (
-      <ReviewItem key={item.id} review={item} />
-    ));
+    return reviews.map((item: Reviews) => <ReviewItem key={item.id} review={item} />);
   };
 
   if (reviews.length === 0) {
     return (
       <Flex vertical={true} style={{ width: "100%", padding: "10px" }}>
         <Title level={5}>{t("otzyvy")}</Title>
-        <Text>
-          {t("u-etogo-tovara-eshe-net-otzyvov-vy-mozhete-ostavit-ego-pervym")}
-        </Text>
+        <Text>{t("u-etogo-tovara-eshe-net-otzyvov-vy-mozhete-ostavit-ego-pervym")}</Text>
         <Button type="primary" onClick={() => alert("В разработке")}>
           {t("ostavit-otzyv")}
         </Button>
@@ -72,12 +73,19 @@ const ReviewsList: React.FC<{ productId: number | string }> = ({ productId }) =>
       itemType="http://schema.org/Product"
     >
       <meta itemProp="productID" content={productId.toString()} />
+      {/* Добавляем aggregateRating */}
+      {reviews.length > 0 && (
+        <div itemProp="aggregateRating" itemScope={true} itemType="http://schema.org/AggregateRating">
+          <meta itemProp="ratingValue" content={averageRating.toFixed(1)} />
+          <meta itemProp="reviewCount" content={reviews.length.toString()} />
+        </div>
+      )}
       <Flex gap={10} align="baseline">
         <Title level={5} itemProp="name">
           {t("otzyvy")}
         </Title>
         <Text>
-          <span >{averageRating.toFixed(1)}</span> {t("iz")} 5 ({reviews.length} {t("otzyvov")})
+          <span>{averageRating.toFixed(1)}</span> {t("iz")} 5 ({reviews.length} {t("otzyvov")})
         </Text>
       </Flex>
       <RenderReviews />

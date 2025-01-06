@@ -25,23 +25,25 @@ interface IRenderSwiperProps {
   name: string | undefined | null;
   width: number;
   height: number;
-  
+
 }
 
 const RenderImages: React.FC<IRenderImagesProps> = (props) => {
-  const {name,width,height} = props
+  const { name, width, height } = props
   return (
-    <Image
-      src="/nofoto.jpg"
-      alt={`${name}-no-image`}
-      width={width}
-      height={height}
-      style={{
-        objectFit: "scale-down",
-        width: width,
-        height: height,
-      }}
-    />
+    <>
+      <link itemProp="image" href={"/nofoto.jpg"} />
+      <Image
+        src="/nofoto.jpg"
+        alt={`${name}-no-image`}
+        width={width}
+        height={height}
+        style={{
+          objectFit: "scale-down",
+          width: width,
+          height: height,
+        }}
+      /></>
   );
 };
 
@@ -51,10 +53,11 @@ const RenderSwiper: React.FC<IRenderSwiperProps> = (props) => {
     <Swiper {...paramsSwiper} modules={[Pagination, Navigation, EffectCube]}>
       {images.map((item, index) => (
         <SwiperSlide key={index}>
+          <link itemProp="image" href={item} />
           <Image
             preview={{
               mask: null
-            }as ImagePreviewType}
+            } as ImagePreviewType}
             src={item}
             alt={`${name}-slide-${index}`}
             width={width}
@@ -91,11 +94,11 @@ const ProductDetailSwiper: React.FC<IProductCartSwiperProps> = (props) => {
   };
 
   return (
-    <div style={{ width: width, height: height,overflow: "hidden" }}>
+    <div style={{ width: width, height: height, overflow: "hidden" }}>
       {images?.length > 0 ? (
-        <RenderSwiper images={images} paramsSwiper={paramsSwiper} name={name}  width={width} height={height} />
+        <RenderSwiper images={images} paramsSwiper={paramsSwiper} name={name} width={width} height={height} />
       ) : (
-        <RenderImages width={width} height={height} name={name}/>
+        <RenderImages width={width} height={height} name={name} />
       )}
     </div>
   );

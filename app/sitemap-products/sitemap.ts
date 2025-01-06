@@ -1,5 +1,5 @@
 import { locales } from "@/i18n/routing";
-import { ApiUrl, UrlApi, UrlApiWithDomain, UrlRevalidate } from "@/shared/api/url";
+import { ApiUrl, UrlApiWithDomain, UrlRevalidate } from "@/shared/api/url";
 import { MetadataRoute } from "next/types";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
@@ -20,7 +20,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   let fetchSlugs = undefined;
   try {
-    const url = `${ApiUrl}${UrlApi.getProducts}all/slugs/`
+    const url = `${UrlApiWithDomain.getProducts}all/slugs/`
+
     fetchSlugs = await(await fetch(url,{
       headers: {
         "Content-Type": "application/json",
@@ -28,7 +29,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       },
     })).json();
   } catch (error) {
-    console.log("Ошибка запроса категории  товаров", error);
+    console.log("Ошибка запроса slugs товаров", error);
   }
 
   const HOST_URL = process.env.HOST_URL ?? ApiUrl;

@@ -30,20 +30,23 @@ interface IRenderSwiperProps {
 const RenderImages: React.FC<IRenderImagesProps> = (props) => {
   const { name, width, height, src } = props;
   return (
-    <Image
-      loading="lazy"
-      priority={false}
-      fetchPriority="low"
-      src={src ?? "/nofoto.jpg"}
-      alt={`${name}-no-image`}
-      width={width}
-      height={height}
-      style={{
-        objectFit: "scale-down",
-        width: width,
-        height: height,
-      }}
-    />
+    <>
+      <link itemProp="image" href={src ?? "/nofoto.jpg"} />
+      <Image
+
+        loading="lazy"
+        priority={false}
+        fetchPriority="low"
+        src={src ?? "/nofoto.jpg"}
+        alt={`${name}-no-image`}
+        width={width}
+        height={height}
+        style={{
+          objectFit: "scale-down",
+          width: width,
+          height: height,
+        }}
+      /></>
   );
 };
 
@@ -53,6 +56,7 @@ const RenderSwiper: React.FC<IRenderSwiperProps> = (props) => {
     <Swiper {...paramsSwiper} modules={[Pagination, Navigation, EffectCube]}>
       {images.map((item, index) => (
         <SwiperSlide key={index}>
+          <link itemProp="image" href={item} />
           <Image
             loading="lazy"
             priority={false}
@@ -78,7 +82,7 @@ const ProductCartSwiper: React.FC<IProductCartSwiperProps> = (props) => {
   const { images, width, height, name } = props;
 
   const paramsSwiper: SwiperProps = {
-    lazy:'true',
+    lazy: 'true',
     lazyPreloadPrevNext: 2,
     loop: true,
     pagination: true,

@@ -5,7 +5,7 @@ import useSelectedCity from "@/shared/hooks/useSelectedCity";
 import beautifulCost from "@/shared/tools/beautifulCost";
 import { selectDataByLangProducts } from "@/shared/tools/selectDataByLang";
 import { ProductsDetail } from "@/shared/types/productsDetail";
-import { Flex,Typography } from "antd";
+import { Flex, Typography } from "antd";
 import { useLocale, useTranslations } from "next-intl";
 
 
@@ -20,9 +20,9 @@ const ProductDetailPrice: React.FC<IProductDetailPriceProps> = (props) => {
   const t = useTranslations();
   const localeActive = useLocale();
   const selectedCity = useSelectedCity();
-  const { price,discountPrice } = getPrice(fetchProduct,selectedCity);
+  const { price, discountPrice } = getPrice(fetchProduct, selectedCity);
   return (
-    <Flex style={{ width: "100%",padding:"10px" }} vertical={true}>
+    <Flex style={{ width: "100%", padding: "10px" }} vertical={true}>
       <Title level={5}>
         {selectDataByLangProducts(fetchProduct, localeActive)}
       </Title>
@@ -31,7 +31,15 @@ const ProductDetailPrice: React.FC<IProductDetailPriceProps> = (props) => {
           <Text>{t("artikul")}</Text>
           <Text>{fetchProduct.vendor_code}</Text>
         </Flex>
-        <Flex gap={10} justify="space-between" align="center" itemProp="aggregateRating" itemScope={true} itemType="http://schema.org/AggregateRating">
+        <Flex gap={10} justify="space-between" align="center" >
+
+          {fetchProduct?.average_rating && fetchProduct?.average_rating != 0 && <div itemProp="aggregateRating" itemScope={true} itemType="http://schema.org/AggregateRating">
+            <meta itemProp="bestRating" content="5" />
+            <meta itemProp="worstRating" content="0" />
+            <meta itemProp="ratingValue" content={(fetchProduct?.reviews_count ?? 1).toString()} />
+            {fetchProduct.average_rating && fetchProduct?.average_rating != 0 && <meta itemProp="ratingCount" content={(fetchProduct?.average_rating ?? 0).toString()} />}
+          </div>}
+
           <Flex gap={5} justify="space-between" align="center" >
             <svg
               width="18"
@@ -45,7 +53,7 @@ const ProductDetailPrice: React.FC<IProductDetailPriceProps> = (props) => {
                 fill="#FFA600"
               />
             </svg>
-            <Text style={{ color: "#FFA600" }} itemProp="ratingValue">
+            <Text style={{ color: "#FFA600" }}>
               {fetchProduct.average_rating ?? 0}
             </Text>
           </Flex>
@@ -63,7 +71,7 @@ const ProductDetailPrice: React.FC<IProductDetailPriceProps> = (props) => {
             <Text disabled>
               {"("}
             </Text>
-            <Text disabled itemProp="reviewCount">
+            <Text disabled>
               {fetchProduct.reviews_count ?? 0}
             </Text>
             <Text disabled>
@@ -74,6 +82,10 @@ const ProductDetailPrice: React.FC<IProductDetailPriceProps> = (props) => {
         </Flex>
       </Flex>
       <Flex justify="space-between" itemProp="offers" itemScope={true} itemType="http://schema.org/Offer">
+        <meta itemProp="availability" content="http://schema.org/InStock" />
+        <meta itemProp="price" content={(price ?? 0).toString()} />
+        <meta itemProp="priceCurrency" content="KZT" />
+        <meta itemProp="priceValidUntil" content="2030-12-31" />
         <Flex vertical={true}>
           {discountPrice && (
             <Text disabled delete >
@@ -81,7 +93,7 @@ const ProductDetailPrice: React.FC<IProductDetailPriceProps> = (props) => {
             </Text>
           )}
           {price && (
-            <Title level={5} style={{ color: "red" }} itemProp="price">
+            <Title level={5} style={{ color: "red" }}>
               {beautifulCost(price ?? "")}
             </Title>
           )}

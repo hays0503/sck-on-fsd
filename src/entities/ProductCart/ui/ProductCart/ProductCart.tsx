@@ -39,6 +39,8 @@ const ProductCart: React.FC<IProductCartProps> = (props) => {
         width: CartWidth,
         padding: "10px",
       }}
+      itemScope
+      itemType="http://schema.org/Product"
     >
       <Level1
         discount={discount}
