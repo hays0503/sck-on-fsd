@@ -1,5 +1,6 @@
 
-import { Credit } from "@/entities/Credit";
+// eslint-disable-next-line boundaries/element-types
+import { Credit } from "@/widgets/Credit";
 import { getPrice } from "@/entities/ProductCart";
 import useSelectedCity from "@/shared/hooks/useSelectedCity";
 import beautifulCost from "@/shared/tools/beautifulCost";
