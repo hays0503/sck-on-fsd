@@ -7,7 +7,7 @@ import { selectDataByLangCity } from "@/shared/tools/selectDataByLang";
 import { iCity } from "@/shared/types/city";
 import { Button, Col, Input, Modal, Row, Space, Tour, TourProps, Typography,Popconfirm  } from "antd";
 import { useLocale, useTranslations } from "next-intl";
-import Image from "next/image";
+// import Image from "next/image";
 import { ChangeEvent, useLayoutEffect, useRef, useState } from "react";
 import { DownOutlined } from '@ant-design/icons';
 import ComponentSelectCityList from "./ComponentSelectCityList";
@@ -66,9 +66,17 @@ const SelectCity = () => {
                 type={"text"}
                 onClick={() => setIsOpen(true)}
                 style={{ padding: 0, border: "1px solid #f4f4f42e" }}
-                icon={<Image src={"/place.svg"} width={24} height={24} alt="account" />}
+                // icon={<Image src={"/place.svg"} width={24} height={24} alt="account" />}
             >
-                <Text strong={true} data-testid="select-city">
+                <Text style={{
+                    color: "#404247",                    
+                    fontFamily: "Inter",
+                    fontSize: "14px",
+                    fontStyle: "normal",
+                    fontWeight: "400",
+                    lineHeight: "20px",
+                    letterSpacing: "-0.6px"
+                }} data-testid="select-city">
                     {LangCity}
                 </Text>
                 <DownOutlined />
@@ -76,7 +84,6 @@ const SelectCity = () => {
             <Tour open={openToor} onClose={() => setOpenToor(false)} steps={steps} />
             <Modal
                 open={isOpen}
-                // onCancel={() => setIsOpen(false)}
                 closeIcon={
                     <Popconfirm
                         title={`${t('vybrannyi-vami-gorod')} ${LangCity}?`}

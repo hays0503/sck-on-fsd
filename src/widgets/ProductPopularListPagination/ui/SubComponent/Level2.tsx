@@ -27,20 +27,25 @@ const Level2: React.FC<ILevel2Props> = (props) => {
     }
   };
 
-    return (
-      <Flex justify="center" align="center" style={{ width: "100%" }}>
-        <Pagination
-          align="center"
-          pageSize={pageSize}
-          total={total}
-          current={current}
-          defaultPageSize={pageSize}
-          defaultCurrent={1}
-          onChange={onChangePage}
+  return (
+    <Flex justify="center" align="center" style={{ width: "100%" }}>
+      <Pagination
+        showQuickJumper={false}
+        showSizeChanger={false}
+        // showTitle={false}
+        // showLessItems={false}
+        showPrevNextJumpers={false}
+        align="center"
+        pageSize={pageSize}
+        total={total}
+        current={current}
+        defaultPageSize={pageSize}
+        defaultCurrent={1}
+        onChange={onChangePage}
         itemRender={ItemRender}
-        />
-      </Flex>
-    );
-  };
+      />
+    </Flex>
+  );
+};
 
-  export default Level2;
+export default Level2;

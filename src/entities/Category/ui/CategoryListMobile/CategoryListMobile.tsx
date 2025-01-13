@@ -15,6 +15,8 @@ const CategoryListMobile = () => {
   const style:CSSProperties = {
     "--ant-segmented-item-selected-bg":"#3E54CF",
     "--ant-segmented-item-selected-color":"#FFF",
+    "--ant-segmented-track-bg":"transparent",
+    
   } as CSSProperties
 
   const router = useRouter();
@@ -25,8 +27,11 @@ const CategoryListMobile = () => {
         value: category.slug,
         label: (
           <span style={{
-            marginLeft: "15px",
-            marginRight: "15px",
+            marginLeft: "5px",
+            marginRight: "5px",
+            backgroundColor: "#f5f5f5",
+            padding: "8px 16px",
+            borderRadius: "4px"
           }}>
             {selectDataByLangCategory(category, localActive) ??
               selectDataByLangCategory(category, "ru")}

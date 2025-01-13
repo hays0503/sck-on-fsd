@@ -37,34 +37,41 @@ const ProductCart: React.FC<IProductCartProps> = (props) => {
       style={{
         backgroundColor: "#FFFFFF",
         width: CartWidth,
-        padding: "10px",
+
       }}
       itemScope
       itemType="http://schema.org/Product"
     >
-      <Level1
-        discount={discount}
-        addToFavoriteSlot={addToFavoriteSlot}
-        Swiper={
-          <Link href={`/city/${currentCity}/product/${props.Product.slug}`} prefetch={true}>
-            <ProductCartSwiper
-              name={name}
-              images={props.Product.list_url_to_image}
-              width={CartWidth}
-              height={CartWidth} //Квадрат высота равна ширине
-            />
-          </Link>
-        }
-      />
-      <Link href={`/city/${currentCity}/product/${props.Product.slug}`} style={{ width: "100%" }} prefetch={true}>
-        <Level2
-          name={name}
-          average_rating={Product?.average_rating}
-          reviews_count={Product?.reviews_count}
-          price={price}
-          discountPrice={discountPrice}
+      <Flex
+        wrap
+        vertical={true}
+        align="center"
+        justify="space-between"
+        gap={10} style={{ padding: "10px", width: CartWidth, }}>
+        <Level1
+          discount={discount}
+          addToFavoriteSlot={addToFavoriteSlot}
+          Swiper={
+            <Link href={`/city/${currentCity}/product/${props.Product.slug}`} prefetch={true}>
+              <ProductCartSwiper
+                name={name}
+                images={props.Product.list_url_to_image}
+                width={CartWidth}
+                height={CartWidth} //Квадрат высота равна ширине
+              />
+            </Link>
+          }
         />
-      </Link>
+        <Link href={`/city/${currentCity}/product/${props.Product.slug}`} style={{ width: "100%" }} prefetch={true}>
+          <Level2
+            name={name}
+            average_rating={Product?.average_rating}
+            reviews_count={Product?.reviews_count}
+            price={price}
+            discountPrice={discountPrice}
+          />
+        </Link>
+      </Flex>
       <Level3 addToCartSlot={addToCartSlot} />
     </Flex>
   );

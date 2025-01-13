@@ -34,7 +34,7 @@ export default function ProductPopularListPagination(
   }, []);
 
   return (
-    <Flex vertical={true} align="center" justify="space-evenly" gap={10} style={{ width: "100%",height: "100%",backgroundColor: "#EEEFF1" }}>
+    <Flex vertical={true} align="center" justify="space-evenly" gap={10} style={{ width: "100%",height: "100%",backgroundColor: "#FFF" }}>
       <Level1 Products={currentProducts} />
       <Level2 pageSize={ProductsPerPage} total={Products.length} current={currentPage} onChange={setCurrentPage}/>
     </Flex>
