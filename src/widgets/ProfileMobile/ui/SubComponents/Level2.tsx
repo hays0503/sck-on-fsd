@@ -48,11 +48,11 @@ const ElementList: React.FC<{
               {title}
             </Title>
           </Flex>
-          <Link href={disabled ? "#" : href} prefetch={true}>
+          <Link href={disabled ? "#" : href} prefetch={true} style={{width:"40px", height:"40px"}}>
             <svg
-              width="48"
-              height="112"
-              viewBox="0 0 24 56"
+              // width="36"
+              // height="36"
+              viewBox="-10 9 40 40"
               fill="none"
               xmlns="http://www.w3.org/2000/svg"
             >

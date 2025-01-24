@@ -15,7 +15,6 @@ const Filter: React.FC<{ category: string, filterActive: number[], setFilterActi
     const [isOpen, setIsOpen] = useState(false);
 
     useLayoutEffect(() => {
-
         const classRunner = new GetFilterCategory(category);
         classRunner.getProductIdsByCategory(category).then((productIds) => {
             classRunner.getRawSpecsByProductIdsAndParse(

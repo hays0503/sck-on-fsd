@@ -41,7 +41,7 @@ export default function FooterAboutMobile() {
       <Text>Политика возвратов</Text>
       </Flex> */}
 
-      <Text>2024 © SCK All rights reserved</Text>
+      <Text>2016-{new Date().getFullYear()} © SCK All rights reserved</Text>
 
     </Flex>
   )
