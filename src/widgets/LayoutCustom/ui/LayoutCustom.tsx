@@ -16,7 +16,7 @@ const { Header, Footer, Content } = Layout;
 const LayoutCustom: React.FC<ILayoutMainCustomProps> = (props) => {
   const { headerContent, content, footerContent,h,hightHeader,hightFooter } = props;
 
-  const hightContent = hightFooter+hightHeader;
+  const hightContent = hightFooter+hightHeader+20;
 
   const layoutStyle: CSSProperties = {
     borderRadius: 8,

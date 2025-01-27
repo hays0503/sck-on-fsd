@@ -59,7 +59,7 @@ export default function FooterMobile({ defaultKey }: { defaultKey?: string }) {
 
   return (
     <Flex
-      style={{ width: "100%", height: "100%" }}
+      style={{ width: "100%", height: "100%",paddingBottom:"20px" }}
       justify="center"
       align="center"
     >
