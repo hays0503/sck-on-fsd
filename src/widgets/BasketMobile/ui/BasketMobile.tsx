@@ -67,7 +67,7 @@ const BasketMobile: React.FC<IBasketMobileProps> = ({ basket_id }) => {
           alignItems: "center"
         }}>
           <ShoppingCartOutlined />
-          <Text style={{color: "white"}}>Авторизуйтесь для  продолжение оформление</Text>
+          <Text style={{color: "white"}}>{t('avtorizuites-dlya-prodolzheniya-oformleniya')}</Text>
           <ShoppingCartOutlined />
         </Link>
       </Flex>)

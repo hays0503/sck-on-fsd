@@ -8,7 +8,7 @@ const { Text } = Typography;
 
 export const Label: React.FC<{ styleActive: CSSProperties, styleActiveBg: string, styleActiveAccent: string }> = ({ styleActive, styleActiveBg, styleActiveAccent }) => {
     const t = useTranslations();
-    return <Flex vertical={true} gap={"10px"} align="center">
+    return <Flex vertical={true} gap={"5px"} align="center">
         <svg
             width="25"
             height="24"

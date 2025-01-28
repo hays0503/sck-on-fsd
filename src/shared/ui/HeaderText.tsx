@@ -1,6 +1,7 @@
 "use client";
 import { useRouter } from "@/i18n/routing";
 import { Button, Flex, Typography } from "antd";
+import EllipsisMiddle from "./EllipsisMiddle/EllipsisMiddle";
 interface IHeaderTextProps {
   readonly text: string;
 }
@@ -57,7 +58,9 @@ const HeaderText: React.FC<IHeaderTextProps> = (props) => {
             textAlign: "left",
           }}
         >
+          <EllipsisMiddle suffixCount={12}>
           {text}
+          </EllipsisMiddle>
         </Title>
       </Flex>
     </Flex>
